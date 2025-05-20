@@ -1,28 +1,40 @@
 \chapter{DESAIN DAN IMPLEMENTASI}
 \label{chap:desainimplementasi}
 
-% Ubah bagian-bagian berikut dengan isi dari desain dan implementasi
 
-Penelitian ini dilaksanakan sesuai \lipsum[1][1-5]
+\section{Struktur Rencana Kerja Pengembangan (WBS)}
+\sloppy
+Penelitian ini menggunakan pendekatan pengembangan berbasis \emph{Work Breakdown Structure} (WBS), yaitu metode sistematis untuk membagi keseluruhan proses pengembangan ke dalam unit-unit kerja yang lebih kecil dan terstruktur. WBS mencakup tahapan analisis kebutuhan, perancangan, implementasi, hingga evaluasi, yang disusun secara hierarkis untuk memudahkan perencanaan dan pelaksanaan sistem secara efisien. Diagram WBS yang digunakan dalam penelitian ini dapat dilihat pada Gambar \ref{fig:wbs}.
 
-\section{Deskripsi Sistem}
-\label{sec:deskripsisistem}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{gambar/bab3/wbs.png}
+  \caption{\emph{Work Breakdown Structure} (WBS) Penelitian}
+  \label{fig:wbs}
+  \footnotesize{\textbf{Sumber:} Dokumentasi Pribadi}
+\end{figure}
 
-Sistem akan dibuat dengan \lipsum[1-2]
+\section{Analisis Kebutuhan}
+Analisis kebutuhan dilakukan melalui pengumpulan data dari studi literatur dan wawancara dengan pihak-pihak terkait. Berdasarkan hasil analisis. Adapun spesifikasi kebutuhan sistem yang harus dipenuhi dalam penelitian ini adalah sebagai berikut:
 
-\section{Implementasi Alat
-  \label{sec:implementasi alat}}
+\newpage
 
-Alat diimplementasikan dengan \lipsum[1]
 
-% Contoh pembuatan potongan kode
-\lipsum[2-3]
 
-% Contoh input potongan kode dari file
-\lstinputlisting[
-  language=Python,
-  caption={Program perhitungan bilangan prima.},
-  label={lst:bilanganprima}
-]{program/bilangan-prima.py}
+\section{Perancangan Sistem (\emph{Planning})}
 
-\lipsum[4]
+Desain elektrikal robot mencakup perancangan sistem distribusi daya dan komunikasi yang bertujuan untuk mengintegrasikan komponen-komponen tambahan ke dalam sistem robot yang sudah ada. Komponen-komponen tambahan tersebut dirancang untuk mendukung kemampuan operasi otonom robot. Desain elektrikal lengkap dari robot ini dapat dilihat pada Gambar \ref{fig:electrical}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{gambar/bab3/electrical.png}
+  \caption{Desain Elektrikal Robot}
+  \label{fig:electrical}
+  \footnotesize{\textbf{Sumber:} Dokumentasi Pribadi}
+\end{figure}
+
+\subsection{Integrasi Pengendalian dan Penghindaran}
+
+Dalam sistem navigasi jalur otonom, integrasi antara pengendalian lintasan dan penghindaran rintangan menjadi sangat penting. Salah satu strategi umum adalah memanfaatkan PID atau Pure Pursuit sebagai pengendali utama lintasan, dan mengaktifkan modul penghindaran Braitenberg secara kondisional ketika objek terdeteksi pada jarak tertentu. Pendekatan ini memungkinkan sistem untuk tetap mengikuti jalur yang diinginkan, namun secara dinamis menghindari rintangan tanpa perlu perencanaan ulang jalur penuh.
+
+Integrasi semacam ini dapat direalisasikan melalui skema \emph{behavior-based arbitration} atau \emph{subsumption architecture}, di mana penghindaran rintangan memiliki prioritas lebih tinggi saat kondisi kritis terdeteksi, kemudian dikembalikan ke kontrol jalur utama setelah lingkungan aman. Dengan demikian, sistem navigasi menjadi lebih adaptif, aman, dan efisien dalam lingkungan nyata yang dinamis.
