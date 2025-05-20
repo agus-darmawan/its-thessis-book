@@ -63,8 +63,7 @@ Transformator merupakan salah satu komponen utama dalam gardu listrik yang berfu
 \emph{Pemutus sirkuit} adalah perangkat yang berfungsi untuk melindungi sistem kelistrikan dari arus lebih (\emph{overcurrent}) dan hubung singkat (\emph{short circuit}). \emph{Pemutus sirkuit} dapat secara otomatis memutuskan aliran listrik ketika terdeteksi adanya gangguan, sehingga mencegah kerusakan pada peralatan dan menjaga keselamatan sistem. Terdapat berbagai jenis \emph{pemutus sirkuit}, termasuk \emph{pemutus sirkuit otomatis} (\emph{automatic circuit breaker}) dan \emph{pemutus sirkuit manual} (\emph{manual circuit breaker}), yang masing-masing memiliki aplikasi dan karakteristik yang berbeda Pemeliharaan dan pengujian berkala terhadap \emph{pemutus sirkuit} sangat penting untuk memastikan bahwa perangkat ini berfungsi dengan baik saat dibutuhkan. Suhu operasi \emph{pemutus sirkuit} biasanya berkisar antara -25°C hingga 55°C, dan overheating dapat terjadi jika suhu melebihi 85°C, yang dapat menyebabkan kerusakan pada mekanisme pemutus \cite{Ilomets2020}.
 
 \subsection{DeepRobotics Jueying X30 Pro}
-\textit{DeepRobotics Jueying X30 Pro} adalah robot berkaki empat (\textit{quadruped}) generasi terbaru yang dikembangkan oleh perusahaan teknologi robotik DeepRobotics di Tiongkok. Dirancang untuk berbagai aplikasi industri seperti inspeksi fasilitas, penyelamatan darurat, eksplorasi lingkungan ekstrem, serta pemantauan di berbagai medan, robot ini mengintegrasikan teknologi sensor canggih untuk navigasi dan persepsi lingkungan. Dalam memdukung navigasi dan pemetaan lingkungan, X30 Pro dilengkapi dengan empat sensor LiDAR 360° Livox dua di bagian depan dan dua di bagian belakang.  Selain itu, X30 Pro dilengkapi dengan IMU (\textit{Inertial Measurement Unit}) Yesense YIS100-V, yang menggabungkan akselerometer dan giroskop untuk mengukur percepatan linear dan kecepatan sudut. 
-Dengan desain industrial yang tangguh, \textit{Jueying X30 Pro} mampu bergerak secara cepat dan stabil di berbagai jenis permukaan. Kemampuan tersebut didukung oleh integrasi teknologi persepsi multimodal dan sistem kendali gerak adaptif, sehingga memungkinkan navigasi otonom dalam kondisi lingkungan yang kompleks. Spesifikasi teknis utama dari \textit{X30 Pro} ditampilkan pada Tabel~\ref{tab:spesifikasiX30}.
+DeepRobotics Jueying X30 Pro adalah robot berkaki empat (\textit{quadruped}) generasi terbaru yang dikembangkan oleh perusahaan teknologi robotik DeepRobotics di Tiongkok. Dirancang untuk berbagai aplikasi industri seperti inspeksi fasilitas, penyelamatan darurat, eksplorasi lingkungan ekstrem, serta pemantauan di berbagai medan, robot ini mengintegrasikan teknologi berbagai sensor untuk navigasi dan persepsi lingkungan. Dalam mendukung navigasi dan pemetaan lingkungan, X30 Pro dilengkapi dengan empat sensor LiDAR 360° Livox, dua di bagian depan dan dua di bagian belakang. Selain itu, X30 Pro dilengkapi dengan IMU (\textit{Inertial Measurement Unit}) Yesense YIS100-V, yang menggabungkan akselerometer dan giroskop untuk mengukur percepatan linear dan kecepatan sudut. Dengan desain industrial Jueying X30 Pro mampu bergerak secara cepat dan stabil di berbagai jenis permukaan. Kemampuan tersebut didukung oleh integrasi teknologi persepsi \emph{multimodal} dan sistem kendali gerak adaptif, sehingga memungkinkan navigasi otonom dalam kondisi lingkungan yang kompleks. Spesifikasi teknis utama dari Jueying X30 Pro ditampilkan pada Tabel~\ref{tab:spesifikasiX30}.
 
 
 \begin{table}[H]
@@ -101,18 +100,86 @@ Dengan desain industrial yang tangguh, \textit{Jueying X30 Pro} mampu bergerak s
 \end{table}
 
 
-\noindent
-Untuk mendukung operasi otonom dan efisien, \emph{DeepRobotics Jueying X30 Pro} dilengkapi dengan tiga unit komputer onboard yang masing-masing bertanggung jawab atas fungsi gerak (\emph{motion}), persepsi (\emph{perception}), dan navigasi (\emph{navigation}). Arsitektur ini memungkinkan pemrosesan paralel dan spesialisasi tugas, meningkatkan kinerja robot dalam lingkungan yang kompleks dan dinamis. Ketiga komputer ini terhubung melalui  Ethernet seperti pada gambar \ref{fig:network_architecture_x30pro}
+Untuk mendukung operasi otonom dan efisien, \emph{DeepRobotics Jueying X30 Pro} dilengkapi dengan tiga unit komputer onboard yang masing-masing bertanggung jawab atas fungsi gerak (\emph{motion}), persepsi (\emph{perception}), dan navigasi (\emph{navigation}). Arsitektur ini memungkinkan pemrosesan paralel dan spesialisasi tugas, meningkatkan kinerja robot dalam lingkungan yang kompleks dan dinamis. Ketiga komputer ini terhubung melalui Ethernet seperti pada Gambar \ref{fig:network_architecture_x30pro}.
+
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.75\textwidth]{gambar/bab2/network-x30.png}
+  \includegraphics[width=0.65\textwidth]{gambar/bab2/network-x30.png}
   \caption{Arsitektur Jaringan Internal \emph{DeepRobotics Jueying X30 Pro}}
   \label{fig:network_architecture_x30pro}
   \footnotesize{\textbf{Sumber:} DeepRobotics (2023)}
 \end{figure}
 
 
-Arsitektur tersebut memungkinkan pertukaran data yang cepat dan sinkronisasi antar sistem. Arsitektur modular ini tidak hanya meningkatkan efisiensi operasional tetapi juga memudahkan integrasi dengan sistem eksternal dan pembaruan perangkat lunak.
+Arsitektur modular ini tidak hanya meningkatkan efisiensi operasional tetapi juga memudahkan integrasi dengan sistem eksternal dan pembaruan perangkat lunak. Robot ini menggunakan \emph{Robot Operating System (ROS) Noetic Ninjameys} dan dijalankan menggunakan sistem operasi Ubuntu 20.04, yang semakin memperluas potensi integrasi dan pengembangan aplikasi berbasis \emph{open-source}.
 
+
+\subsection{\emph{Robot Operating System (ROS)}}
+\emph{Robot Operating System (ROS)} adalah \emph{framework} perangkat lunak \emph{open-source} yang dirancang untuk memfasilitasi pengembangan aplikasi robotik. ROS menyediakan berbagai \emph{tools} dan \emph{libraries} untuk mengelola berbagai tugas robotik, seperti kontrol aktuator, pemrosesan data sensor, serta navigasi dan kontrol gerak. Salah satu keunggulan ROS adalah arsitekturnya yang modular, memungkinkan pengembang untuk membagi sistem robotik kompleks menjadi bagian-bagian kecil yang saling terhubung, dikenal sebagai \emph{node}. ROS mendukung berbagai aplikasi robotik, mulai dari robot industri hingga robot otonom. Berikut adalah beberapa komponen dan konsep penting dalam ROS:
+
+\subsubsection{\emph{2.2.3.1 Node}}
+\emph{Node} adalah unit dasar dalam ROS yang berfungsi sebagai proses independen untuk menjalankan tugas spesifik dalam sistem robotik. Setiap \emph{node} memiliki fungsionalitas tertentu, seperti mengambil data sensor atau mengontrol aktuator, dan dapat berkomunikasi dengan \emph{node} lainnya melalui berbagai mekanisme komunikasi, seperti \emph{topic}, \emph{service}, atau \emph{action}. \emph{Node} bekerja secara paralel dan saling berinteraksi untuk membentuk aplikasi robotik yang kompleks.
+
+\subsubsection{\emph{2.2.3.2 Topic}}
+\emph{Topic} adalah mekanisme komunikasi \emph{publish/subscribe} antara \emph{node} untuk pertukaran data secara asinkron. \emph{Node} yang berfungsi sebagai \emph{publisher} mengirimkan data ke \emph{topic}, sementara \emph{node} yang berfungsi sebagai \emph{subscriber} menerima data dari \emph{topic} tersebut. Data yang dikirim melalui \emph{topic} biasanya berbentuk pesan (\emph{message}) yang memiliki format tertentu yang disepakati oleh pengembang.
+
+\subsubsection{\emph{2.2.3.3 Service}}
+\emph{Service} adalah mekanisme komunikasi sinkron antara dua \emph{node}, di mana satu \emph{node} melakukan permintaan (\emph{request}) dan \emph{node} lainnya memberikan respon (\emph{response}) secara langsung. Layanan ini berguna untuk tugas-tugas yang memerlukan hasil segera setelah permintaan dilakukan, seperti pengaturan parameter robot atau pembacaan nilai sensor tertentu.
+
+\subsubsection{\emph{2.2.3.4 Action}}
+\emph{Action} digunakan untuk tugas-tugas yang memerlukan umpan balik berkelanjutan dan memungkinkan komunikasi dua arah antara \emph{node}. Berbeda dengan \emph{service}, yang bersifat sinkron dan langsung, \emph{action} mendukung komunikasi asinkron dengan menyediakan umpan balik selama operasi berlangsung, seperti pada tugas pergerakan robot yang memerlukan estimasi waktu dan status secara dinamis.
+
+\subsubsection{\emph{2.2.3.5 Launch File}}
+\emph{Launch File} adalah file berformat XML yang digunakan untuk menginisiasi beberapa \emph{node} dan parameter konfigurasi secara bersamaan. \emph{Launch file} memungkinkan pengembang untuk menyusun dan mengelola konfigurasi sistem robotik dengan lebih efisien, menghindari pengaturan manual yang berulang kali. File ini dapat digunakan untuk menentukan urutan \emph{node} yang dijalankan serta parameter yang diperlukan.
+
+\subsubsection{\emph{2.2.3.6 Bag File}}
+\emph{Bag File} adalah format file yang digunakan untuk merekam dan memutar ulang data \emph{topic}. \emph{Bag file} sangat berguna dalam pengujian dan debugging karena memungkinkan pengembang untuk memeriksa data yang dikumpulkan sebelumnya tanpa perlu menjalankan robot secara langsung. Dengan menggunakan \emph{bag file}, data dapat diputar ulang untuk melakukan analisis atau pengujian lebih lanjut.
+
+\subsubsection{\emph{2.2.3.7 Package}}
+\emph{Package} adalah unit dasar dalam ROS yang mengorganisir \emph{node}, \emph{libraries}, dan file konfigurasi yang diperlukan oleh aplikasi robotik. Setiap paket dapat berisi kode sumber, file eksekusi, dan file konfigurasi yang mendukung tugas tertentu dalam sistem robot. Paket memungkinkan pengelolaan dan pemeliharaan proyek robotik menjadi lebih terstruktur dan modular.
+
+\subsubsection{\emph{2.2.3.8 Parameter}}
+\emph{Parameter} adalah variabel dinamis yang disimpan dalam server parameter ROS. \emph{Parameter} ini memungkinkan \emph{node} untuk berbagi informasi konfigurasi secara global dalam sistem. Dengan menggunakan \emph{parameter}, pengembang dapat mengubah konfigurasi robot secara lebih fleksibel tanpa perlu mengubah kode sumber. \emph{Parameter} biasanya digunakan untuk menyimpan nilai-nilai yang digunakan oleh beberapa \emph{node}, seperti kecepatan robot atau batasan sensor.
+
+\subsubsection{\emph{2.2.3.9 Workspace}}
+\emph{Workspace} adalah direktori kerja dalam ROS tempat pengembang mengelola \emph{package}, \emph{build}, dan konfigurasi pengembangan. \emph{Workspace} umumnya terdiri dari folder seperti \texttt{src} untuk menyimpan kode sumber, \texttt{devel} untuk hasil \emph{build}, dan \texttt{install} untuk menampung hasil instalasi. Dengan menggunakan \emph{workspace}, pengembang dapat mengelola proyek ROS secara terstruktur dan efisien.
+
+\subsubsection{\emph{2.2.3.10 Transformation (tf)}}
+\emph{Transformation} adalah sebuah \emph{library} dalam ROS yang digunakan untuk melacak hubungan koordinat antara berbagai frame dalam sistem robotik. \emph{tf} memungkinkan pengembang untuk melakukan transformasi antara berbagai frame koordinat (misalnya, frame robot dan frame map) secara efisien, sehingga koordinat objek dan sensor dapat diubah sesuai dengan referensi yang dibutuhkan. Misalnya, dalam robot otonom, \emph{tf} digunakan untuk mengetahui posisi dan orientasi robot dalam peta atau untuk menghitung posisi objek yang terdeteksi oleh sensor.
+
+Dengan menggunakan \emph{tf}, pengembang dapat menghindari kesalahan dalam kalkulasi posisi dan orientasi, yang sangat penting dalam aplikasi robotik yang melibatkan navigasi dan interaksi dengan lingkungan. Paket \emph{tf} menyediakan berbagai fungsi untuk mengatur dan mengelola transformasi koordinat, seperti \texttt{tf::TransformListener} yang digunakan untuk mendengarkan perubahan transformasi, dan \texttt{tf::TransformBroadcaster} untuk mempublikasikan transformasi koordinat \cite{ros_noetic}.
+
+
+\subsection{Pengendali PID}
+Pengendali PID (\emph{Proportional-Integral-Derivative}) merupakan metode pengendalian yang banyak digunakan dalam berbagai aplikasi teknik dan industri, karena kesederhanaannya dan kemampuannya untuk memberikan kinerja yang baik dengan hanya tiga parameter utama. Pengendali ini memiliki tiga komponen yang saling melengkapi dalam memperbaiki \emph{error} pada sistem kontrol. Komponen pertama, aksi \emph{proportional}, memberikan koreksi berdasarkan besarnya \emph{error} saat ini, sehingga semakin besar \emph{error}, semakin besar pula koreksi yang diberikan. Aksi \emph{integral} memperhitungkan \emph{error} masa lalu dan bertujuan untuk mengeliminasi offset atau kesalahan yang tetap ada dalam sistem, dengan cara menjumlahkan \emph{error} dari waktu ke waktu. Sedangkan, aksi \emph{derivative} berfungsi untuk memperkirakan laju perubahan \emph{error}, sehingga dapat memberikan respons prediktif terhadap perubahan yang akan datang dan membantu sistem dalam merespons lebih cepat terhadap perubahan. Secara matematis, sinyal kontrol total \( u(t) \) dalam pengendali PID dapat dirumuskan sebagai kombinasi dari ketiga aksi tersebut, yaitu: 
+\begin{equation}
+    u(t) = u_P(t) + u_I(t) + u_D(t) = K_p e(t) + K_i \int_{0}^{t} e(\tau) \, d\tau + K_d \frac{d}{dt}e(t),
+\end{equation}
+di mana \( K_p \), \( K_i \), dan \( K_d \) adalah koefisien \emph{gain} yang terkait dengan masing-masing komponen \emph{proportional}, \emph{integral}, dan \emph{derivative}, dan \( e(t) \) adalah \emph{error} pada waktu \( t \). Ketiga komponen ini bekerja bersama-sama untuk mengoptimalkan kontrol sistem, mengurangi kesalahan, dan meningkatkan kinerja sistem secara keseluruhan.
+
+
+
+
+\newpage
+
+
+\subsection{React.js}
+
+React.js merupakan salah satu \emph{library} \emph{JavaScript} yang umum digunakan dalam pengembangan antarmuka pengguna (\emph{user interface}) yang dinamis dan interaktif. React mengadopsi pendekatan berbasis \emph{component}, yaitu unit antarmuka yang terpisah dan modular, sehingga memudahkan proses pengembangan, pemeliharaan, serta pengujian perangkat lunak. Komponen dalam React dapat dibangun melalui dua pendekatan utama, yaitu \emph{class components} dan \emph{functional components}, yang keduanya bertanggung jawab dalam proses \emph{rendering} elemen antarmuka berdasarkan \emph{props} dan \emph{state} \cite{Panjaitan2021}. Efisiensi dalam pembaruan antarmuka didukung oleh penerapan \emph{Virtual DOM}, yang memungkinkan perubahan hanya terjadi pada bagian yang terdampak tanpa memuat ulang seluruh halaman. Pendekatan ini tidak hanya meningkatkan keterbacaan dan perawatan kode, tetapi juga mendukung prinsip \emph{reusability}, yakni penggunaan kembali komponen di berbagai konteks pengembangan. Dengan karakteristik tersebut, React.js menjadi salah satu teknologi dominan dalam pengembangan aplikasi web berbasis \emph{single-page application} (\emph{SPA}) \cite{Panjaitan2021}.
+
+\subsection{Next.js}
+Next.js merupakan \emph{framework} berbasis \emph{React} yang dikembangkan untuk mendukung pengembangan aplikasi web \emph{full-stack} secara efisien dan terstruktur. Sebagai ekstensi dari \emph{React}, Next.js menyederhanakan berbagai konfigurasi tingkat rendah seperti \emph{module bundling}, \emph{routing}, dan \emph{code splitting}, yang umumnya memerlukan pengaturan manual dalam proyek \emph{React} murni \cite{Nextjs2024}. Kemampuan ini memungkinkan pengembang untuk fokus pada pengembangan fitur tanpa harus terlibat langsung dalam proses pengelolaan infrastruktur aplikasi. Next.js mengintegrasikan secara native pendekatan \emph{server-side rendering} (SSR) dan \emph{static site generation} (SSG), dua teknik rendering yang krusial dalam optimalisasi performa dan aksesibilitas halaman web. SSR memungkinkan halaman dirender di sisi server sebelum dikirim ke klien, sehingga mengurangi waktu muat awal pada web browswer. Di sisi lain, SSG menghasilkan halaman statis pada waktu kompilasi, yang secara signifikan menurunkan beban server dan mempercepat distribusi konten. Kombinasi kedua pendekatan ini memberikan fleksibilitas tinggi dalam strategi rendering berdasarkan kebutuhan spesifik aplikasi. Dalam konteks pengembangan berbasis komponen, integrasi React dan Next.js mendukung pengembangan antarmuka interaktif dengan performa tinggi. Studi mutakhir menunjukkan bahwa implementasi \emph{framework} seperti Next.js dapat menurunkan latensi interaksi, meningkatkan \emph{user engagement}, serta mendukung skalabilitas dalam arsitektur perangkat lunak modern \cite{Nextjs2024}.
+
+\subsection{Tailwind CSS}
+
+Tailwind CSS merupakan \emph{framework} \emph{utility-first} berbasis CSS yang mengedepankan penggunaan kelas utilitas langsung dalam markup untuk membentuk antarmuka pengguna yang responsif dan terstruktur. Berbeda dengan \emph{framework} tradisional yang menyediakan komponen siap pakai, pendekatan Tailwind memungkinkan fleksibilitas tinggi dan iterasi cepat dalam pengembangan desain kustom \cite{Azhariyah2024}. Integrasinya yang seamless dengan \emph{framework} JavaScript seperti React dan Angular memperkuat efisiensi pengembangan berbasis komponen, sekaligus mengurangi kebutuhan akan file CSS yang besar. Dukungan bawaan terhadap desain responsif menjadikan Tailwind CSS relevan untuk pengembangan aplikasi lintas perangkat dengan konsistensi visual yang tinggi.
+
+\subsection{ShadCN}
+
+ShadCN UI merupakan kumpulan komponen \emph{React} modern yang bersifat \emph{open-source}, namun tidak dikemas sebagai pustaka tradisional yang dapat diinstal melalui \emph{Node Package Manager} (\emph{npm}). Sebaliknya, pengembang menyalin langsung kode sumber komponen ke dalam basis kode proyek, sehingga memberikan fleksibilitas tinggi dalam modifikasi fungsionalitas dan penataan. Komponen-komponen ini menggunakan \emph{Tailwind CSS} untuk styling, dengan desain awal yang konsisten dan minimalis. ShadCN menyediakan beragam komponen antarmuka umum seperti \emph{dialog}, \emph{input}, \emph{checkbox}, dan \emph{table}, serta mendukung integrasi cepat melalui perintah \emph{CLI} untuk menyalin kode ke dalam direktori lokal proyek \cite{Shadcn2024}. Pendekatan ini menghasilkan aplikasi yang lebih ringan dan modular, karena hanya menyertakan komponen yang benar-benar dibutuhkan.
+
+
+\subsection{WebSocket}
+WebSocket adalah protokol komunikasi dua arah yang beroperasi di atas koneksi TCP yang persisten, memungkinkan pertukaran pesan antara klien dan server secara efisien. Protokol ini dirancang untuk mengatasi kekurangan teknologi komunikasi dua arah yang ada sebelumnya, yang sering menggunakan \emph{HTTP} sebagai lapisan transportasi. Dengan memanfaatkan mekanisme \emph{upgrade} dari \emph{HTTP}, WebSocket dapat membuka saluran komunikasi bidirectional yang lebih efisien dibandingkan dengan pendekatan tradisional seperti \emph{polling} atau \emph{long polling} \cite{Fette2011}. Keunggulan utama dari WebSocket terletak pada kemampuannya untuk mengurangi overhead komunikasi, yang sangat penting dalam aplikasi yang memerlukan pembaruan real-time, seperti aplikasi \emph{chat}, permainan daring, dan sistem \emph{IoT}. Penelitian menunjukkan bahwa WebSocket tidak hanya meningkatkan efisiensi komunikasi, tetapi juga memungkinkan pengembangan aplikasi kolaboratif yang lebih responsif dan interaktif \cite{Milsap2019}. Dengan demikian, WebSocket menjadi solusi yang ideal untuk aplikasi yang membutuhkan latensi rendah dan kecepatan tinggi dalam pertukaran data.
 
 
