@@ -22,7 +22,7 @@ Berdasarkan latar belakang yang telah dijelaskan sebelumnya, penelitian ini berf
 Penelitian ini bertujuan untuk mengembangkan sistem pemantauan potensi overheat pada komponen gardu induk menggunakan robot otonom yang dilengkapi dengan kamera termal dan sistem pendukung lainnya. Secara terperinci, tujuan penelitian ini meliputi:
 \begin{enumerate}
       \item Mengembangkan sistem \emph{computer vision} pada robot yang mampu mendeteksi dan mengidentifikasi komponen gardu induk yang berpotensi mengalami \emph{overheat}.
-      \item Merancang dan mengimplementasikan sistem navigasi otonom untuk memungkinkan robot bergerak secara mandiri di lingkungan gardu induk, menghindari rintangan, serta menjalankan tugas patroli secara efisien.
+      \item Merancang dan mengimplementasikan sistem navigasi otonom untuk memungkinkan robot bergerak secara mandiri di lingkungan gardu induk, menghindari rintangan, serta menjalankan tugas patroli.
       \item Merancang \emph{control station} untuk memantau pergerakan robot dan menampilkan hasil analisis suhu serta estimasi posisi komponen yang berpotensi mengalami \emph{overheat}.
 \end{enumerate}
 
@@ -30,16 +30,22 @@ Penelitian ini bertujuan untuk mengembangkan sistem pemantauan potensi overheat 
 
 
 \section{Batasan Masalah}
-\label{sec:batasanmasalah}
-
 Penelitian ini memiliki sejumlah batasan yang ditetapkan untuk menyesuaikan dengan keterbatasan sumber daya, waktu, dan ruang lingkup. Adapun batasan-batasan tersebut adalah sebagai berikut:
+
 \begin{enumerate}
-    \item Algoritma \emph{motion} yang digunakan untuk pergerakan robot merupakan algoritma bawaan pabrik, tanpa dilakukan pengembangan atau modifikasi lebih lanjut.
+    \item\textbf{Perangkat yang digunakan} \\
+    Penelitian ini dilakukan menggunakan robot DeepRobotics X30 Pro versi 0.0.8-0 (2024) yang dilengkapi dengan \emph{ PTZ thermal camera} Hikmicro HM-TD5528T, serta \emph{AP router} Doublecom DB6000ANLT90-FR (\emph{base station}) dan Doublecom DB6000FR-ANS (\emph{rover}) sebagai perangkat komunikasi. Seluruh eksperimen dan pengambilan data dibatasi pada konfigurasi dan karakteristik perangkat ini.
     
-    \item Robot yang digunakan dalam penelitian ini adalah \emph{DeepRobotics X30}, yang dilengkapi dengan \emph{PTZ thermal camera} Hikmicro HM-TD5528T untuk mendeteksi suhu pada komponen gardu induk.
-    
-    \item Lingkungan yang menjadi lokasi pengujian adalah gardu induk tipe \emph{outdoor} dengan luas area maksimal 2000\,m$^2$.
+    \item \textbf{Algoritma pergerakan robot} \\
+    Sistem pergerakan robot menggunakan \emph{algoritma motion} bawaan pabrik, sehingga penelitian ini tidak membahas aspek \emph{kinematika}, \emph{dinamika}, maupun \emph{stabilitas} robot di berbagai jenis medan.
+
+    \item \textbf{Ruang lingkup pengembangan sistem} \\
+    Pengembangan sistem dibatasi pada otomatisasi proses pemantauan komponen gardu induk yang sebelumnya dilakukan secara manual. Penelitian ini tidak mencakup pengembangan skenario pemantauan baru.
+
+    \item \textbf{Lingkungan pengujian} \\
+    Pengujian dilakukan di \emph{lingkungan nyata} dan \emph{simulasi}, dengan simulasi hanya menggunakan data \emph{log} hasil pengujian langsung. Penelitian tidak membangun lingkungan simulasi baru.
 \end{enumerate}
+
 
 
 \section{Sistematika Penulisan}

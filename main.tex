@@ -28,6 +28,7 @@
 
 % Package lainnya
 \usepackage{changepage}
+\usepackage{listings}
 \usepackage{enumitem}
 \usepackage{eso-pic}
 \usepackage{txfonts} % Font times
@@ -45,6 +46,15 @@
   \vspace*{\fill}
   \begin{center}\textit{[Halaman ini sengaja dikosongkan]}\end{center}
   \vfill}{}{}
+
+\lstset{
+    breaklines=true,        % Enable line breaking
+    basicstyle=\ttfamily,    % Use monospaced font
+    columns=flexible,       % Allow for flexible column width
+    keepspaces=true,        % Keep spaces
+    upquote=true,          % Use straight quotes instead of curly quotes
+    literate={"}{\textquotedblright}1
+}
 
 % Pengaturan penomoran halaman
 \usepackage{fancyhdr}
