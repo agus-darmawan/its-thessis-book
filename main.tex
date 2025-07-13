@@ -27,6 +27,9 @@
 \usepackage[style=ieee, backend=biber]{biblatex}
 
 % Package lainnya
+\usepackage[utf8]{inputenc}
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+
 \usepackage{changepage}
 \usepackage{listings}
 \usepackage{enumitem}
@@ -103,6 +106,7 @@
 \titleformat{\section}{\bfseries\large}{\MakeUppercase{\thesection}}{1ex}{\vspace{1ex}}
 \titleformat{\subsection}{\bfseries\large}{\MakeUppercase{\thesubsection}}{1ex}{}
 \titleformat{\subsubsection}{\bfseries\large}{\MakeUppercase{\thesubsubsection}}{1ex}{}
+\titleformat{\subsubsubsubsection}[runin]{\bfseries\large}{\MakeUppercase{\thesubsubsubsection}}{1ex}{}
 \titlespacing{\chapter}{0ex}{0ex}{4ex}
 \titlespacing{\section}{0ex}{1ex}{0ex}
 \titlespacing{\subsection}{0ex}{0.5ex}{0ex}

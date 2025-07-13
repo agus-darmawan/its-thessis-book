@@ -27,9 +27,8 @@ Penelitian ini mengusulkan penggunaan \emph{VANT} \emph{(Vehículo Aéreo No Tri
 
 \begin{figure} [H] \centering
   \includegraphics[scale=0.64]{gambar/bab2/drone.png}
-  \caption{Drone dengan kamera termal untuk pemantauan gardu induk}
+  \caption{\emph{GUI} Drone dengan kamera termal untuk pemantauan gardu induk \cite{Prieto2022}}
   \label{fig:Drone dengan kamera termal untuk pemantauan gardu induk}
-  \footnotesize{\textbf{Sumber:} Prieto et al. (2022)}
 \end{figure}
 
 Hasil analisis ini dapat digunakan untuk memprediksi potensi kerusakan pada komponen dan mengambil tindakan pencegahan yang diperlukan. Penelitian ini menunjukkan bahwa penggunaan drone dengan kamera termal dapat meningkatkan efisiensi dan akurasi dalam pemantauan gardu induk, serta meminimalkan risiko keselamatan bagi petugas yang harus melakukan inspeksi langsung di lokasi gardu \cite{Prieto2022}. Penelitian ini memiliki kesamaan dengan topik kami yang juga menggunakan kamera termal untuk pemantauan komponen gardu listrik.
@@ -39,28 +38,40 @@ Subbab ini membahas berbagai teori dan konsep dasar yang menjadi landasan dalam 
 
 \subsection{Gardu Listrik}
 \sloppy
-% Gardu listrik merupakan salah satu komponen vital dalam sistem kelistrikan yang berfungsi sebagai titik penghubung antara pembangkit listrik dan jaringan distribusi. Melalui gardu listrik, aliran energi listrik dapat diatur dan dialirkan secara efisien dari sumber pembangkit menuju konsumen akhir \cite{stevenson1994power}. Proses transmisi dan distribusi energi listrik tidak dapat dilakukan secara aman dan terkontrol tanpa adanya gardu listrik. Secara umum, terdapat beberapa jenis gardu listrik, antara lain gardu induk dan gardu pembangkit. Gardu induk memiliki fungsi utama untuk menurunkan tegangan listrik dari tingkat tinggi, yang digunakan dalam proses transmisi, menjadi tegangan menengah atau rendah agar aman untuk digunakan oleh konsumen \cite. Gardu ini umumnya terletak di antara pembangkit dan kawasan konsumen, baik permukiman maupun kawasan industri.
+Gardu listrik merupakan salah satu komponen vital dalam sistem kelistrikan yang berfungsi sebagai titik penghubung antara pembangkit listrik dan jaringan distribusi. Melalui gardu listrik, aliran energi listrik dapat diatur dan dialirkan secara efisien dari sumber pembangkit menuju konsumen akhir \cite{stevenson1994power}. Proses transmisi dan distribusi energi listrik tidak dapat dilakukan secara aman dan terkontrol tanpa adanya gardu listrik. Secara umum, terdapat beberapa jenis gardu listrik, antara lain gardu induk dan gardu pembangkit. Gardu induk memiliki fungsi utama untuk menurunkan tegangan listrik dari tingkat tinggi, yang digunakan dalam proses transmisi, menjadi tegangan menengah atau rendah agar aman untuk digunakan oleh konsumen Gardu ini umumnya terletak di antara pembangkit dan kawasan konsumen, baik permukiman maupun kawasan industri.
 
 Sementara itu, gardu pembangkit merupakan fasilitas yang berada di dekat sumber energi primer, seperti pembangkit listrik tenaga air (PLTA), pembangkit listrik tenaga uap (PLTU), atau jenis pembangkit lainnya. Gardu ini berfungsi untuk menyalurkan energi listrik yang dihasilkan dari proses konversi energi primer ke jaringan transmisi. Untuk mendukung fungsinya, gardu listrik dilengkapi dengan berbagai peralatan kelistrikan, seperti transformator, pemutus sirkuit, dan isolator untuk menjamin keandalan sistem. Keandalan gardu listrik sangat berpengaruh terhadap kualitas dan kontinuitas pasokan energi listrik \cite{gonen2016electric}.
 
-\subsubsection{2.2.1.1 Transformator}
-Transformator merupakan salah satu komponen utama dalam gardu listrik yang berfungsi untuk mengubah tingkat tegangan sesuai kebutuhan dalam proses transmisi maupun distribusi energi listrik. Salah satu jenis transformator yang umum pada gardu listrik adalah transformator daya. Transformator daya digunakan untuk menyesuaikan tegangan agar sesuai dengan kebutuhan sistem, sekaligus meminimalkan rugi-rugi daya selama proses transmisi jarak jauh. Berdasarkan fungsinya, transformator daya dibedakan menjadi dua jenis, yaitu transformator \emph{step-up} dan transformator \emph{step-down}  Transformator \emph{step-up} digunakan di sisi pembangkit untuk menaikkan tegangan listrik ke tingkat yang lebih tinggi agar transmisi lebih efisien dan rugi daya berkurang, sedangkan transformator \emph{step-down} digunakan di sisi distribusi untuk menurunkan tegangan ke tingkat yang lebih rendah sehingga aman digunakan oleh konsumen . Transformator daya biasanya dirancang untuk beroperasi pada suhu maksimum sekitar 105\textdegree{}C hingga 110\textdegree{}C, tergantung pada kelas isolasi termal yang digunakan, seperti kelas A, B, atau F \cite{stevenson1994power}.
+\subsubsection{2.2.1.1 Gardu Induk}
+Gardu induk merupakan salah satu komponen vital dalam sistem tenaga listrik yang berfungsi untuk mengubah, mengatur, dan menyalurkan energi listrik dari pembangkit ke konsumen melalui jaringan transmisi dan distribusi. Fungsinya mencakup menaikkan tegangan listrik dari pembangkit untuk keperluan transmisi jarak jauh, serta menurunkan tegangan sebelum didistribusikan ke konsumen akhir. Tegangan tinggi diperlukan dalam proses transmisi untuk meminimalkan rugi-rugi daya (\emph{losses}) yang terjadi akibat resistansi saluran, sementara penurunan tegangan dibutuhkan agar sesuai dengan batasan keamanan dan kebutuhan perangkat di sisi konsumen. Berdasarkan tingkat tegangan yang diolah, gardu induk diklasifikasikan menjadi beberapa jenis utama, yaitu gardu induk tegangan ekstra tinggi (\emph{GITET}), gardu induk tegangan tinggi (\emph{GIT}), gardu induk tegangan menengah (\emph{GIM}), dan gardu induk tegangan rendah (\emph{GIR}). \emph{GITET} beroperasi pada tegangan di atas 500 kilovolt (kV) dan digunakan untuk transmisi daya dalam skala besar antarpulau atau antardaerah beban yang berjauhan, karena efisiensinya dalam mengurangi kehilangan daya selama proses transmisi. \emph{GIT} menangani tegangan pada rentang 150--500 kV, berfungsi sebagai titik interkoneksi antar sistem transmisi serta sebagai tempat pengaturan pembebanan antara pembangkit dan jaringan utama. Selanjutnya, \emph{GIM} beroperasi pada tegangan menengah antara 20--150 kV, dan biasanya digunakan untuk menghubungkan sistem transmisi ke jaringan distribusi, baik di wilayah industri maupun kawasan pemukiman padat. Terakhir, \emph{GIR} mengelola tegangan di bawah 20 kV, dan bertugas menyuplai energi listrik langsung ke konsumen akhir seperti rumah tangga, pertokoan, dan industri kecil.
 
-\subsubsection{2.2.1.2 \emph{Arrester}}
+Secara umum, setiap gardu induk dilengkapi dengan berbagai peralatan kelistrikan utama, seperti transformator daya untuk konversi tegangan, pemutus sirkuit (\emph{circuit breaker}) untuk proteksi dan pemisahan rangkaian, isolator untuk pemisahan fisik komponen bertegangan, serta perangkat pengukuran dan kontrol lainnya. Selain itu, gardu induk juga dilengkapi dengan sistem proteksi otomatis untuk mendeteksi gangguan dan mencegah kerusakan pada peralatan. Keandalan dan efisiensi operasional gardu induk sangat menentukan kestabilan sistem tenaga listrik secara keseluruhan, terutama dalam menghadapi fluktuasi beban, kondisi darurat, maupun pemeliharaan jaringan\cite{gonen2016electric}.
+
+
+
+\subsubsection{2.2.1.2 Transformator}
+
+Transformator merupakan salah satu komponen utama dalam gardu listrik yang berfungsi untuk mengubah tingkat tegangan sesuai kebutuhan dalam proses transmisi maupun distribusi energi listrik. Transformator bekerja berdasarkan prinsip induksi elektromagnetik, di mana energi listrik dialirkan melalui dua kumparan yang terpisah secara galvanis namun terhubung melalui inti magnetik. Dalam sistem tenaga listrik, transformator tidak hanya digunakan untuk mengatur level tegangan, tetapi juga untuk meningkatkan efisiensi dan keamanan sistem. Salah satu jenis transformator yang umum digunakan pada gardu listrik adalah transformator daya. Transformator ini berfungsi untuk menyesuaikan tegangan agar sesuai dengan kebutuhan sistem, serta meminimalkan rugi-rugi daya selama proses transmisi jarak jauh. Berdasarkan fungsinya, transformator daya dibedakan menjadi dua jenis utama, yaitu transformator \emph{step-up} dan transformator \emph{step-down}. Transformator \emph{step-up} digunakan di sisi pembangkit untuk menaikkan tegangan listrik ke tingkat yang lebih tinggi agar proses transmisi menjadi lebih efisien dan rugi daya dapat dikurangi. Sebaliknya, transformator \emph{step-down} digunakan di sisi distribusi untuk menurunkan tegangan ke tingkat yang lebih rendah agar aman digunakan oleh konsumen akhir, seperti rumah tangga dan industri.
+
+Selain transformator daya, gardu listrik juga dilengkapi dengan transformator arus atau \emph{current transformer} (CT). CT berfungsi untuk mengubah arus listrik yang besar pada sistem tenaga menjadi arus yang lebih kecil dan aman untuk keperluan pengukuran, pengendalian, dan proteksi. Dengan menggunakan CT, perangkat seperti relai proteksi, sistem pemantauan, dan peralatan metering dapat mengamati kondisi arus tanpa harus langsung berhubungan dengan arus utama yang tinggi dan berbahaya. Transformator arus dirancang dengan akurasi dan rasio transformasi tertentu untuk memastikan bahwa sinyal arus yang dikirimkan ke peralatan sekunder tetap mencerminkan kondisi nyata sistem. Dari sisi termal, transformator daya umumnya dirancang untuk beroperasi pada suhu maksimum antara 105\textdegree{}C hingga 110\textdegree{}C, tergantung pada kelas isolasi termalnya, seperti kelas A (105\textdegree{}C), B (130\textdegree{}C), atau F (155\textdegree{}C). Sementara itu, transformator arus (CT) biasanya dirancang untuk beroperasi pada rentang suhu antara 70\textdegree{}C hingga 90\textdegree{}C, tergantung pada standar pabrikan dan klasifikasi aplikasinya. Meskipun arus yang masuk ke CT merupakan arus tinggi, arus keluarannya kecil sehingga beban termal yang diterima relatif rendah. Namun demikian, CT tetap memerlukan sistem ventilasi atau pendinginan yang memadai agar kinerja pengukuran tetap stabil dan umur operasional peralatan dapat terjaga. Pengelolaan suhu operasional yang baik pada kedua jenis transformator ini menjadi faktor krusial untuk menjaga keandalan dan efisiensi sistem tenaga secara keseluruhan \cite{stevenson1994power}.
+
+
+\subsubsection{2.2.1.3 Pemutus Sirkuit (\emph{Circuit Breaker})}
+\emph{Pemutus sirkuit} adalah perangkat yang berfungsi untuk melindungi sistem kelistrikan dari arus lebih (\emph{overcurrent}) dan hubung singkat (\emph{short circuit}). \emph{Pemutus sirkuit} dapat secara otomatis memutuskan aliran listrik ketika terdeteksi adanya gangguan, sehingga mencegah kerusakan pada peralatan dan menjaga keselamatan sistem. Terdapat berbagai jenis \emph{pemutus sirkuit}, termasuk \emph{pemutus sirkuit otomatis} (\emph{automatic circuit breaker}) dan \emph{pemutus sirkuit manual} (\emph{manual circuit breaker}), yang masing-masing memiliki aplikasi dan karakteristik yang berbeda Pemeliharaan dan pengujian berkala terhadap \emph{pemutus sirkuit} sangat penting untuk memastikan bahwa perangkat ini berfungsi dengan baik saat dibutuhkan. Suhu operasi \emph{pemutus sirkuit} biasanya berkisar antara -25°C hingga 55°C, dan overheating dapat terjadi jika suhu melebihi 85°C, yang dapat menyebabkan kerusakan pada mekanisme pemutus \cite{Ilomets2020}.
+
+
+\subsubsection{2.2.1.4 \emph{Arrester}}
 \emph{Arrester}, atau \emph{lightning arrester}, merupakan perangkat pelindung dalam sistem kelistrikan yang berfungsi untuk mengamankan peralatan dari lonjakan tegangan akibat sambaran petir atau gangguan tegangan lebih sesaat. \emph{Arrester} bekerja dengan cara mengalihkan arus lebih tersebut langsung ke \emph{ground}, sehingga mencegah terjadinya kerusakan pada peralatan penting seperti transformator, pemutus sirkuit, dan komponen lainnya di gardu listrik. Pemeliharaan rutin terhadap \emph{arrester} sangat penting dilakukan untuk memastikan performanya tetap optimal. Salah satu parameter penting yang harus dipantau adalah suhu operasi perangkat. Umumnya, \emph{arrester} dirancang untuk beroperasi pada suhu lingkungan antara -40\textdegree{}C hingga 60\textdegree{}C. Jika suhu operasional melebihi batas maksimum tersebut, maka dapat terjadi kerusakan permanen pada komponen internal arrester yang berakibat pada menurunnya efektivitas perlindungan sistem secara keseluruhan \cite{Kartika2022}.
 
-\subsubsection{2.2.1.3 Disconnector}
+\subsubsection{2.2.1.5 Disconnector}
 \emph{Disconnector} merupakan perangkat yang berfungsi untuk memisahkan suatu bagian dari sistem kelistrikan guna keperluan pemeliharaan atau perbaikan, tanpa memengaruhi bagian lain dari jaringan. Pemeliharaan serta pengujian secara berkala terhadap \emph{disconnector} sangat krusial untuk memastikan bahwa perangkat ini dapat berfungsi secara optimal saat dibutuhkan. Suhu operasi \emph{disconnector} umumnya berada dalam kisaran 20°C hingga 40°C. Namun, apabila suhu meningkat melebihi 85°C, dapat terjadi overheating yang berpotensi menyebabkan kegagalan fungsi \cite{Henriana2022}.
 
 
-\subsubsection{2.2.1.4 Busbar}
+\subsubsection{2.2.1.6 Busbar}
 \emph{Busbar} adalah komponen dalam gardu listrik yang berfungsi sebagai penghubung antara berbagai peralatan listrik. \emph{Busbar} memungkinkan distribusi arus listrik yang efisien dan aman di dalam gardu. \emph{Busbar} biasanya terbuat dari bahan konduktif yang baik, seperti tembaga atau aluminium, dan dirancang untuk menampung arus listrik dalam jumlah besar. Pemeliharaan dan pengujian \emph{busbar} secara rutin diperlukan untuk mencegah kerusakan dan memastikan keandalan sistem distribusi listrik. Suhu operasi \emph{busbar} dapat bervariasi, tetapi umumnya tidak boleh melebihi 90°C untuk mencegah overheating yang dapat merusak isolasi dan struktur busbar itu sendiri \cite{Telaumbanua2024}.
 
-\subsubsection{2.2.1.5 Isolator}
+\subsubsection{2.2.1.7 Isolator}
 \emph{Isolator} adalah perangkat yang berfungsi untuk memisahkan bagian dari sistem kelistrikan, sehingga mencegah arus listrik mengalir ke bagian yang tidak diinginkan. \emph{Isolator} digunakan untuk menjaga keamanan dan keandalan sistem kelistrikan, terutama saat pemeliharaan dilakukan. \emph{Isolator} dirancang untuk menahan tegangan tinggi dan memiliki karakteristik dielektrik yang baik. Pemeliharaan \emph{isolator} juga penting untuk memastikan bahwa tidak ada kebocoran arus yang dapat menyebabkan kerusakan pada peralatan lainnya. Suhu operasi \emph{isolator} biasanya berkisar antara -30°C hingga 50°C, dan overheating dapat terjadi jika suhu melebihi 70°C, yang dapat mengakibatkan kerusakan pada material isolasi \cite{Moreno2017}.
-
-\subsubsection{2.2.1.6 Pemutus Sirkuit (\emph{Circuit Breaker})}
-\emph{Pemutus sirkuit} adalah perangkat yang berfungsi untuk melindungi sistem kelistrikan dari arus lebih (\emph{overcurrent}) dan hubung singkat (\emph{short circuit}). \emph{Pemutus sirkuit} dapat secara otomatis memutuskan aliran listrik ketika terdeteksi adanya gangguan, sehingga mencegah kerusakan pada peralatan dan menjaga keselamatan sistem. Terdapat berbagai jenis \emph{pemutus sirkuit}, termasuk \emph{pemutus sirkuit otomatis} (\emph{automatic circuit breaker}) dan \emph{pemutus sirkuit manual} (\emph{manual circuit breaker}), yang masing-masing memiliki aplikasi dan karakteristik yang berbeda Pemeliharaan dan pengujian berkala terhadap \emph{pemutus sirkuit} sangat penting untuk memastikan bahwa perangkat ini berfungsi dengan baik saat dibutuhkan. Suhu operasi \emph{pemutus sirkuit} biasanya berkisar antara -25°C hingga 55°C, dan overheating dapat terjadi jika suhu melebihi 85°C, yang dapat menyebabkan kerusakan pada mekanisme pemutus \cite{Ilomets2020}.
 
 \subsection{DeepRobotics Jueying X30 Pro}
 DeepRobotics Jueying X30 Pro adalah robot berkaki empat (\textit{quadruped}) generasi terbaru yang dikembangkan oleh perusahaan teknologi robotik DeepRobotics di Tiongkok. Dirancang untuk berbagai aplikasi industri seperti inspeksi fasilitas, penyelamatan darurat, eksplorasi lingkungan ekstrem, serta pemantauan di berbagai medan, robot ini mengintegrasikan teknologi berbagai sensor untuk navigasi dan persepsi lingkungan. Dalam mendukung navigasi dan pemetaan lingkungan, X30 Pro dilengkapi dengan empat sensor LiDAR 360° Livox, dua di bagian depan dan dua di bagian belakang. Selain itu, X30 Pro dilengkapi dengan IMU (\textit{Inertial Measurement Unit}) Yesense YIS100-V, yang menggabungkan akselerometer dan giroskop untuk mengukur percepatan linear dan kecepatan sudut. Dengan desain industrial Jueying X30 Pro mampu bergerak secara cepat dan stabil di berbagai jenis permukaan. Kemampuan tersebut didukung oleh integrasi teknologi persepsi \emph{multimodal} dan sistem kendali gerak adaptif, sehingga memungkinkan navigasi otonom dalam kondisi lingkungan yang kompleks. Spesifikasi teknis utama dari Jueying X30 Pro ditampilkan pada Tabel~\ref{tab:spesifikasiX30}.
@@ -68,7 +79,7 @@ DeepRobotics Jueying X30 Pro adalah robot berkaki empat (\textit{quadruped}) gen
 
 \begin{table}[H]
 	\centering
-	\caption{Spesifikasi Teknis Deep Robotics X30}
+	\caption{Spesifikasi Teknis Deep Robotics X30} \
 	\label{tab:spesifikasiX30}
 	\renewcommand{\arraystretch}{1.2}
 	\begin{tabular}{|p{5.5cm}|p{7cm}|}
@@ -91,7 +102,9 @@ DeepRobotics Jueying X30 Pro adalah robot berkaki empat (\textit{quadruped}) gen
 		\hline
 		Daya Tahan Baterai            & 2,5--4 jam (dengan beban penuh)                                   \\
 		\hline
-		Sistem Pengisian Daya         & Pengisian otomatis (\emph{auto-charging}), \emph{manual charging} \\
+		Sistem Pengisian Daya         &  (\emph{Auto-charging}), \emph{manual charging} \\
+		\hline
+		Port Daya Eksternal           & 24V hingga 240 W, 12V hingga 36 W, daya total maksimal 350 W      \\
 		\hline
 		Antarmuka Komunikasi          & Ethernet, USB 2.0/3.0, dan Wi-Fi                                  \\
 		\hline
@@ -108,7 +121,6 @@ Untuk mendukung operasi otonom dan efisien, \emph{DeepRobotics Jueying X30 Pro} 
   \includegraphics[width=0.65\textwidth]{gambar/bab2/network-x30.png}
   \caption{Arsitektur Jaringan Internal \emph{DeepRobotics Jueying X30 Pro}}
   \label{fig:network_architecture_x30pro}
-  \footnotesize{\textbf{Sumber:} DeepRobotics (2023)}
 \end{figure}
 
 
@@ -116,86 +128,63 @@ Arsitektur modular ini tidak hanya meningkatkan efisiensi operasional tetapi jug
 
 
 \subsection{Hikvision HM-TD5528T-15/W}
+Hikvision HM-TD5528T-15/W merupakan kamera pengawas tipe \emph{Thermographic Thermal and Optical Bi-spectrum Network Mini Positioning System} yang dirancang untuk pemantauan area kritis seperti gardu distribusi, fasilitas industri, dan zona rawan kebakaran. Kamera ini menggabungkan sensor termal dan sensor optik beresolusi tinggi dalam satu unit, serta didukung unit pemrosesan berbasis GPU yang memungkinkan pemantauan suhu dan visual secara \emph{real-time}. Kamera ini menggunaka modul termal sensor \emph{Vanadium Oxide Uncooled Focal Plane Arrays} dengan resolusi \(256 \times 192\) piksel dan \emph{pixel pitch} \(12~\mu\text{m}\). Kamera ini memiliki sensitivitas termal tinggi dengan \emph{NETD} \(\leq 35~\text{mK}\) pada suhu \(25^\circ\text{C}\), dan dilengkapi lensa dengan panjang fokus 15~mm serta aperture F1.0. Sudut pandang termal sebesar \(11.69^\circ \times 8.78^\circ\) memberikan cakupan area yang cukup sempit namun presisi, dengan IFOV \(0.8~\text{mrad}\) dan jarak fokus minimum 2{,}5~m. Zoom digital tersedia hingga \(8 \times\).
 
-Hikvision HM-TD5528T-15/W adalah kamera termal cerdas untuk pemantauan area kritis seperti gardu distribusi, industri, dan zona rawan kebakaran. Perangkat ini menggabungkan sensor termal presisi tinggi, deteksi suhu real-time, serta kemampuan mendeteksi api dan asap secara simultan. Dengan desain tahan cuaca ekstrem, kamera ini ideal untuk pengawasan luar ruang jangka panjang. Rincian spesifikasi utama ditampilkan pada Tabel~\ref{tab:spesifikasiHikvision}.
+Modul optik kamera ini menggunakan sensor CMOS \(1/2.8^{\prime\prime}\) progresif dengan resolusi hingga 4~MP (\(2688 \times 1520\) piksel). Rentang panjang fokus optik adalah 4{,}8--153~mm, dengan \emph{optical zoom} hingga \(32 \times\) dan \emph{digital zoom} hingga \(16 \times\). Kamera ini juga mendukung fitur \emph{WDR} 120~dB, \emph{optical defog}, serta \emph{picture-in-picture} yang memungkinkan tampilan kanal termal ditampilkan bersamaan di kanal optik. Dalam hal pengukuran suhu, kamera ini menyediakan hingga 273 skenario yang masing-masing dapat memiliki hingga 21 aturan (10 titik, 10 area, dan 1 garis). Rentang suhu yang dapat diukur adalah dari \(-20^\circ\text{C}\) hingga \(550^\circ\text{C}\), dengan akurasi \(\pm 2^\circ\text{C}\) atau \(\pm 2\%\), tergantung nilai yang lebih besar. Kamera ini merupakan jenis kamera thermal CCTV yang tidak memiliki konfigurasi nilai emisivitas secara langsung. Oleh karena itu, koreksi emisivitas perlu dilakukan secara eksternal, tergantung jenis permukaan target (contoh: logam teroksidasi sekitar 0{,}80, kulit manusia 0{,}95, keramik 0{,}90). Dari sisi integrasi sistem, perangkat ini mendukung berbagai protokol jaringan seperti IPv4/IPv6, RTSP, HTTP/HTTPS, ISAPI, dan ONVIF (Profile S, G, T). Penyimpanan data dapat dilakukan melalui kartu microSD hingga 128~GB dan NAS, dengan dukungan fitur \emph{Automatic Network Replenishment} (ANR). Kamera juga menyediakan antarmuka komunikasi seperti Ethernet RJ45 dan RS-485, serta kompatibel dengan perangkat lunak pemantauan seperti iVMS-4200 dan Hik-Connect.
 
-\begin{table}[H]
-    \centering
-    \caption{Spesifikasi Teknis Hikvision HM-TD5528T-15/W}
-    \label{tab:spesifikasiHikvision}
-    \renewcommand{\arraystretch}{1.2}
-    \begin{tabular}{|p{6cm}|p{7.5cm}|}
-        \hline
-        \textbf{Parameter} & \textbf{Spesifikasi} \\
-        \hline
-        Sensor Termal & Vanadium Oxide Uncooled FPA \\
-        \hline
-        Resolusi & \(256 \times 192\) piksel \\
-        \hline
-        Pixel Pitch & \(12~\mu\mathrm{m}\) \\
-        \hline
-        Rentang Spektral & \(8 - 14~\mu\mathrm{m}\) \\
-        \hline
-        NETD & \(\leq 35~\text{mK}\) @ \(25^\circ\text{C}\), F1.0 \\
-        \hline
-        Panjang Fokus & 15 mm \\
-        \hline
-        Field of View & \(11.69^\circ \times 8.78^\circ\) \\
-        \hline
-        IFOV & \(0.8~\text{mrad}\) \\
-        \hline
-        Deteksi Kendaraan & 1917 m (deteksi), 240 m (identifikasi) \\
-        \hline
-        Pengukuran Suhu & Titik, area, garis; akurasi \(\pm 2^\circ\text{C}\) atau \(\pm 2\%\) \\
-        \hline
-        Protokol Jaringan & RTSP, ISAPI, ONVIF, SDK \\
-        \hline
-        Perlindungan & IP67, tahan \(-40^\circ\text{C}\) s.d. \(70^\circ\text{C}\), petir 6000 V \\
-        \hline
-    \end{tabular}
-    \footnotesize\\ \textbf{Sumber:} Hikvision Datasheet (2025)
-\end{table}
 
-Dengan kemampuan deteksi suhu tinggi dan cakupan jarak jauh, HM-TD5528T-15/W ideal untuk pemantauan kondisi trafo, koneksi kabel, dan komponen gardu lainnya. Dukungan RTSP dan ISAPI memudahkan integrasi dengan software berbasis ROS dan Website. 
+\subsection{Doublecom DB6000FR-ANS}
+
+Doublecom DB6000FR-ANS merupakan terminal nirkabel industri kelas luar ruang yang dirancang untuk lingkungan dengan mobilitas tinggi seperti kendaraan AGV, robot pintar, drone, dan sistem logistik otomatis. Perangkat ini mendukung standar komunikasi nirkabel IEEE 802.11a/n dan mengimplementasikan teknologi MIMO 2T2R dengan arsitektur dua antena pengirim dan penerima. DB6000FR-ANS memiliki bandwidth maksimum sebesar 300~Mbps dan daya pancar maksimum hingga 1000~mW. Perangkat ini juga dilengkapi dengan antarmuka RF eksternal (2×SMA) yang memungkinkan penggunaan antena eksternal dengan berbagai karakteristik gain untuk meningkatkan jangkauan hingga lebih dari 1~km dalam kondisi tertentu. Sensitivitas penerimaannya mencapai \(-96~\text{dBm}\), yang menjadikannya cocok untuk komunikasi jarak jauh dan lingkungan padat interferensi.
+
+Fitur utama lainnya mencakup dukungan \emph{Fast Roaming} (perpindahan AP dengan jeda kurang dari 50~ms), teknologi TDMA untuk efisiensi dalam komunikasi multipoint, dan berbagai fungsi jaringan seperti VLAN, NAT, QoS, VPN, serta firewall. Selain itu, perangkat ini mendukung bandwidth fleksibel (5~MHz, 10~MHz, 20~MHz, dan 40~MHz), serta pengaturan spektrum dinamis melalui DFS. Secara perangkat keras, DB6000FR-ANS dilengkapi prosesor 600~MHz, RAM 64~MB, dan antarmuka jaringan 10/100/1000BASE-T (RJ45). Desainnya tahan terhadap guncangan, antistatik, serta mampu bekerja dalam rentang suhu ekstrem antara \(-40^\circ\text{C}\) hingga \(75^\circ\text{C}\). Perangkat ini juga mendukung manajemen lokal maupun cloud melalui platform aplikasi dan menyediakan indikator sinyal LED, port POE 12--24~VDC, serta konsumsi daya maksimum hanya 9~W.
+
+\subsection{Doublecom DB6000ANLT90-FR}
+Doublecom DB6000ANLT90-FR merupakan perangkat nirkabel luar ruang kelas operator (\emph{carrier-grade}) yang dirancang untuk menjadi titik pusat dalam komunikasi nirkabel berbasis sektor. Perangkat ini menggabungkan protokol IEEE 802.11a/n dengan antena dual-pol 90° terintegrasi, bekerja dalam pita frekuensi 5.8~GHz bebas lisensi, mencakup rentang 5150--5850~MHz, dan memiliki gain antena sebesar 18~dBi. DB6000ANLT90-FR menggunakan arsitektur MIMO 2T2R dengan kecepatan transmisi maksimum hingga 300~Mbps. Perangkat ini dirancang untuk komunikasi \emph{point-to-multipoint} dalam radius hingga 5~km, dan dapat mentransmisikan lebih dari 10 kanal video HD dengan bandwidth total lebih dari 100~Mbps. Ini dimungkinkan berkat penerapan teknologi TDMA yang mengatur alokasi waktu transmisi antar titik secara efisien.
+
+Dari sisi perangkat keras, perangkat ini dilengkapi CPU 600~MHz, RAM 64~MB, serta satu port jaringan RJ-45 berkecepatan 10/100/1000BASE-T. Power supply dapat disuplai melalui adaptor DC 12--24~V atau AC 200--300~V, serta mendukung PoE. Fitur manajemen jaringan meliputi DHCP, VLAN, NAT, QoS, firewall, packet sniffing, dan analisis lalu lintas secara langsung. Dari sisi ketahanan lingkungan, perangkat ini dilengkapi proteksi IP67 yang tahan air, angin, debu, dan paparan sinar matahari langsung. Perangkat dapat beroperasi dalam suhu \(-40^\circ\text{C}\) hingga \(75^\circ\text{C}\), kelembapan hingga 95\% (non-kondensasi), serta memiliki desain tahan guncangan dan disipasi panas. Konsumsi daya maksimum perangkat ini sekitar 14~W, dan dapat dipasang menggunakan bracket tipe-L atau sistem penjepit pipa berdiameter \(\phi 30{-}55~\text{mm}\).
+
+\subsection{Moxa EDS-205}
+
+Moxa EDS-205 adalah perangkat \emph{unmanaged Ethernet switch} industri dengan lima port RJ45 10/100BASE-T(X) yang mendukung mode \emph{auto negotiation} dan \emph{auto MDI/MDI-X}. Perangkat ini cocok untuk pengaplikasian di lingkungan industri karena mendukung standar IEEE 802.3, 802.3u, dan 802.3x, serta memiliki kemampuan proteksi terhadap \emph{broadcast storm} EDS-205 menggunakan metode pemrosesan \emph{store and forward}, memiliki ukuran tabel MAC sebesar 2K, dan buffer paket sebesar 512~kbit. Perangkat ini beroperasi pada tegangan masukan 12--48~VDC, dengan konsumsi arus sekitar 0.12~A pada 24~VDC dan proteksi terhadap polaritas terbalik serta arus lebih (\(1.1~\text{A}\)). Dari sisi fisik, perangkat ini memiliki dimensi \(24.9 \times 100 \times 86.5~\text{mm}\), berat 135~g, dan dipasang melalui rel DIN. Perangkat ini dirancang dengan peringkat IP30 dan dapat beroperasi dalam suhu \(-10^\circ\text{C}\) hingga \(60^\circ\text{C}\), serta disertifikasi dengan berbagai standar keselamatan dan kompatibilitas elektromagnetik (seperti UL 508, EN 62368-1, EN 55032/35, IEC 61000-4-x). Perangkat ini sangat andal untuk kebutuhan komunikasi data industri yang tidak memerlukan konfigurasi kompleks.
 
 \subsection{\emph{Robot Operating System (ROS)}}
-\emph{Robot Operating System (ROS)} adalah \emph{framework} perangkat lunak \emph{open-source} yang dirancang untuk memfasilitasi pengembangan aplikasi robotik. ROS menyediakan berbagai \emph{tools} dan \emph{libraries} untuk mengelola berbagai tugas robotik, seperti kontrol aktuator, pemrosesan data sensor, serta navigasi dan kontrol gerak. Salah satu keunggulan ROS adalah arsitekturnya yang modular, memungkinkan pengembang untuk membagi sistem robotik kompleks menjadi bagian-bagian kecil yang saling terhubung, dikenal sebagai \emph{node}. ROS mendukung berbagai aplikasi robotik, mulai dari robot industri hingga robot otonom. Berikut adalah beberapa komponen dan konsep penting dalam ROS:
 
-\subsubsection{\emph{2.2.3.1 Node}}
-\emph{Node} adalah unit dasar dalam ROS yang berfungsi sebagai proses independen untuk menjalankan tugas spesifik dalam sistem robotik. Setiap \emph{node} memiliki fungsionalitas tertentu, seperti mengambil data sensor atau mengontrol aktuator, dan dapat berkomunikasi dengan \emph{node} lainnya melalui berbagai mekanisme komunikasi, seperti \emph{topic}, \emph{service}, atau \emph{action}. \emph{Node} bekerja secara paralel dan saling berinteraksi untuk membentuk aplikasi robotik yang kompleks.
+\emph{Robot Operating System (ROS)} merupakan sebuah \emph{framework} perangkat lunak \emph{open-source} yang dikembangkan untuk memfasilitasi pengembangan aplikasi robotik yang modular dan skalabel. ROS menyediakan seperangkat \emph{tools} dan \emph{libraries} yang dirancang untuk mengelola berbagai fungsi utama dalam sistem robot, seperti kendali aktuator, pemrosesan data sensor, navigasi, dan perencanaan lintasan. Salah satu keunggulan utama ROS adalah arsitekturnya yang terdistribusi, memungkinkan pengembang untuk membagi sistem kompleks ke dalam unit-unit proses yang saling terhubung, dikenal sebagai \emph{node}. ROS mendukung beragam aplikasi, mulai dari robot industri hingga sistem otonom.Berikut merupakan komponen dan konsep fundamental yang membentuk arsitektur dan ekosistem ROS:
 
-\subsubsection{\emph{2.2.3.2 Topic}}
-\emph{Topic} adalah mekanisme komunikasi \emph{publish/subscribe} antara \emph{node} untuk pertukaran data secara asinkron. \emph{Node} yang berfungsi sebagai \emph{publisher} mengirimkan data ke \emph{topic}, sementara \emph{node} yang berfungsi sebagai \emph{subscriber} menerima data dari \emph{topic} tersebut. Data yang dikirim melalui \emph{topic} biasanya berbentuk pesan (\emph{message}) yang memiliki format tertentu yang disepakati oleh pengembang.
+\subsubsection{\emph{2.2.7.1 Node}}
+\emph{Node} adalah unit eksekusi dasar dalam ROS yang merepresentasikan sebuah proses independen untuk menjalankan tugas tertentu dalam sistem robot. Setiap \emph{node} memiliki tanggung jawab spesifik, seperti pembacaan data sensor atau pengendalian aktuator, dan dapat berkomunikasi dengan \emph{node} lainnya melalui mekanisme seperti \emph{topic}, \emph{service}, atau \emph{action}. Pendekatan ini memungkinkan sistem bekerja secara paralel dan modular.
 
-\subsubsection{\emph{2.2.3.3 Service}}
-\emph{Service} adalah mekanisme komunikasi sinkron antara dua \emph{node}, di mana satu \emph{node} melakukan permintaan (\emph{request}) dan \emph{node} lainnya memberikan respon (\emph{response}) secara langsung. Layanan ini berguna untuk tugas-tugas yang memerlukan hasil segera setelah permintaan dilakukan, seperti pengaturan parameter robot atau pembacaan nilai sensor tertentu.
+\subsubsection{\emph{2.2.7.2 Topic}}
+\emph{Topic} merupakan mekanisme komunikasi berbasis model \emph{publish/subscribe} yang memungkinkan pertukaran data antar \emph{node} secara asinkron. \emph{Node} yang berperan sebagai \emph{publisher} akan mengirimkan data ke suatu \emph{topic}, sedangkan \emph{subscriber} akan menerima data dari \emph{topic} tersebut. Data yang ditransmisikan berbentuk \emph{message} yang memiliki struktur dan tipe tertentu yang telah ditentukan.
 
-\subsubsection{\emph{2.2.3.4 Action}}
-\emph{Action} digunakan untuk tugas-tugas yang memerlukan umpan balik berkelanjutan dan memungkinkan komunikasi dua arah antara \emph{node}. Berbeda dengan \emph{service}, yang bersifat sinkron dan langsung, \emph{action} mendukung komunikasi asinkron dengan menyediakan umpan balik selama operasi berlangsung, seperti pada tugas pergerakan robot yang memerlukan estimasi waktu dan status secara dinamis.
+\subsubsection{\emph{2.2.7.3 Service}}
+\emph{Service} merupakan bentuk komunikasi sinkron antara dua \emph{node}, di mana satu \emph{node} mengirimkan permintaan (\emph{request}) dan \emph{node} lain memberikan tanggapan (\emph{response}) secara langsung. Mekanisme ini cocok untuk interaksi yang bersifat langsung dan satu kali, seperti pembacaan status atau perubahan konfigurasi.
 
-\subsubsection{\emph{2.2.3.5 Launch File}}
-\emph{Launch File} adalah file berformat XML yang digunakan untuk menginisiasi beberapa \emph{node} dan parameter konfigurasi secara bersamaan. \emph{Launch file} memungkinkan pengembang untuk menyusun dan mengelola konfigurasi sistem robotik dengan lebih efisien, menghindari pengaturan manual yang berulang kali. File ini dapat digunakan untuk menentukan urutan \emph{node} yang dijalankan serta parameter yang diperlukan.
+\subsubsection{\emph{2.2.7.4 Action}}
+\emph{Action} digunakan untuk menangani proses yang memerlukan waktu eksekusi yang relatif lama dan memungkinkan pemantauan progres secara kontinu. Berbeda dengan \emph{service} yang bersifat sinkron, \emph{action} menyediakan kemampuan komunikasi dua arah secara asinkron dengan dukungan umpan balik berkala (\emph{feedback}) serta notifikasi penyelesaian (\emph{result}).
 
-\subsubsection{\emph{2.2.3.6 Bag File}}
-\emph{Bag File} adalah format file yang digunakan untuk merekam dan memutar ulang data \emph{topic}. \emph{Bag file} sangat berguna dalam pengujian dan debugging karena memungkinkan pengembang untuk memeriksa data yang dikumpulkan sebelumnya tanpa perlu menjalankan robot secara langsung. Dengan menggunakan \emph{bag file}, data dapat diputar ulang untuk melakukan analisis atau pengujian lebih lanjut.
+\subsubsection{\emph{2.2.7.5 Launch File}}
+\emph{Launch file} adalah berkas berformat XML yang digunakan untuk meluncurkan beberapa \emph{node} dan parameter konfigurasi secara bersamaan. File ini memungkinkan pengelolaan sistem ROS secara lebih efisien dan konsisten, terutama dalam pengujian dan pengoperasian sistem yang melibatkan banyak komponen secara paralel.
 
-\subsubsection{\emph{2.2.3.7 Package}}
-\emph{Package} adalah unit dasar dalam ROS yang mengorganisir \emph{node}, \emph{libraries}, dan file konfigurasi yang diperlukan oleh aplikasi robotik. Setiap paket dapat berisi kode sumber, file eksekusi, dan file konfigurasi yang mendukung tugas tertentu dalam sistem robot. Paket memungkinkan pengelolaan dan pemeliharaan proyek robotik menjadi lebih terstruktur dan modular.
+\subsubsection{\emph{2.2.7.6 Bag File}}
+\emph{Bag file} merupakan format file dalam ROS yang digunakan untuk merekam dan memutar ulang data dari \emph{topic}. Fasilitas ini sangat berguna dalam pengujian, analisis, dan debugging karena memungkinkan simulasi ulang dari data historis tanpa perlu menjalankan robot secara langsung.
 
-\subsubsection{\emph{2.2.3.8 Parameter}}
-\emph{Parameter} adalah variabel dinamis yang disimpan dalam server parameter ROS. \emph{Parameter} ini memungkinkan \emph{node} untuk berbagi informasi konfigurasi secara global dalam sistem. Dengan menggunakan \emph{parameter}, pengembang dapat mengubah konfigurasi robot secara lebih fleksibel tanpa perlu mengubah kode sumber. \emph{Parameter} biasanya digunakan untuk menyimpan nilai-nilai yang digunakan oleh beberapa \emph{node}, seperti kecepatan robot atau batasan sensor.
+\subsubsection{\emph{2.2.7.7 Package}}
+\emph{Package} adalah unit organisasi utama dalam ROS yang mengelompokkan \emph{node}, pustaka, dan file konfigurasi ke dalam satu kesatuan logis. Paket memfasilitasi pengembangan perangkat lunak yang terstruktur, modular, serta memudahkan distribusi dan pemeliharaan proyek dalam skala besar.
 
-\subsubsection{\emph{2.2.3.9 Workspace}}
-\emph{Workspace} adalah direktori kerja dalam ROS tempat pengembang mengelola \emph{package}, \emph{build}, dan konfigurasi pengembangan. \emph{Workspace} umumnya terdiri dari folder seperti \texttt{src} untuk menyimpan kode sumber, \texttt{devel} untuk hasil \emph{build}, dan \texttt{install} untuk menampung hasil instalasi. Dengan menggunakan \emph{workspace}, pengembang dapat mengelola proyek ROS secara terstruktur dan efisien.
+\subsubsection{\emph{2.2.7.8 Parameter}}
+\emph{Parameter} adalah variabel konfigurasi yang disimpan dalam \emph{parameter server} ROS. Parameter ini memungkinkan \emph{node} untuk berbagi nilai konfigurasi secara global dalam sistem. Dengan memanfaatkan parameter, perubahan konfigurasi dapat dilakukan secara dinamis tanpa perlu memodifikasi kode sumber.
 
-\subsubsection{\emph{2.2.3.10 Transformation (tf)}}
-\emph{Transformation} adalah sebuah \emph{library} dalam ROS yang digunakan untuk melacak hubungan koordinat antara berbagai frame dalam sistem robotik. \emph{tf} memungkinkan pengembang untuk melakukan transformasi antara berbagai frame koordinat (misalnya, frame robot dan frame map) secara efisien, sehingga koordinat objek dan sensor dapat diubah sesuai dengan referensi yang dibutuhkan. Misalnya, dalam robot otonom, \emph{tf} digunakan untuk mengetahui posisi dan orientasi robot dalam peta atau untuk menghitung posisi objek yang terdeteksi oleh sensor.
+\subsubsection{\emph{2.2.7.9 Workspace}}
+\emph{Workspace} adalah direktori kerja yang digunakan untuk mengelola pengembangan proyek ROS, termasuk penyimpanan kode sumber, hasil kompilasi, dan instalasi. Struktur \emph{workspace} umumnya mencakup folder \texttt{src}, \texttt{devel}, dan \texttt{install}, serta mendukung penggunaan \emph{catkin} sebagai sistem \emph{build} utama.
 
-Dengan menggunakan \emph{tf}, pengembang dapat menghindari kesalahan dalam kalkulasi posisi dan orientasi, yang sangat penting dalam aplikasi robotik yang melibatkan navigasi dan interaksi dengan lingkungan. Paket \emph{tf} menyediakan berbagai fungsi untuk mengatur dan mengelola transformasi koordinat, seperti \texttt{tf::TransformListener} dan \texttt{tf::TransformBroadcaster}  yang digunakan untuk mendengarkan serta mempublikasikan transformasi koordinat \cite{ros_noetic}.
+\subsubsection{\emph{2.2.7.10 Transformation (tf)}}
+\emph{Transformation} adalah pustaka dalam ROS yang digunakan untuk melacak dan mengelola transformasi spasial antar kerangka koordinat (\emph{frame}) dalam sistem robot. Dengan \emph{tf}, pengembang dapat melakukan transformasi posisi dan orientasi antar objek atau sensor berdasarkan referensi waktu nyata. Pustaka ini menyediakan antarmuka seperti \texttt{tf::TransformListener} untuk mendengarkan transformasi dan \texttt{tf::TransformBroadcaster} untuk mempublikasikan transformasi antar \emph{frame}. Fitur ini sangat krusial dalam aplikasi navigasi, pemetaan, dan manipulasi objek, di mana presisi spasial menjadi aspek fundamental \cite{ros_noetic}.
 
 \subsection{\emph{Localization dan Mapping}}
 
- \textit{ Localization and Mapping} berperan penting dalam sistem robotik dan kendaraan otonom, terutama dalam membangun peta lingkungan sekaligus menentukan posisi robot secara presisi. Seiring berkembangnya metode pemrosesan data LIDAR dan sensor IMU, berbagai pendekatan telah dikembangkan untuk meningkatkan akurasi, efisiensi komputasi, dan ketahanan terhadap dinamika lingkungan. Bagian ini mengulas beberapa metode terkemuka yang digunakan untuk pemetaan dan lokalisasi, yaitu NanoGICP, Quatro, Fast-LIO-SAM, dan Fast-LIO-Localization QN.
+ \textit{ Localization and Mapping} berperan penting dalam sistem robotik dan kendaraan otonom, terutama dalam membangun peta lingkungan sekaligus menentukan posisi robot secara presisi. Seiring berkembangnya metode pemrosesan data LIDAR dan sensor IMU, berbagai pendekatan telah dikembangkan untuk meningkatkan akurasi, efisiensi komputasi, dan ketahanan terhadap dinamika lingkungan. 
 
 \subsubsection{2.2.5.1 NanoGICP}
 
@@ -205,6 +194,19 @@ NanoGICP adalah algoritma registrasi cloud point ringan yang dimodifikasi dari \
 \subsubsection{2.2.5.2 Quatro}
 
 \emph{Quatro} merupakan sistem lokalisasi berbasis \emph{LiDAR} yang mengintegrasikan empat strategi utama: \emph{scan-to-scan registration}, \emph{scan-to-map matching}, ekstraksi fitur bidang (\emph{plane-feature}), dan kompensasi deformasi waktu (\emph{time-deformed registration}). Kombinasi ini memungkinkan estimasi pose yang lebih akurat dan stabil dalam lingkungan yang dinamis serta berkontur kompleks. Quatro terbukti memiliki performa unggul pada berbagai benchmark dataset seperti KITTI dan NCLT, serta mampu berjalan \emph{real-time} dengan efisiensi komputasi tinggi \cite{kim2022quatro}.
+
+\subsubsection{2.2.5.3 \emph{Direct LiDAR-Inertial Odometry (DLIO)}}`
+Algoritma \emph{Direct LiDAR-Inertia'l Odometry} (DLIO) menawarkan solusi dengan pendekatan \emph{coarse-to-fine} untuk menghasilkan koreksi gerakan waktu kontinu secara lebih akurat. DLIO memanfaatkan persamaan analitik yang dirancang untuk memperbaiki setiap titik data secara paralel dan efisien, sekaligus mengintegrasikan data LiDAR dan \emph{Inertial Measurement Unit} (IMU) secara ketat untuk menghasilkan estimasi keadaan robot yang lebih akurat. Pendekatan ini memungkinkan koreksi distorsi pada \emph{point cloud} secara \emph{real-time}, bahkan dalam kondisi pergerakan dinamis yang kompleks \cite{chen2022dlio}.
+
+
+\begin{figure} [H] \centering
+  \includegraphics[scale=0.6]{gambar/bab2/dlio_Arch.png}
+  \caption{Arsitektur \emph{Direct LiDAR-Inertial Odometry (DLIO)}}
+  \label{fig:DLIO Architecture}
+\end{figure}
+
+Keunggulan DLIO tidak hanya terletak pada akurasi tinggi dalam estimasi posisi, tetapi juga pada efisiensi komputasi yang lebih baik dibandingkan algoritma-algoritma terkini lainnya seperti LIO-SAM dan FAST-LIO2. DLIO menggabungkan koreksi gerakan dan pembuatan \emph{prior} dalam satu langkah, menghilangkan kebutuhan akan \emph{scan-to-scan matching} yang biasanya memakan waktu. Melalui eksperimen pada \emph{dataset} publik dan \emph{dataset} lapangan yang dikumpulkan secara mandiri, DLIO menunjukkan keunggulan dalam menghasilkan peta 3D yang detail dengan kesalahan posisi minimum. Sistem ini menjadi alternatif yang menjanjikan untuk platform robot bergerak, termasuk drone, dalam navigasi dan pemetaan di lingkungan yang tidak terstruktur.
+
 
 
 \subsubsection{2.2.5.3 \emph{Fast-LIO2}: \emph{Fast Direct LiDAR-Inertial Odometry}}
