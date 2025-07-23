@@ -430,17 +430,120 @@ $i \gets 0$\;
 \subsection{Implementasi Sistem \emph{Control Station}}
 Sistem \emph{Control Station} diimplementasikan sebagai antarmuka pengguna berbasis web yang memungkinkan operator untuk mengendalikan robot, memantau statusnya, dan mengakses data yang dikumpulkan selama operasi. Implementasi sistem ini dapat dibagi menjadi dua komponen utama yaitu\emph{front-end} dan \emph{back-end}.
 
-\subsubsection{3.4.4.1 Perancangan \emph{Frontend}}
-Frontend dari sistem ini dirancang menggunakan library \textit{React} dan framework \textit{Next.js} untuk memberikan pengalaman pengguna yang cepat dan dinamis. Pemilihan \textit{React} didasarkan pada prinsip \textit{component-based architecture} yang memungkinkan pembuatan antarmuka pengguna dengan komponen-komponen modular yang dapat digunakan kembali. Hal ini mempercepat proses pengembangan dan mengurangi redundansi kode, karena pengembang dapat memanfaatkan kembali komponen yang sudah ada di berbagai bagian aplikasi. Sementara itu, \textit{Next.js} memperluas kemampuan \textit{React} dengan menambahkan fitur seperti \textit{server-side rendering} (SSR), \textit{static site generation}, dan routing berbasis file. Dengan menggunakan \textit{Next.js}, sistem ini dapat menghasilkan halaman yang lebih cepat dengan waktu pemuatan yang lebih singkat karena SSR memungkinkan konten halaman di-render di sisi server sebelum dikirimkan ke klien.
+\subsubsection{3.4.4.1 Implementasi \emph{Frontend}}
+Frontend dari sistem ini dibuat menggunakan library \textit{React} dan framework \textit{Next.js} untuk memberikan pengalaman pengguna yang cepat dan dinamis. Pemilihan \textit{React} didasarkan pada prinsip \textit{component-based architecture} yang memungkinkan pembuatan antarmuka pengguna dengan komponen-komponen modular yang dapat digunakan kembali. Hal ini mempercepat proses pengembangan dan mengurangi redundansi kode, karena pengembang dapat memanfaatkan kembali komponen yang sudah ada di berbagai bagian aplikasi. Sementara itu, \textit{Next.js} memperluas kemampuan \textit{React} dengan menambahkan fitur seperti \textit{server-side rendering} (SSR), \textit{static site generation}, dan routing berbasis file. Dengan menggunakan \textit{Next.js}, sistem ini dapat menghasilkan halaman yang lebih cepat dengan waktu pemuatan yang lebih singkat karena SSR memungkinkan konten halaman di-render di sisi server sebelum dikirimkan ke klien.
 
 Untuk pengelolaan state, sistem ini menggunakan \textit{state management} dengan \texttt{Zustand}, sebuah library ringan dan efisien yang memungkinkan pengelolaan state secara sederhana dan terpusat tanpa memerlukan \textit{boilerplate code} seperti yang banyak seperti penggunaan reducer. Untuk pengambilan data dari server, aplikasi ini menggunakan \texttt{Tanstack Query}, yang mempermudah pengelolaan data, mendukung caching, dan menyediakan pembaruan data secara otomatis ketika ada perubahan. Sistem ini juga mengimplementasikan \textit{client-side filtering} dan \textit{server-side pagination}. \textit{Client-side filtering} memungkinkan data yang ditampilkan untuk difilter langsung di sisi klien, mempercepat proses pencarian, sementara \textit{server-side pagination} membagi data menjadi beberapa halaman, sehingga hanya sebagian data yang dimuat pada satu waktu, mengurangi beban pada server dan meningkatkan kinerja aplikasi. \textit{Server-side rendering} (SSR) yang didukung oleh \textit{Next.js} memungkinkan aplikasi untuk merender halaman di sisi server sebelum mengirimkannya ke klien, sehingga mempercepat waktu pemuatan halaman dan meningkatkan kemampuan mesin pencari untuk mengindeks halaman dengan lebih baik.
 
-Untuk tampilan antarmuka pengguna (UI), aplikasi ini menggunakan \texttt{Shadcn UI} dan \texttt{Tailwind CSS}. \texttt{Shadcn UI} adalah pustaka komponen UI yang menyediakan elemen-elemen desain minimalis dan responsif, sementara \texttt{Tailwind CSS} memungkinkan pengembang untuk mendesain elemen-elemen UI dengan cepat menggunakan \textit{utility-first} CSS, sehingga memudahkan pembuatan tampilan yang responsif dan dinamis. Untuk manajemen autentikasi, aplikasi ini menggunakan cookies untuk menyimpan token autentikasi pengguna. Dengan menggunakan cookies, sesi pengguna dapat dipertahankan meskipun terjadi refresh halaman. Cookies ini bekerja dengan \textit{token JWT} untuk memverifikasi identitas pengguna dalam setiap permintaan ke server. 
+Untuk tampilan antarmuka pengguna (UI), aplikasi ini menggunakan \texttt{Shadcn UI} dan \texttt{Tailwind CSS}. \texttt{Shadcn UI} adalah pustaka komponen UI yang menyediakan elemen-elemen desain minimalis dan responsif, sementara \texttt{Tailwind CSS} memungkinkan pengembang untuk mendesain elemen-elemen UI dengan cepat menggunakan \textit{utility-first} CSS, sehingga memudahkan pembuatan tampilan yang responsif dan dinamis. Untuk manajemen autentikasi, aplikasi ini menggunakan cookies untuk menyimpan token autentikasi pengguna. Dengan menggunakan cookies, sesi pengguna dapat dipertahankan meskipun terjadi refresh halaman. Cookies ini bekerja dengan \textit{token JWT} untuk memverifikasi identitas pengguna dalam setiap permintaan ke server.  Berikut merupakan implementasi tampilan antarmuka pengguna pada \emph{control station} yang telah dirancang sebelumnya.
 
-\subsubsection{3.4.4.2 Perancangan Sistem Backend}
 
-Sistem backend dari aplikasi ini dirancang menggunakan bahasa pemrograman \textit{TypeScript} dengan framework \textit{Express.js} untuk membangun RESTful API yang efisien dan mudah diakses. \textit{TypeScript} dipilih karena memberikan keunggulan dalam hal tipe data, yang memungkinkan pengembang untuk menulis kode yang lebih aman dan mudah dipelihara. Dengan menggunakan \textit{Express.js}, pengembangan API menjadi lebih cepat dan mudah, karena framework ini menyediakan berbagai fitur yang dibutuhkan untuk membangun aplikasi web dan API secara efisien. Untuk pengelolaan basis data, sistem ini menggunakan pustaka \texttt{Sequelize} sebagai \textit{Object-Relational Mapping} (ORM). \texttt{Sequelize} memungkinkan interaksi dengan basis data menggunakan model JavaScript yang lebih mudah dipahami dan dikelola, tanpa perlu menulis kueri SQL secara langsung. ORM ini menyediakan berbagai fitur seperti validasi data, relasi antar tabel, serta sistem migrasi untuk mempermudah pengelolaan skema dan konsistensi data aplikasi.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.65\textwidth]{gambar/bab3/fe/home.png}
+  \caption{Implementasi desain halaman utama pada \emph{control station}}
+  \label{fig:home-page}
+  \footnotesize\emph{Sumber: Dokumentasi Penulis}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.65\textwidth]{gambar/bab3/fe/robot.png}
+  \caption{Implementasi desain halaman manajemen robot pada \emph{control station}}
+  \label{fig:robot-management}
+  \footnotesize\emph{Sumber: Dokumentasi Penulis}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.65\textwidth]{gambar/bab3/fe/component.png}
+  \caption{Implementasi desain halaman manajemen komponen gardu pada \emph{control station}}
+  \label{fig:component-management}
+  \footnotesize\emph{Sumber: Dokumentasi Penulis}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.65\textwidth]{gambar/bab3/fe/overheat.png}
+  \caption{Implementasi desain halaman hasil deteksi overheat pada \emph{control station}}
+  \label{fig:overheat-detection}
+  \footnotesize\emph{Sumber: Dokumentasi Penulis}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.65\textwidth]{gambar/bab3/fe/user.png}
+  \caption{Implementasi desain halaman manajemen user pada \emph{control station}}
+  \label{fig:user-management}
+  \footnotesize\emph{Sumber: Dokumentasi Penulis}
+\end{figure}
+
+
+\subsubsection{3.4.4.2 Implementasun Sistem Backend}
+
+Sistem backend dari aplikasi ini dibuat menggunakan bahasa pemrograman \textit{TypeScript} dengan framework \textit{Express.js} untuk membangun RESTful API yang efisien dan mudah diakses. \textit{TypeScript} dipilih karena memberikan keunggulan dalam hal tipe data, yang memungkinkan pengembang untuk menulis kode yang lebih aman dan mudah dipelihara. Dengan menggunakan \textit{Express.js}, pengembangan API menjadi lebih cepat dan mudah, karena framework ini menyediakan berbagai fitur yang dibutuhkan untuk membangun aplikasi web dan API secara efisien. Untuk pengelolaan basis data, sistem ini menggunakan pustaka \texttt{Sequelize} sebagai \textit{Object-Relational Mapping} (ORM). \texttt{Sequelize} memungkinkan interaksi dengan basis data menggunakan model JavaScript yang lebih mudah dipahami dan dikelola, tanpa perlu menulis kueri SQL secara langsung. ORM ini menyediakan berbagai fitur seperti validasi data, relasi antar tabel, serta sistem migrasi untuk mempermudah pengelolaan skema dan konsistensi data aplikasi.
 
 Dalam hal autentikasi, sistem menerapkan pendekatan berbasis \textit{JWT} (JSON Web Tokens) untuk login dan pengelolaan sesi. Pengguna yang berhasil melakukan autentikasi akan menerima \textit{access token} dan \textit{refresh token}. \textit{Access token} digunakan untuk mengakses endpoint API yang bersifat privat, sedangkan \textit{refresh token} memungkinkan pembaruan \textit{access token} yang telah kedaluwarsa tanpa perlu login ulang. Middleware \texttt{auth} digunakan untuk memverifikasi setiap token yang masuk dalam permintaan API, sehingga hanya pengguna yang telah terautentikasi yang dapat mengakses sumber daya tertentu. Sistem ini juga menerapkan \textit{Role-Based Access Control} (RBAC) untuk membatasi hak akses berdasarkan peran pengguna, seperti \textit{superadmin}, \textit{admin}, atau \textit{user}. Selain itu, fitur keamanan lintas domain dikendalikan melalui penerapan mekanisme \textit{CORS} (Cross-Origin Resource Sharing), yang memastikan bahwa hanya domain yang sah dan terverifikasi yang dapat berinteraksi dengan sistem API backend.
 
 Untuk mendukung pengolahan data secara waktu nyata (\textit{real-time}), sistem ini menggunakan protokol \texttt{WebSocket}. Dengan WebSocket, koneksi dua arah (\textit{full-duplex}) antara klien dan server dapat terjaga secara terus-menerus, memungkinkan pengiriman data seperti posisi robot, status sensor, dan notifikasi sistem secara langsung tanpa perlu melakukan permintaan berulang (\textit{polling}). Pendekatan ini sangat penting untuk sistem pemantauan dan kontrol yang memerlukan latensi rendah dan pembaruan data secara instan. Sementara itu, untuk mendukung transmisi video langsung dari kamera robot ke antarmuka pengguna, sistem menggunakan protokol \texttt{WebRTC} (\textit{Web Real-Time Communication}). WebRTC memungkinkan komunikasi audio dan video secara peer-to-peer antara klien dan server, tanpa perlu plugin tambahan, serta mendukung kompresi dan pengiriman media dengan efisiensi tinggi. Penggunaan WebRTC memastikan bahwa tayangan video dari kamera robot dapat diakses secara langsung (\textit{live streaming}) dengan latensi rendah dan kualitas yang dapat disesuaikan secara adaptif sesuai kondisi jaringan.
+
+
+\section{Integrasi Sistem}
+Integrasi sistem dilakukan dengan menggabungkan seluruh komponen perangkat keras dan perangkat lunak yang telah dirancang untuk menciptakan sistem yang berjalan secara efisien dan terkoordinasi. Tahap pertama adalah integrasi komponen elektrikal, yang melibatkan pemasangan perangkat tambahan seperti kamera termal, router nirkabel, dan perangkat \emph{switch} jaringan pada robot. Komponen-komponen ini dihubungkan dengan catu daya 24 VDC dari port daya \emph{navigation host} robot, memastikan semua perangkat dapat beroperasi tanpa memerlukan sumber daya eksternal tambahan. Selanjutnya, perangkat-perangkat ini dikonfigurasi dalam jaringan lokal dengan alamat IP statis, memungkinkan komunikasi antar perangkat di dalam robot untuk mendukung fungsionalitas sistem. Untuk komunikasi antara \emph{control station} dan robot, digunakan skema komunikasi nirkabel \emph{Point-to-Point} (PTP). Pada \emph{control station}, router berfungsi sebagai \emph{access point} (AP) yang terhubung ke jaringan lokal robot. Sementara itu, pada robot, perangkat \emph{router} berfungsi sebagai \emph{station}, yang terhubung langsung dengan \emph{access point} yang ada di \emph{control station}. Konfigurasi ini memungkinkan pertukaran data dua arah berkecepatan tinggi antara robot dan \emph{control station}, dengan latensi rendah yang sangat krusial untuk mendukung transmisi data secara \emph{real-time}.
+
+Setelah integrasi perangkat keras, sistem \emph{ROS} (Robot Operating System) diimplementasikan pada robot untuk mengelola komunikasi antar \textit{package} dan menjalankan berbagai fungsionalitas robot. ROS mengatur deteksi objek menggunakan model \emph{YOLO}, navigasi otonom, serta pemantauan suhu untuk mendeteksi potensi \emph{overheat}. Sistem ini memungkinkan integrasi komponen perangkat keras dan perangkat lunak dalam robot, dengan \emph{package}-package yang saling terhubung dan berkomunikasi untuk mencapai tujuan operasi otonom yang efisien.
+
+Setelah robot terintegrasi dengan sistem ROS, \emph{control station} yang berbasis web diimplementasikan pada PC operator. \emph{Control station} memungkinkan operator untuk memantau dan mengendalikan robot secara \emph{real-time}, dengan antarmuka pengguna yang menyediakan akses mudah untuk memantau posisi robot, status sensor, dan hasil deteksi suhu berlebih pada komponen gardu induk. Di dalam \emph{control station}, operator dapat memasukkan data komponen gardu induk, termasuk jenis, lokasi, dan ambang batas suhu abnormal, yang kemudian terintegrasi dengan sistem. Dengan demikian, robot dan seluruh komponen gardu dapat terdaftar dan dipantau secara terpusat dalam satu sistem, yang memudahkan pengawasan dan pengendalian operasi robot di lapangan.
+
+\section{Alur Kerja Sistem}
+
+Alur kerja sistem dalam penelitian ini mencakup integrasi data komponen gardu induk, pembuatan rute, penentuan waypoint pada robot, serta pengaturan jadwal patroli yang terhubung dengan sistem \emph{control station}. Selain itu, terdapat pula mekanisme koreksi navigasi robot menggunakan metode \emph{Fast-LIO2} dan penghindaran rintangan untuk memastikan robot tetap pada jalur yang telah ditentukan. Proses ini dimulai dengan pengaturan data komponen hingga pengoperasian robot untuk patroli dan deteksi suhu berlebih pada komponen gardu induk. Berikut adalah penjelasan alur kerja secara rinci:
+
+\subsection{Integrasi Data Komponen Gardu Induk}
+Pada tahap awal, \emph{control station} menerima data komponen gardu induk yang mencakup informasi tentang nama kelas komponen, ambang batas suhu, serta posisi komponen yang terpasang di gardu induk. Data ini digunakan sebagai dasar bagi robot untuk mendeteksi suhu berlebih pada komponen gardu induk selama proses patroli. 
+
+\subsection{Pembuatan Rute dan Waypoint di \emph{Control Station}}
+Setelah data komponen terintegrasi, operator dapat membuat rute patroli di \emph{control station}. Rute ini terdiri dari serangkaian waypoint yang masing-masing berisi informasi tentang lokasi (X, Y), orientasi (Z), serta jenis waypoint (seperti \emph{start}, \emph{scan area}, atau \emph{dock charge}). Data waypoint ini kemudian dikirimkan ke robot dan digunakan untuk navigasi. Pada setiap waypoint, terdapat parameter tambahan yang digunakan untuk mengontrol pergerakan robot dan pengaturan kamera, seperti kecepatan (\emph{speed}), tipe gait (\emph{gaitType}), serta kontrol kamera seperti pan, tilt, dan zoom. Parameter ini memungkinkan robot untuk bergerak sesuai dengan yang diinginkan serta melakukan pemindaian atau deteksi suhu pada komponen gardu induk. Berikut adalah contoh format salah satu array waypoint yang digunakan dalam sistem:
+
+\begin{lstlisting}
+{
+  "id": 6,
+  "sequenceOrder": 0,
+  "locationX": 10.5,
+  "locationY": 20.3,
+  "orientationZ": 45,
+  "waypointType": "start",
+  "gaitType": "walk",
+  "speed": 0.5,
+  "bodyHeight": 1.2,
+  "cameraPan": 90,
+  "cameraTilt": -10,
+  "rgbCameraZoom": 1.5,
+  "thermalCameraZoom": 2,
+  "direction": "forward",
+  "useObstacleAvoidance": true,
+  "map": "route_1"
+}
+\end{lstlisting}
+
+\subsection{Navigasi Robot}
+Setelah waypoint dan rute ditentukan, robot dapat dijadwalkan untuk patroli pada waktu tertentu. Robot yang selalu terhubung dalam kondisi docking station akan melanjutkan patroli ke rute yang telah ditentukan pada waktu yang telah dijadwalkan. Selama patroli, robot bergerak menuju setiap waypoint secara berurutan, dengan mempertimbangkan kecepatan dan metode pergerakan yang telah diatur. Jika robot mendeteksi suhu berlebih pada komponen gardu induk, sistem akan melaporkan kondisi tersebut ke \emph{control station}.
+
+\subsection{Deteksi Overheat dan Visualisasi pada \emph{Control Station}}
+Robot dilengkapi dengan sistem deteksi suhu menggunakan kamera termal untuk memantau suhu komponen gardu induk. Jika robot mendeteksi adanya komponen yang mengalami suhu berlebih, kondisi tersebut akan dikirimkan ke \emph{control station}. Di \emph{control station}, informasi suhu berlebih akan divisualisasikan, dengan memperhitungkan posisi robot dan kelas komponen yang terdeteksi. Visualisasi ini memungkinkan operator untuk mengambil langkah segera jika terjadi overheat.
+
+\subsection{Koreksi Posisi dengan \emph{Fast-LIO2}}
+Selama patroli, robot dapat mengalami penyimpangan posisi atau kesalahan dalam estimasi lokasi akibat faktor lingkungan, misalnya perubahan medan atau ketidakakuratan sensor. Oleh karena itu, robot dilengkapi dengan \emph{Fast-LIO2} yang digunakan untuk memperbaiki posisi robot. Sistem ini mengintegrasikan data dari sensor LiDAR dan IMU untuk memperkirakan posisi robot secara akurat. Prediksi posisi robot pada waktu \( t \) dihitung menggunakan data IMU, sedangkan pencocokan data LiDAR dengan peta digunakan untuk memperbaiki estimasi posisi tersebut. Proses koreksi posisi ini dapat dijelaskan dengan persamaan berikut:
+
+\begin{equation}
+\mathbf{x}_t^{\text{updated}} = \mathbf{x}_t^{\text{pred}} + \mathbf{K} \cdot (\mathbf{z}_t - h(\mathbf{x}_t^{\text{pred}}))
+\end{equation}
+
+Di sini, \( \mathbf{x}_t^{\text{pred}} \) adalah posisi robot yang diprediksi berdasarkan data IMU, \( \mathbf{z}_t \) adalah data pengukuran LiDAR, dan \( \mathbf{K} \) adalah matriks gain dari pembaruan Kalman. Fungsi \( h(\mathbf{x}_t^{\text{pred}}) \) adalah model yang menghubungkan prediksi posisi robot dengan data pengukuran LiDAR. Proses koreksi posisi ini memungkinkan robot untuk memperbaiki estimasi posisi secara real-time dan menjaga akurasi navigasi.
+
+\subsection{Penghindaran Rintangan dan Kembali ke Jalur}
+Jika robot mendeteksi adanya rintangan selama patroli, sistem \emph{obstacle avoidance} akan mengaktifkan algoritma penghindaran untuk menghindari hambatan tersebut. Setelah rintangan terhindar, robot akan melanjutkan perjalanannya dan kembali ke jalur semula menggunakan \emph{Fast-LIO2} untuk memastikan robot tetap pada jalur yang telah ditentukan. Jika robot masih menyimpang setelah menghindari rintangan, sistem akan mengoreksi posisi dan arah robot untuk memastikan kembali ke jalur yang benar. Penghindaran rintangan diaktifkan secara otomatis melalui deteksi objek yang ada di sekitar robot. Data dari sensor LiDAR yang dipasang pada robot digunakan untuk mendeteksi objek di sekitarnya, dan algoritma \emph{Braitenberg} digunakan untuk menilai seberapa dekat objek dengan robot. Jika jarak objek terdeteksi lebih kecil dari ambang batas yang telah ditentukan, robot akan menyesuaikan jalurnya dan menghindari rintangan.
+
+\subsection{Pengecekan Konfigurasi dan Kembali ke Posisi Awal}
+Pada saat robot melakukan docking untuk pengisian daya, sistem akan memeriksa dan memperbarui konfigurasi yang diterima dari \emph{control station}. Perubahan konfigurasi, baik itu rute atau jadwal patroli, hanya dapat dilakukan ketika robot berada dalam kondisi \emph{idle} atau saat berada di \emph{dock station}. Hal ini memastikan bahwa perubahan tidak mengganggu patroli yang sedang berjalan. Setelah menyelesaikan patroli, robot akan kembali ke posisi awalnya. Rute yang telah dibuat harus mencakup titik awal dan titik akhir yang sama, sehingga robot dapat kembali ke tempat yang sama setelah menyelesaikan patroli. Dalam hal ini, sistem memastikan bahwa robot mengikuti jalur yang benar, melakukan koreksi posisi jika diperlukan, dan kembali ke titik awal setelah menyelesaikan tugasnya. Dengan alur kerja yang terstruktur ini, robot dapat melakukan patroli secara otomatis, memantau kondisi komponen gardu induk, dan mengatasi potensi overheat yang terjadi, sambil tetap mengikuti jalur yang telah ditentukan dengan akurasi tinggi.

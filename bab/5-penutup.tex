@@ -1,34 +1,29 @@
 \chapter{PENUTUP}
 \label{chap:penutup}
 
-% Ubah bagian-bagian berikut dengan isi dari penutup
-
 \section{Kesimpulan}
 \label{sec:kesimpulan}
-
-Berdasarkan hasil pengujian yang \lipsum[1][1-3] sebagai berikut:
+Penelitian ini telah menghasilkan sebuah sistem robotik otonom yang mampu melakukan estimasi posisi komponen gardu induk yang berpotensi mengalami \emph{overheat} berdasarkan citra dari kamera termal. Hasil pengembangan dan pengujian menunjukkan bahwa sistem yang dirancang telah memenuhi tujuan utama secara fungsional. Adapun kesimpulan utama dari penelitian ini adalah sebagai berikut:
 
 \begin{enumerate}[nolistsep]
+  \item Sistem \emph{computer vision} berbasis kamera termal dan algoritma \emph{YOLOv8} mampu mendeteksi komponen gardu induk yang mengalami potensi \emph{overheat} secara \emph{real-time} dengan performa yang baik. Model menghasilkan nilai \emph{mAP} sebesar 0{,}8554 dan presisi 0{,}9529, sehingga dapat mendeteksi posisi komponen yang berpotensi \emph{overheat} dengan akurasi yang tinggi.
 
-  \item Pembuatan \lipsum[2][1-3]
+  \item Pengujian menunjukkan bahwa lokalisasi berhasil dilakukan dengan baik, ditunjukkan oleh tercapainya \emph{loop closure} secara konsisten pada lima kali percobaan dengan tingkat keberhasilan 100\%. Sistem navigasi menunjukkan performa yang andal dengan rata-rata \emph{Mean Absolute Error (MAE)} antara 0{,}40 hingga 0{,}85 meter. Selain itu, sistem juga dilengkapi fitur \emph{obstacle avoidance} yang mampu mendeteksi dan menghindari rintangan secara real-time dengan akurasi sebesar 96{,}5\%. Hal tersebut membuat robot dapat bergerak secara otonom di lingkungan gardu induk yang kompleks, menghindari rintangan, dan mencapai sudut pandang optimal untuk pengambilan data termal dari setiap komponen gardu induk dalam mendukung deteksi komponen \emph{overheat} pada gardu induk.
+  
 
-  \item \lipsum[2][4-6]
-
-  \item \lipsum[2][7-10]
-
+  \item Sistem \emph{Control Station} yang dibangun mampu memantau pergerakan robot dan menampilkan hasil deteksi suhu serta estimasi posisi komponen secara \emph{real-time}, sesuai dengan kebutuhan pengawasan jarak jauh di gardu induk. Komunikasi data menggunakan WebSocket dan WebRTC menunjukkan latensi rendah, dengan delay rata-rata 30–50 ms untuk data status dan 210–350 ms untuk citra termal, serta jangkauan efektif hingga 100 meter. Hal ini memungkinkan pemantauan  terhadap lokasi komponen yang berpotensi \emph{overheat} pada gardu induk.
 \end{enumerate}
 
-\section{Saran}
-\label{chap:saran}
 
-Untuk pengembangan lebih lanjut pada \lipsum[1][1-3] antara lain:
+\section{Saran}
+\label{sec:saran}
+
+Untuk pengembangan lebih lanjut, beberapa saran yang dapat dilakukan antara lain:
 
 \begin{enumerate}[nolistsep]
+    \item Model deteksi suhu perlu ditingkatkan dengan memperluas dataset pelatihan dari lingkungan gardu nyata serta menggunakan teknik augmentasi untuk memperkaya variasi suhu, latar belakang, dan posisi objek.
 
-  \item Memperbaiki \lipsum[2][1-3]
+    \item Sistem navigasi sebaiknya dilengkapi dengan teknologi lokalisasi absolut seperti GPS atau UWB guna meningkatkan akurasi dan memungkinkan pengujian secara langsung di lapangan terbuka.
 
-  \item \lipsum[2][4-6]
-
-  \item \lipsum[2][7-10]
-
+    \item Perlu dilakukan evaluasi terhadap algoritma alternatif dalam navigasi seperti DWA atau TEB, serta metode pendeteksian suhu berbasis segmentasi atau regresi.
 \end{enumerate}
