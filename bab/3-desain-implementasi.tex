@@ -50,7 +50,7 @@ Terdapat empat \textit{package} utama yang dikembangkan, yaitu \textit{IO packag
   \label{fig:software-arch}
 \end{figure}
 
-Pada gambar \ref{fig:software-arch} terdapat empat \emph{package} utama. \emph{IO package} mengelola komunikasi dengan perangkat keras seperti kamera thermal dan kontrol PTZ. \emph{Localization and Mapping package} bertanggung jawab untuk pemetaan dan penentuan posisi robot menggunakan data dari sensor LiDAR dan IMU. \emph{Autonomy package} mengatur penghindaran rintangan dan kontrol patroli robot untuk navigasi otonom. \emph{Perception package} mendeteksi suhu \emph{overheat} menggunakan kamera thermal dan membantu robot dalam mengidentifikasi hambatan Setiap \textit{package} menjalankan fungsi tertentu dan saling berkomunikasi melalui mekanisme \textit{topic}, \textit{service}, atau \textit{action} sesuai dengan kebutuhan sistem.
+Pada gambar \ref{fig:software-arch} terdapat empat \emph{package} utama. \emph{IO package} mengelola komunikasi dengan perangkat keras seperti kamera thermal dan kontrol \emph{PTZ}. \emph{Localization and Mapping package} bertanggung jawab untuk pemetaan dan penentuan posisi robot menggunakan data dari sensor LiDAR dan IMU. \emph{Autonomy package} mengatur penghindaran rintangan dan kontrol patroli robot untuk navigasi otonom. \emph{Perception package} mendeteksi suhu \emph{overheat} menggunakan kamera thermal dan membantu robot dalam mengidentifikasi hambatan Setiap \textit{package} menjalankan fungsi tertentu dan saling berkomunikasi melalui mekanisme \textit{topic}, \textit{service}, atau \textit{action} sesuai dengan kebutuhan sistem.
 
 \subsubsection{3.2.3.1 \emph{IO Package}}
 \textit{IO package} bertanggung jawab untuk mengelola seluruh input dan output dari perangkat keras robot, yang dalam hal ini adalah kamera thermal. \textit{IO package} terdiri dari dua program utama, yaitu \textit{RTSP client} dan \textit{PTZ controller}.  \textit{RTSP client} berfungsi untuk menghubungkan kamera thermal dengan sistem robot dan mengubah aliran data menjadi \textit{rostopic} berupa \textit{compressed image}. Sementara itu, \textit{PTZ controller} digunakan untuk mengatur pergerakan \textit{pan-tilt-zoom (PTZ)} serta menerima status posisi \emph{PTZ} saat ini menggunakan protokol \emph{ISAPI}. Informasi ini kemudian digunakan untuk mengontrol pergerakan \emph{PTZ} secara dinamis, yang dipadukan dengan \textit{PID controller} untuk memperoleh kecepatan rotasi dan sudut target yang akurat.
@@ -76,58 +76,13 @@ Tahap ini mencakup desain visual antarmuka, termasuk tata letak, elemen grafis, 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.8\textwidth]{gambar/bab3/homepage.png}
+  \includegraphics[width=0.84\textwidth]{gambar/bab3/homepage.png}
   \caption{Desain halaman utama pada \emph{control station}}
   \label{fig:control-station-robot-main}
-  \footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\textwidth]{gambar/bab3/robot-ui.png}
-  \caption{Desain halaman manajemen robot pada \emph{control station}}
-  \label{fig:control-station-robot-robot}
-  \footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\textwidth]{gambar/bab3/component-ui.png}
-  \caption{Desain halaman manajemen komponen gardu pada \emph{control station}}
-  \label{fig:control-station-robot-patrol}
-  \footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
 \end{figure}
 
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\textwidth]{gambar/bab3/patrol-m.png}
-  \caption{Desain halaman \emph{configurasi} jawdal patrol pada \emph{control station}}
-  \label{fig:control-station-robot-settinq}
-  \footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
-\end{figure}
-
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\textwidth]{gambar/bab3/report.png}
-  \caption{Desain halaman hasil deteksi overheat \emph{control station}}
-  \label{fig:control-station-robot-feature}
-  \footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
-\end{figure}
-
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\textwidth]{gambar/bab3/user-ui.png}
-  \caption{Desain halaman manajemen user pada \emph{control station}}
-  \label{fig:control-station-robot-user}
-  \footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
-\end{figure}
-
-
-
-
+Pada Gambar~\ref{fig:control-station-robot-main}, terlihat bahwa halaman utama \emph{control station} menampilkan peta yang menunjukkan posisi robot secara \emph{real-time}. Peta ini dilengkapi dengan informasi terkait suhu komponen yang terdeteksi, serta status kamera termal. Selain itu, terdapat juga fitur untuk mengakses tampilan kamera langsung (\emph{live camera}) dan pengaturan jalur patroli. Antarmuka dirancang agar mudah dinavigasi, dengan elemen-elemen yang jelas dan responsif terhadap interaksi pengguna. Hal ini bertujuan untuk memastikan operator dapat dengan cepat memahami kondisi lapangan dan mengambil tindakan yang diperlukan. Selain halaman utama, dalam \emph{control station} juga terdapat beberapa halaman lain yang berfungsi sebagai tempat untuk memasukkan data robot, data komponen, dan tampilan data suhu berlebih, yang lebih jelasnya dapat dilihat pada lampiran 1 \emph{Design UI/UX Control station}.
 
 
 \subsubsection{3.2.4.2 \emph{Physical data model design}}
@@ -138,23 +93,21 @@ Tahap ini mencakup desain visual antarmuka, termasuk tata letak, elemen grafis, 
   \includegraphics[width=0.87\textwidth]{gambar/bab3/pdm.png}
   \caption{\emph{Physical Data Model} \emph{Control Station}}
   \label{fig:physical-data-model}
-  \footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
 \end{figure}
 
-Dari \emph{physical data model} \ref{fig:physical-data-model}, terlihat adanya entitas utama seperti \texttt{robots}, \texttt{patrol\_routes}, \texttt{patrol\_schedules}, dan \texttt{patrol\_sessions} yang merepresentasikan proses penjadwalan dan pelaksanaan patroli robot. Entitas \texttt{components} dan \texttt{component\_details} digunakan untuk menyimpan data komponen gardu yang dimonitor, termasuk jenis, lokasi pemasangan, serta parameter ambang batas suhu abnormal. Informasi jenis komponen disimpan dalam entitas \texttt{component\_types}. Deteksi suhu berlebih atau potensi overheat direkam dalam tabel \texttt{overheat\_detections}, yang terhubung dengan sesi patroli dan data komponen terkait. Posisi dan status robot secara waktu nyata dikelola melalui entitas \texttt{robot\_websockets}, yang mencatat data seperti posisi, arah, status sensor, dan kekuatan sinyal. Sistem ini juga mencakup manajemen pengguna dengan tabel \texttt{users} dan \texttt{refresh\_tokens} untuk kebutuhan autentikasi dan otorisasi. Informasi jenis robot disimpan dalam tabel \texttt{robot\_types}. Relasi antar tabel dirancang untuk mendukung integritas data dan efisiensi operasional sistem pemantauan dan pengendalian robot.
+Dari \emph{physical data model} \ref{fig:physical-data-model}, terlihat adanya entitas utama seperti \texttt{robots}, \texttt{patrol\_routes}, \texttt{patrol\_schedules}, dan \texttt{patrol\_sessions} yang merepresentasikan proses penjadwalan dan pelaksanaan patroli robot. Entitas \texttt{components} dan \texttt{component\_details} digunakan untuk menyimpan data komponen gardu yang dimonitor, termasuk jenis, lokasi pemasangan, serta parameter ambang batas suhu abnormal. Informasi jenis komponen disimpan dalam entitas \texttt{component\_types}. Deteksi suhu berlebih atau potensi overheat direkam dalam tabel \texttt{overheat\_detections}, yang terhubung dengan sesi patroli dan data komponen terkait. Posisi dan status robot secara waktu nyata dikelola melalui entitas \texttt{robot\_websockets}, yang mencatat data seperti posisi, arah, status sensor, dan kekuatan sinyal. Sistem ini juga mencakup manajemen pengguna dengan tabel \texttt{users} dan \texttt{refresh\_tokens} untuk kebutuhan autentikasi dan otorisasi. Informasi jenis robot disimpan dalam tabel \texttt{robot\_types}. Relasi antar tabel dirancang untuk mendukung integritas data dan efisiensi operasional sistem pemantauan dan pengendalian robot. Detail struktur tabel dan relasi antar entitas dapat dilihat pada lampiran 2 \emph{Database model documentation}.
 
 \subsubsection{3.2.4.3 \emph{Use case diagram}}
 \emph{Use case diagram} digunakan untuk menggambarkan interaksi antara pengguna (aktor) dengan sistem. Diagram ini membantu dalam memahami kebutuhan fungsional sistem dan bagaimana pengguna akan berinteraksi dengan berbagai fitur yang disediakan. Berikut adalah \emph{use case diagram} yang menggambarkan interaksi antara pengguna dengan sistem \emph{control station}:
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.8\textwidth]{gambar/bab3/usecase.png}
+  \includegraphics[width=0.85\textwidth]{gambar/bab3/usecase.png}
   \caption{\emph{Use Case Diagram} \emph{Control Station}}
   \label{fig:use-case-diagram}
-  \footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
 \end{figure}
 
-Pada diagram tersebut terdapat tiga aktor, yaitu \texttt{User}, \texttt{Admin}, dan \texttt{Super Admin}, yang masing-masing memiliki tingkat akses berbeda terhadap sistem. Aktor \texttt{User} hanya memiliki akses untuk melihat data posisi dan data \emph{realtime} robot melalui fitur \texttt{View Realtime Data}, serta melihat data suhu berlebih melalui fitur \texttt{View Overheat Data}. Aktor \texttt{Admin} memiliki akses lebih luas, mencakup pengelolaan robot, komponen, dan jadwal patroli, serta melihat data anomali suhu, namun tidak memiliki wewenang untuk mengelola pengguna. Akses penuh terhadap seluruh fitur sistem, termasuk \texttt{Manage User}, hanya dimiliki oleh aktor \texttt{Super Admin}. Fitur \texttt{View Realtime Data} merupakan bagian dari \texttt{Manage Robot}, sedangkan \texttt{View Overheat Data} termasuk dalam \texttt{Manage Patrol}. Diagram ini menggambarkan batasan interaksi dan hak akses masing-masing aktor terhadap sistem \emph{Control Station}.
+Pada diagram \ref{fig:use-case-diagram} terdapat tiga aktor, yaitu \texttt{User}, \texttt{Admin}, dan \texttt{Super Admin}, yang masing-masing memiliki tingkat akses berbeda terhadap sistem. Aktor \texttt{User} hanya memiliki akses untuk melihat data posisi dan data \emph{realtime} robot melalui fitur \texttt{View Realtime Data}, serta melihat data suhu berlebih melalui fitur \texttt{View Overheat Data}. Aktor \texttt{Admin} memiliki akses lebih luas, mencakup pengelolaan robot, komponen, dan jadwal patroli, serta melihat data anomali suhu, namun tidak memiliki wewenang untuk mengelola pengguna. Akses penuh terhadap seluruh fitur sistem, termasuk \texttt{Manage User}, hanya dimiliki oleh aktor \texttt{Super Admin}. Fitur \texttt{View Realtime Data} merupakan bagian dari \texttt{Manage Robot}, sedangkan \texttt{View Overheat Data} termasuk dalam \texttt{Manage Patrol}. Diagram ini menggambarkan batasan interaksi dan hak akses masing-masing aktor terhadap sistem \emph{Control Station}.
 
 
 \section{Implementasi Sistem}
