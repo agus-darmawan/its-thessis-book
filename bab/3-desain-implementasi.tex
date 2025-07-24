@@ -1,6 +1,9 @@
 \chapter{DESAIN DAN IMPLEMENTASI}
 \label{chap:desainimplementasi}
 
+% Include packages for algorithms
+
+
 
 \section{Struktur Rencana Kerja Pengembangan (WBS)}
 \sloppy
@@ -76,13 +79,26 @@ Tahap ini mencakup desain visual antarmuka, termasuk tata letak, elemen grafis, 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.84\textwidth]{gambar/bab3/homepage.png}
+  \includegraphics[width=0.84\textwidth]{gambar/bab3/home-fix.png}
   \caption{Desain halaman utama pada \emph{control station}}
   \label{fig:control-station-robot-main}
 \end{figure}
 
 
-Pada Gambar~\ref{fig:control-station-robot-main}, terlihat bahwa halaman utama \emph{control station} menampilkan peta yang menunjukkan posisi robot secara \emph{real-time}. Peta ini dilengkapi dengan informasi terkait suhu komponen yang terdeteksi, serta status kamera termal. Selain itu, terdapat juga fitur untuk mengakses tampilan kamera langsung (\emph{live camera}) dan pengaturan jalur patroli. Antarmuka dirancang agar mudah dinavigasi, dengan elemen-elemen yang jelas dan responsif terhadap interaksi pengguna. Hal ini bertujuan untuk memastikan operator dapat dengan cepat memahami kondisi lapangan dan mengambil tindakan yang diperlukan. Selain halaman utama, dalam \emph{control station} juga terdapat beberapa halaman lain yang berfungsi sebagai tempat untuk memasukkan data robot, data komponen, dan tampilan data suhu berlebih, yang lebih jelasnya dapat dilihat pada lampiran 1 \emph{Design UI/UX Control station}.
+Pada Gambar~\ref{fig:control-station-robot-main}, terlihat bahwa halaman utama \emph{control station} menampilkan peta yang menunjukkan posisi robot secara \emph{real-time}. Peta ini dilengkapi dengan informasi terkait suhu komponen yang terdeteksi, serta status kamera termal. Selain itu, terdapat juga fitur untuk mengakses tampilan kamera langsung (\emph{live camera}) dan pengaturan jalur patroli. Antarmuka dirancang agar mudah dinavigasi, dengan elemen-elemen yang jelas dan responsif terhadap interaksi pengguna. Hal ini bertujuan untuk memastikan operator dapat dengan cepat memahami kondisi lapangan dan mengambil tindakan yang diperlukan. Selain halaman utama, dalam \emph{control station} juga terdapat beberapa halaman lain seperti halaman \emph{overheat component}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.84\textwidth]{gambar/bab3/overheat.png}
+  \caption{Desain halaman \emph{overheat component} pada \emph{control station}}
+  \label{fig:control-station-overheat}
+\end{figure}
+
+
+Pada Gambar~\ref{fig:control-station-overheat}, ditampilkan antarmuka halaman \emph{Overheat Component} yang berfungsi untuk menampilkan daftar komponen gardu induk yang terdeteksi mengalami suhu berlebih. Setiap entri pada daftar ini mencakup informasi penting seperti jenis komponen, lokasi keberadaan komponen, serta nilai suhu yang terdeteksi secara real-time oleh kamera termal. Halaman ini dirancang untuk menyajikan informasi secara jelas, ringkas, dan mudah dipahami oleh operator, sehingga memungkinkan pengambilan keputusan secara cepat untuk mencegah potensi kerusakan lebih lanjut pada komponen penting sistem kelistrikan. 
+Sistem \emph{Control Station} juga menyediakan sejumlah halaman pendukung lainnya yang bertujuan untuk mempermudah proses manajemen data dan pengoperasian sistem secara keseluruhan. Halaman \emph{Robot Management} digunakan untuk mengelola data robot, termasuk identitas, status operasional, serta konfigurasi parameter. Halaman \emph{Component Management} digunakan untuk mencatat dan memperbarui informasi mengenai komponen-komponen gardu induk yang dimonitor. Sementara itu, halaman \emph{Patrol Management} berfungsi untuk menyusun, menjadwalkan, dan memantau pelaksanaan rute patroli robot secara otomatis. Selanjutnya, tersedia pula halaman \emph{User Management} yang digunakan untuk mengelola data pengguna, hak akses, serta otentikasi sistem, dan halaman \emph{System Configuration} yang berfungsi untuk mengatur berbagai parameter sistem seperti koneksi jaringan, waktu sistem, dan pengaturan integrasi perangkat. Seluruh halaman ini dirancang dengan prinsip kemudahan penggunaan (\emph{user-friendly}) dan konsistensi antarmuka, guna memastikan operator dapat mengakses dan mengelola data secara efisien. Tampilan rancangan antarmuka pengguna secara lebih rinci dapat dilihat pada Lampiran~1 berjudul \emph{Design UI/UX Control Station}.
+
 
 
 \subsubsection{3.2.4.2 \emph{Physical data model design}}
@@ -95,7 +111,7 @@ Pada Gambar~\ref{fig:control-station-robot-main}, terlihat bahwa halaman utama \
   \label{fig:physical-data-model}
 \end{figure}
 
-Dari \emph{physical data model} \ref{fig:physical-data-model}, terlihat adanya entitas utama seperti \texttt{robots}, \texttt{patrol\_routes}, \texttt{patrol\_schedules}, dan \texttt{patrol\_sessions} yang merepresentasikan proses penjadwalan dan pelaksanaan patroli robot. Entitas \texttt{components} dan \texttt{component\_details} digunakan untuk menyimpan data komponen gardu yang dimonitor, termasuk jenis, lokasi pemasangan, serta parameter ambang batas suhu abnormal. Informasi jenis komponen disimpan dalam entitas \texttt{component\_types}. Deteksi suhu berlebih atau potensi overheat direkam dalam tabel \texttt{overheat\_detections}, yang terhubung dengan sesi patroli dan data komponen terkait. Posisi dan status robot secara waktu nyata dikelola melalui entitas \texttt{robot\_websockets}, yang mencatat data seperti posisi, arah, status sensor, dan kekuatan sinyal. Sistem ini juga mencakup manajemen pengguna dengan tabel \texttt{users} dan \texttt{refresh\_tokens} untuk kebutuhan autentikasi dan otorisasi. Informasi jenis robot disimpan dalam tabel \texttt{robot\_types}. Relasi antar tabel dirancang untuk mendukung integritas data dan efisiensi operasional sistem pemantauan dan pengendalian robot. Detail struktur tabel dan relasi antar entitas dapat dilihat pada lampiran 2 \emph{Database model documentation}.
+Dari \emph{physical data model} yang ditunjukkan pada Gambar~\ref{fig:physical-data-model}, terlihat adanya sejumlah entitas utama seperti \emph{robots}, \emph{patrol\_routes}, \emph{patrol\_schedules}, dan \emph{patrol\_sessions} yang merepresentasikan proses penjadwalan serta pelaksanaan patroli robot secara sistematis.  Entitas \emph{components} dan \emph{component\_details} digunakan untuk menyimpan data komponen gardu induk yang dimonitor, termasuk informasi jenis komponen, lokasi pemasangan, serta parameter ambang batas suhu abnormal yang menjadi indikator potensi gangguan. Informasi mengenai jenis komponen tersebut direferensikan melalui entitas \emph{component\_types}. Proses deteksi suhu berlebih atau potensi kondisi \emph{overheat} dicatat dalam entitas \emph{overheat\_detections}, yang memiliki relasi dengan sesi patroli pada entitas \emph{patrol\_sessions} dan data komponen terkait pada entitas \emph{components}. Dengan demikian, setiap deteksi dapat ditelusuri berdasarkan sesi inspeksi dan lokasi komponen secara historis. Posisi dan status robot secara waktu nyata dikelola melalui entitas \emph{robot\_websockets}, yang mencatat data seperti koordinat posisi, arah hadap, status sensor, serta kekuatan sinyal komunikasi nirkabel. Informasi jenis robot tersimpan dalam entitas \emph{robot\_types}, yang merepresentasikan klasifikasi atau spesifikasi teknis masing-masing unit robot. Sistem ini juga mendukung pengelolaan pengguna melalui entitas \emph{users} dan \emph{refresh\_tokens} yang digunakan dalam mekanisme autentikasi dan otorisasi akses sistem. Dengan penerapan manajemen token, keamanan dan validitas sesi pengguna dapat dikontrol secara efektif. Relasi antar entitas pada \emph{physical data model} ini dirancang untuk mendukung integritas data, konsistensi referensial, serta efisiensi dalam operasional sistem pemantauan dan pengendalian robot. Detail struktur tabel beserta relasi antar entitas dapat dilihat pada Lampiran~2 \emph{Database Model Documentation}.
 
 \subsubsection{3.2.4.3 \emph{Use case diagram}}
 \emph{Use case diagram} digunakan untuk menggambarkan interaksi antara pengguna (aktor) dengan sistem. Diagram ini membantu dalam memahami kebutuhan fungsional sistem dan bagaimana pengguna akan berinteraksi dengan berbagai fitur yang disediakan. Berikut adalah \emph{use case diagram} yang menggambarkan interaksi antara pengguna dengan sistem \emph{control station}:
@@ -107,7 +123,7 @@ Dari \emph{physical data model} \ref{fig:physical-data-model}, terlihat adanya e
   \label{fig:use-case-diagram}
 \end{figure}
 
-Pada diagram \ref{fig:use-case-diagram} terdapat tiga aktor, yaitu \texttt{User}, \texttt{Admin}, dan \texttt{Super Admin}, yang masing-masing memiliki tingkat akses berbeda terhadap sistem. Aktor \texttt{User} hanya memiliki akses untuk melihat data posisi dan data \emph{realtime} robot melalui fitur \texttt{View Realtime Data}, serta melihat data suhu berlebih melalui fitur \texttt{View Overheat Data}. Aktor \texttt{Admin} memiliki akses lebih luas, mencakup pengelolaan robot, komponen, dan jadwal patroli, serta melihat data anomali suhu, namun tidak memiliki wewenang untuk mengelola pengguna. Akses penuh terhadap seluruh fitur sistem, termasuk \texttt{Manage User}, hanya dimiliki oleh aktor \texttt{Super Admin}. Fitur \texttt{View Realtime Data} merupakan bagian dari \texttt{Manage Robot}, sedangkan \texttt{View Overheat Data} termasuk dalam \texttt{Manage Patrol}. Diagram ini menggambarkan batasan interaksi dan hak akses masing-masing aktor terhadap sistem \emph{Control Station}.
+Pada Diagram~\ref{fig:use-case-diagram}, terdapat tiga aktor utama, yaitu \emph{User}, \emph{Admin}, dan \emph{Super Admin}, yang masing-masing memiliki tingkat akses yang berbeda terhadap sistem. Aktor \emph{User} hanya memiliki akses terbatas, yaitu untuk melihat data posisi dan data robot secara waktu nyata melalui fitur \emph{View Realtime Data}, serta mengakses informasi suhu berlebih melalui fitur \emph{View Overheat Data}. Sementara itu, aktor \emph{Admin} memiliki cakupan akses yang lebih luas, mencakup pengelolaan data robot, data komponen gardu, serta penjadwalan patroli robot. Selain itu, \emph{Admin} juga memiliki hak untuk melihat data anomali suhu, namun tidak diberi wewenang untuk melakukan pengelolaan pengguna dalam sistem. Akses penuh terhadap seluruh fitur sistem, termasuk kemampuan untuk mengelola pengguna melalui fitur \emph{Manage User}, hanya dimiliki oleh aktor \emph{Super Admin}. Dalam struktur hierarki ini, fitur \emph{View Realtime Data} merupakan bagian dari proses \emph{Manage Robot}, sedangkan fitur \emph{View Overheat Data} termasuk dalam cakupan \emph{Manage Patrol}.Dengan pembagian peran dan hak akses yang jelas ini, sistem dirancang untuk memastikan kontrol yang terstruktur dan keamanan data operasional yang optimal.
 
 
 \section{Implementasi Sistem}
@@ -120,20 +136,11 @@ Implementasi sistem elektrikal dilakukan dengan mengintegrasikan komponen-kompon
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{gambar/bab3/int-control-port.png}
-  \caption{Port pada \emph{Navigation Host} Robot  Tampak depan (atas) dan belakang (bawah)}
+  \caption{Port pada \emph{Navigation Host} Robot  Tampak depan (atas) dan belakang (bawah) \cite{deeprobotics_jueyingx30}}
   \label{fig:int-control-port}
-  \footnotesize{\textbf{Sumber:} Jueying X30 Pro Application Manual}
 \end{figure}
 
-Berdasarkan gambar di atas, dapat diketahui bahwa robot memiliki catu daya 24~VDC yang dapat digunakan untuk menyuplai perangkat tambahan. Berdasarkan data spesifikasi dari Deep Robotics X30 Pro, daya maksimum yang dapat disuplai oleh satu port 24~V adalah 240~W, atau dengan arus maksimum sebesar 10~A  Sementara itu perangkat tambahan yang digunakan terdiri dari:
-\begin{enumerate}
-  \item Kamera termal Hikvision HM-TD5528T-15/W dengan \emph{power consumption}  sebesar 20~W,
-  \item Router nirkabel Doublecom DB6000FR-ANS dengan \emph{maximum power consumption} kurang dari 9~W,
-  \item \emph{Switch} Moxa EDS-205  dengan \emph{input current 0.12~A} pada 24~VDC, sehingga daya yang dibutuhkan adalah 2.88~W
-\end{enumerate}
-
-
-Beradaskan data diatas total daya yang dibutuhkan oleh perangkat tambahan adalah:
+Berdasarkan gambar \ref{fig:int-control-port} dapat diketahui bahwa robot memiliki catu daya sebesar 24~VDC yang dapat digunakan untuk menyuplai perangkat tambahan. Berdasarkan data spesifikasi dari Deep Robotics X30 Pro, daya maksimum yang dapat disuplai oleh satu port 24~V adalah 240~W, dengan arus maksimum sebesar 10~A. Perangkat tambahan yang digunakan terdiri dari: (1) kamera termal Hikvision HM-TD5528T-15/W dengan konsumsi daya sebesar 20~W, (2) router nirkabel Doublecom DB6000FR-ANS dengan konsumsi daya maksimum kurang dari 9~W, dan (3) \emph{switch} Moxa EDS-205 dengan arus input sebesar 0{,}12~A pada tegangan 24~VDC, sehingga daya yang dibutuhkan adalah sebesar 2{,}88~W. Dengan demikian, total konsumsi daya dari seluruh perangkat tambahan adalah sekitar 31{,}88~W, yang masih berada dalam batas kemampuan suplai daya robot. Beradaskan data tersebut total daya yang dibutuhkan oleh perangkat tambahan adalah:
 \[
 P_{\text{total}} = 20~W + 9~W + 2{,}88~W = 31{,}88~W
 \]
@@ -148,16 +155,17 @@ Persentase penggunaan terhadap kapasitas maksimum port adalah:
 \text{Daya (\%P):} \quad \frac{31{,}88}{240} \times 100\% \approx 13{,}283333333\%
 \]
 
-Dengan demikian, total konsumsi daya dan arus perangkat tambahan hanya sekitar 13{,}3\% dari kapasitas maksimum port 24~V, sehingga masih berada dalam batas aman dan tidak membebani sistem catu daya robot. Selain sistem catu daya, implementasi ini juga mencakup konfigurasi komunikasi perangkat tambahan agar dapat diakses oleh robot. Dalam implementasinya, perangkat \emph{switch} Doublecom yang terpasang pada robot akan dihubungkan dengan perangkat \emph{switch} eksternal yang juga terhubung dengan kamera termal. Kedua \emph{switch} ini selanjutnya dihubungkan ke port jaringan pada robot. Seluruh perangkat dikonfigurasi dalam jaringan lokal dengan skema alamat IP yang sama, yaitu 192.168.1.\texttt{x}, sehingga dapat saling berkomunikasi tanpa melalui jaringan publik. Kamera termal, yang telah diatur menggunakan alamat IP statis 192.168.1.64, akan berada dalam satu segmen jaringan dengan router dan robot, memungkinkan akses data secara langsung melalui jalur Ethernet. Robot yang telah terintegrasi dengan komponen tambahan dapat dilihat pada gambar \ref{fig:sistem-elec-robot}
-
-
+Dengan demikian, total konsumsi daya dan arus perangkat tambahan hanya sekitar 13{,}3\% dari kapasitas maksimum port 24~V, sehingga masih berada dalam batas aman dan tidak membebani sistem catu daya robot. Selain sistem catu daya, implementasi ini juga mencakup konfigurasi komunikasi perangkat tambahan agar dapat diakses oleh robot.  
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{gambar/bab3/impl-elec2.png}
   \caption{Integrasi robot dengan hardware external yang diperlukan}
   \label{fig:sistem-elec-robot}
-  \footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
 \end{figure}
+
+Dalam implementasinya, perangkat \emph{switch} Moxa yang terpasang pada robot akan dihubungkan dengan sebuah \emph{switch} eksternal yang juga terkoneksi dengan kamera termal. Semua komponen diletakan di bagian atar robot pada \emph{mounting} yang telah disediakan sebagaimana ditunjukkan pada Gambar~\ref{fig:sistem-elec-robot}. \emph{Switch} eksternal ini berfungsi sebagai penghubung antara kamera termal dengan router nirkabel yang juga dipasang pada robot. Router nirkabel tersebut menyediakan koneksi internet yang diperlukan untuk mengakses data dari kamera termal secara langsung, sekaligus menyediakan koneksi nirkabel ke \emph{control station} yang berada di luar robot. Dengan demikian, komunikasi antara robot dan sistem pengendali jarak jauh dapat dilakukan secara nirkabel. Kedua \emph{switch} tersebut kemudian dihubungkan ke port jaringan yang tersedia pada robot. Seluruh perangkat dikonfigurasi dalam satu jaringan lokal dengan skema alamat IP yang seragam, yaitu 192.168.1.\texttt{x}, sehingga memungkinkan komunikasi langsung antarperangkat tanpa melalui jaringan publik. Kamera termal diatur menggunakan alamat IP statis 192.168.1.64, dan berada dalam satu segmen jaringan yang sama dengan router dan robot. Hal ini memungkinkan pengambilan data secara langsung melalui koneksi Ethernet. 
+
+
 
 \subsection{Implementasi sistem \emph{computer vision}}
 Pada tahap implementasi sistem \emph{computer vision}, dilakukan beberapa langkah utama yang mencakup pembuatan dataset, pelatihan model deteksi objek, konversi model ke format \emph{OpenVINO}, dan inferensi model untuk mendeteksi objek serta menganalisis suhu komponen gardu induk. Proses ini bertujuan untuk mengidentifikasi komponen gardu induk yang mengalami kondisi \emph{overheat} berdasarkan citra termal yang diambil oleh kamera termal yang terpasang pada robot.
@@ -170,21 +178,57 @@ Dataset citra termal yang digunakan dalam penelitian ini berasal dari dua sumber
   \includegraphics[width=0.7\textwidth]{gambar/bab3/dataset-anotated.png}
   \caption{Labeling dataset citra termal pada \emph{Roboflow}}
   \label{fig:dataset-annotated}
-  \footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
   \end{figure}
-  
-Proses anotasi ini krusial untuk memastikan model mampu mengenali dan mengklasifikasikan berbagai komponen gardu induk dengan akurat berdasarkan karakteristik citra termal. Dataset kemudian di bagi menjadi tiga bagian: data pelatihan, data validasi, dan data uji. Proporsi pembagian dataset adalah 70\% untuk pelatihan, 20\% untuk validasi, dan 10\% untuk pengujian. Pembagian ini bertujuan untuk memastikan model dapat belajar dengan baik dari data yang tersedia, serta menghindari overfitting pada saat pelatihan.
+
+Pada Gambar~\ref{fig:dataset-annotated} terlihat contoh citra termal yang telah dianotasi dengan label yang sesuai. Proses anotasi ini dilakukan secara manual oleh peneliti dengan bantuan alat anotasi yang disediakan oleh platform \emph{Roboflow}. Proses anotasi ini krusial untuk memastikan model mampu mengenali dan mengklasifikasikan berbagai komponen gardu induk dengan akurat berdasarkan karakteristik citra termal. Dataset kemudian di bagi menjadi tiga bagian: data pelatihan, data validasi, dan data uji. Proporsi pembagian dataset adalah 70\% untuk pelatihan, 20\% untuk validasi, dan 10\% untuk pengujian. Pembagian ini bertujuan untuk memastikan model dapat belajar dengan baik dari data yang tersedia, serta menghindari overfitting pada saat pelatihan.
 
 \subsubsection{3.3.2.2 \emph{Preprocessing} Dataset}
-Setelah dataset citra termal dikumpulkan dan dianotasi, langkah selanjutnya adalah melakukan proses \emph{preprocessing} terhadap data tersebut. Pada penelitian ini, \emph{preprocessing} dilakukan dengan mengubah ukuran citra agar sesuai dengan format input yang dibutuhkan oleh model deteksi objek. Ukuran citra yang digunakan adalah 640$\times$480 piksel, yang merupakan standar umum untuk banyak arsitektur model deteksi seperti YOLO. Penyesuaian ukuran ini bertujuan untuk memastikan konsistensi data masukan, mempercepat proses pelatihan, serta meningkatkan performa dan akurasi model.
+Dataset citra termal dikumpulkan dan dianotasi, langkah selanjutnya adalah melakukan proses \emph{preprocessing} terhadap data tersebut. Pada penelitian ini, \emph{preprocessing} dilakukan dengan mengubah ukuran citra agar sesuai dengan format input yang dibutuhkan oleh model deteksi objek. Ukuran citra yang digunakan adalah 640$\times$640 piksel, yang merupakan standar umum untuk banyak arsitektur model deteksi seperti YOLO. Dalam \emph{preprocessing} ini digunakan \emph{resize} citra dengan menggunakan \emph{Roboflow} seperti ditunjukkan pada 
+Gambar~\ref{fig:dataset-resize}.
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{gambar/bab3/prep-resize.png}
+  \caption{Proses \emph{resize} dataset citra termal pada \emph{Roboflow}}
+  \label{fig:dataset-resize}
+\end{figure}
+
+Gambar~\ref{fig:dataset-resize} terlihat bahwa citra awal diubah menjadi ukuran 640$\times$640 piksel dengan metode \emph{center crop}. Metode ini memastikan bahwa citra tetap mempertahankan proporsi aslinya dengan memotong bagian yang tidak diperlukan, sehingga fokus utama pada komponen gardu induk tetap terlihat jelas.  Proses ini penting untuk memastikan bahwa semua citra dalam dataset memiliki dimensi yang konsisten, sehingga saat \emph{training} model, tidak terjadi kesalahan terkait ukuran input. Dengan ukuran yang seragam, model dapat belajar dari fitur-fitur yang ada pada citra dengan lebih efektif. Selain itu, proses \emph{resize} ini juga membantu mengurangi ukuran file citra, sehingga mempercepat proses pemuatan data selama pelatihan. 
 
 \subsubsection{3.3.2.3 \emph{Augmentasi} Data}
-Untuk meningkatkan variasi data pelatihan dan mengurangi risiko \emph{overfitting}, dilakukan proses \emph{augmentasi} pada dataset citra termal. Proses ini menjadi sangat penting mengingat keterbatasan dalam pengambilan data lapangan secara langsung. Gardu induk merupakan objek vital nasional yang memiliki akses terbatas dan prosedur keamanan yang ketat, sehingga tidak memungkinkan untuk melakukan pengambilan data dalam jumlah besar secara bebas dan berulang. Oleh karena itu, augmentasi data digunakan untuk mensimulasikan berbagai kondisi nyata tanpa harus menambah data mentah secara langsung. Teknik augmentasi yang diterapkan meliputi \emph{Gaussian blur} untuk menyimulasikan kondisi citra buram akibat pergerakan atau gangguan fokus, penyesuaian tingkat kecerahan (\emph{brightness adjustment}) dan rona warna (\emph{hue adjustment}) untuk merepresentasikan variasi pencahayaan dan spektrum inframerah, serta \emph{horizontal flip} untuk menambah keragaman perspektif tampilan komponen. Sementara itu, \emph{vertical flip} tidak digunakan karena orientasi vertikal komponen gardu seperti trafo dan pemutus arus tidak mungkin berubah dalam kondisi nyata. Dengan pendekatan ini, model diharapkan tetap mampu belajar secara optimal meskipun jumlah data asli dari lapangan terbatas.
+Meningkatkan variasi data pelatihan dan mengurangi risiko \emph{overfitting} merupakan tantangan penting dalam pengembangan model deteksi objek. Oleh karena itu, pada tahap ini \emph{augmentasi} data diterapkan untuk memperkaya dataset citra termal yang telah dibuat. Proses ini menjadi krusial mengingat keterbatasan dalam pengambilan data langsung di lapangan. Gardu induk merupakan objek vital nasional yang memiliki akses terbatas serta protokol keamanan yang ketat, sehingga tidak memungkinkan untuk melakukan pengambilan data dalam jumlah besar secara bebas dan berulang. Dalam konteks ini, \emph{augmentasi} data berperan penting untuk menyintesis variasi kondisi nyata secara virtual tanpa harus menambah jumlah data mentah yang diperoleh dari lapangan. Beberapa teknik \emph{augmentasi} diterapkan guna mencerminkan berbagai kemungkinan kondisi citra termal yang akan dihadapi model saat proses inferensi. Teknik pertama adalah \emph{Gaussian blur}, yang digunakan untuk mensimulasikan kondisi citra buram akibat gerakan kamera, getaran mekanis, atau gangguan fokus selama proses akuisisi data di lapangan.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{gambar/bab3/aug-blur.png}
+  \caption{\emph{Augmentasi Gaussian Blur} pada dataset dengan \emph{Roboflow}}
+  \label{fig:dataset-blur}
+\end{figure}
+
+Gambar~\ref{fig:dataset-blur} menunjukkan contoh hasil \emph{augmentasi Gaussian blur} dengan tingkat kekaburan yang bervariasi, mulai dari 0 hingga 2{,}5 piksel. Teknik ini membantu model agar tetap dapat mengenali objek meskipun terdapat gangguan visual minor akibat ketidaksempurnaan sistem pencitraan. Selain itu, diterapkan pula teknik \emph{brightness adjustment} untuk mensimulasikan kondisi pencahayaan yang bervariasi, seperti ketika komponen gardu berada dalam bayangan, terkena cahaya matahari langsung, atau mengalami perubahan intensitas radiasi inframerah karena perubahan suhu lingkungan.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{gambar/bab3/aug-brig.png}
+  \caption{\emph{Augmentasi Brightness Adjustment} pada dataset dengan \emph{Roboflow}}
+  \label{fig:dataset-brightness}
+\end{figure}
+
+Gambar~\ref{fig:dataset-brightness} menunjukkan hasil \emph{brightness adjustment} dengan tingkat kecerahan yang dimodifikasi dari -15\% hingga +15\%. Penyesuaian ini memungkinkan model untuk beradaptasi terhadap dinamika pencahayaan yang umum terjadi di lingkungan luar ruangan, terutama pada pengamatan di area terbuka seperti gardu induk. Teknik selanjutnya adalah \emph{hue adjustment}, yang digunakan untuk menyimulasikan variasi rona warna pada citra termal. Perubahan ini mungkin terjadi akibat pengaruh spektrum inframerah yang berbeda, kalibrasi sensor kamera termal, atau pengaturan palet warna pada perangkat pencitraan.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{gambar/bab3/aug-hue.png}
+  \caption{\emph{Augmentasi Hue Adjustment} pada dataset dengan \emph{Roboflow}}
+  \label{fig:dataset-hue}
+\end{figure}
+
+Gambar~\ref{fig:dataset-hue} memperlihatkan hasil \emph{hue adjustment} dengan perubahan rona warna dalam rentang -15\% hingga +15\%. Teknik ini bertujuan agar model tidak terlalu sensitif terhadap perbedaan palet warna termal yang mungkin bervariasi antarsesi akuisisi data atau antarperangkat. Sebagai pelengkap, digunakan juga teknik \emph{horizontal flip} untuk memperkaya perspektif tampilan komponen gardu induk, mengingat orientasi horizontal dapat bervariasi tergantung arah pengambilan citra. Sementara itu, teknik \emph{vertical flip} tidak digunakan karena orientasi vertikal dari komponen-komponen utama seperti transformator, pemutus arus, dan isolator cenderung konstan dan tidak berubah pada kondisi nyata. Dengan menerapkan berbagai teknik \emph{augmentasi} tersebut, model diharapkan dapat mempelajari representasi fitur secara lebih robust dan general, serta mampu melakukan prediksi yang andal meskipun dihadapkan pada kondisi pencitraan yang bervariasi. Pendekatan ini menjadi solusi penting untuk mengatasi keterbatasan jumlah data asli yang dapat dikumpulkan dari lapangan.
+
 
 \subsubsection{3.3.2.4 Pelatihan Model \emph{YOLOv8}}
 
-Model \emph{YOLOv8} dilatih menggunakan dataset citra termal yang telah melalui proses anotasi, \emph{preprocessing} dan \emph{augmentasi}. Selama proses pelatihan, dilakukan pengaturan terhadap beberapa \emph{hyperparameter} utama, yaitu \emph{batch size}, jumlah \emph{epoch}, dan algoritma \emph{optimizer}, guna memperoleh performa model yang optimal. sedangkan jumlah \emph{epoch} yang diuji bervariasi mulai dari 50, 100, 150, hingga 200. Untuk algoritma optimisasi, dilakukan perbandingan antara \emph{Stochastic Gradient Descent} (SGD) dan \emph{Adam Optimizer} guna melihat pengaruhnya terhadap kecepatan konvergensi dan stabilitas model.  Setelah proses pelatihan selesai, model dievaluasi menggunakan dataset uji yang telah dipisahkan sebelumnya untuk memastikan hasil validasi yang objektif dan menghindari risiko \emph{overfitting}. Evaluasi ini dilakukan dengan mengukur metrik seperti \emph{precision}, \emph{recall}, dan \emph{mAP (mean Average Precision)} guna mengetahui seberapa baik model dapat mendeteksi komponen gardu induk berdasarkan citra termal.
+Model \emph{YOLOv8} dilatih menggunakan dataset citra termal yang telah melalui proses anotasi, \emph{preprocessing} dan \emph{augmentasi}. Selama proses pelatihan, dilakukan pengaturan terhadap beberapa \emph{hyperparameter} utama, yaitu \emph{batch size}, jumlah \emph{epoch}, dan algoritma \emph{optimizer}, guna memperoleh performa model yang optimal. sedangkan jumlah \emph{epoch} yang diuji bervariasi mulai dari 50, 100, 200, hingga 300. Untuk algoritma optimisasi, dilakukan perbandingan antara \emph{Stochastic Gradient Descent (SGD)} dan \emph{Adam Optimizer} guna melihat pengaruhnya terhadap kecepatan konvergensi dan stabilitas model.  Setelah proses pelatihan selesai, model dievaluasi menggunakan dataset uji yang telah dipisahkan sebelumnya untuk memastikan hasil validasi yang objektif dan menghindari risiko \emph{overfitting}. Evaluasi ini dilakukan dengan mengukur metrik seperti \emph{precision}, \emph{recall}, dan \emph{mAP (mean Average Precision)} guna mengetahui seberapa baik model dapat mendeteksi komponen gardu induk berdasarkan citra termal.
 
 
 \subsubsection{3.3.2.5 Konversi ke \emph{OpenVINO}}
@@ -194,30 +238,21 @@ Dalam penelitian ini, sistem inferensi dirancang untuk dijalankan pada perangkat
 
 \subsubsection{3.3.2.6 Inferensi Komponen}
 
-Proses inferensi komponen dilakukan setelah robot tiba pada titik \emph{waypoint} tertentu dan mengambil citra termal menggunakan kamera yang terpasang. Citra tersebut kemudian diproses oleh model deteksi objek \emph{YOLOv8} yang telah dilatih dan dikonversi ke dalam format \emph{OpenVINO} agar dapat berjalan secara efisien di perangkat dengan prosesor Intel. Model ini melakukan deteksi pada citra termal untuk mengidentifikasi dan mengklasifikasikan komponen gardu induk seperti \emph{current transformer}, \emph{circuit breaker}, \emph{bushing}, dan komponen lainnya.
-
-Hasil inferensi berupa koordinat \emph{bounding box} dan label kelas dari masing-masing objek yang terdeteksi. Informasi ini digunakan untuk menentukan area citra yang akan dianalisis lebih lanjut, khususnya dalam konteks pemantauan suhu untuk mendeteksi potensi \emph{overheat}. Proses inferensi ini dilakukan secara waktu nyata (\emph{real-time}) dan menjadi dasar bagi tahapan analisis suhu komponen yang lebih spesifik.
+Proses inferensi komponen dilakukan setelah robot tiba pada titik \emph{waypoint} tertentu dan mengambil citra termal menggunakan kamera yang terpasang. Citra tersebut kemudian diproses oleh model deteksi objek \emph{YOLOv8} yang telah dilatih dan dikonversi ke dalam format \emph{OpenVINO} agar dapat berjalan secara efisien di perangkat dengan prosesor Intel. Model ini melakukan deteksi pada citra termal untuk mengidentifikasi dan mengklasifikasikan komponen gardu induk seperti \emph{current transformer}, \emph{circuit breaker}, \emph{bushing}, dan komponen lainnya. Hasil inferensi berupa koordinat \emph{bounding box} dan label kelas dari masing-masing objek yang terdeteksi. Informasi ini digunakan untuk menentukan area citra yang akan dianalisis lebih lanjut, khususnya dalam konteks pemantauan suhu untuk mendeteksi potensi \emph{overheat}. Proses inferensi ini dilakukan secara waktu nyata (\emph{real-time}) dan menjadi dasar bagi tahapan analisis suhu komponen yang lebih spesifik.
 
 \subsubsection{3.3.2.7 Klasifikasi Suhu Komponen}
 
 Setelah komponen berhasil terdeteksi, tahap berikutnya adalah mengklasifikasikan suhu dari masing-masing komponen berdasarkan area \emph{bounding box}. Langkah pertama dalam proses ini adalah mengonversi citra termal ke dalam format \emph{grayscale}, di mana setiap nilai intensitas piksel (0--255) mewakili tingkat suhu relatif. Nilai-nilai ini kemudian dikonversi ke suhu aktual berdasarkan rentang suhu minimum dan maksimum yang dikonfigurasi pada kamera.
+Rentang suhu tersebut diperoleh menggunakan protokol ISAPI melalui endpoint \texttt{\emph{GET /ISAPI/Image/channels/<ID>/tempRange}}. Endpoint ini digunakan untuk membaca parameter suhu dari kanal tertentu pada kamera, di mana \texttt{<ID>} mengacu pada nomor kanal kamera termal. Jika permintaan berhasil, kamera akan mengembalikan data dalam format XML yang memuat nilai suhu minimum dan maksimum seperti \ref{lst:xml-example}
 
-Rentang suhu tersebut diperoleh menggunakan protokol ISAPI melalui endpoint berikut:
-
-\begin{center}
-\texttt{GET /ISAPI/Image/channels/<ID>/tempRange}
-\end{center}
-
-Endpoint ini digunakan untuk membaca parameter suhu dari kanal tertentu pada kamera, di mana \texttt{<ID>} mengacu pada nomor kanal kamera termal. Jika permintaan berhasil, kamera akan mengembalikan data dalam format XML yang memuat nilai suhu minimum dan maksimum seperti berikut:
-
-\begin{lstlisting}[language=XML]
-<?xml version="1.0" encoding="utf-8"?>
-<TempRange version="2.0" xmlns="http://www.isapi.org/ver20/XMLSchema">
-    <mode>manual</mode>
-    <temperatureUpperLimit>100</temperatureUpperLimit>
-    <temperatureLowerLimit>20</temperatureLowerLimit>
-</TempRange>
-\end{lstlisting}
+\begin{lstlisting}[language=XML, caption={Contoh \emph{XML respone} dari enpoint ISAPI}, label={lst:xml-example}]
+  <?xml version="1.0" encoding="utf-8"?>
+  <TempRange version="2.0" xmlns="http://www.isapi.org/ver20/XMLSchema">
+      <mode>manual</mode>
+      <temperatureUpperLimit>100</temperatureUpperLimit>
+      <temperatureLowerLimit>20</temperatureLowerLimit>
+  </TempRange>
+  \end{lstlisting}
 
 Nilai intensitas piksel dalam area \emph{bounding box} kemudian dikonversi ke suhu aktual (\(T\)) menggunakan rumus berikut:
 
@@ -227,7 +262,7 @@ T(x, y) = T_{\text{min}} + \left( \frac{I(x, y)}{255} \right) \times (T_{\text{m
 \end{equation}
 
 
-\noindent
+\newpage
 dengan keterangan:
 \begin{itemize}
   \item \( T(x, y) \): suhu piksel pada posisi \((x, y)\),
@@ -250,65 +285,61 @@ Implementasi sistem perangkat lunak robot dilakukan dengan mengembangkan paket-p
 
 \subsubsection{3.4.3.1 Implementasi \emph{IO Package}}
 
-\emph{IO package} bertanggung jawab untuk mengelola komunikasi antara robot dan perangkat keras eksternal, dalam hal ini adalah kamera termal. Package ini terdiri dari dua node utama, yaitu \emph{RTSP client} dan \emph{PTZ controller}.  Pada node \emph{RTSP client}, implementasi dilakukan menggunakan pustaka \emph{OpenCV} untuk menangani aliran video dari kamera termal. Node ini terhubung ke kamera melalui protokol \emph{RTSP}, mengambil frame video secara kontinu, dan meneruskannya ke node pada \emph{perception package} untuk proses deteksi objek dan analisis suhu. Selain itu, node ini juga mengelola pengaturan kamera seperti mengubah resolusi menjadi 640$\times$480 piksel, yang merupakan ukuran standar untuk model deteksi objek yang digunakan.
-
-Node \emph{PTZ controller} bertugas mengendalikan pergerakan kamera termal, mencakup rotasi (\emph{pan}), kemiringan (\emph{tilt}), dan perbesaran (\emph{zoom}). Node ini menerima perintah dari \emph{Patrol Controller} melalui mekanisme \emph{action}  seperti ditunjukkan pada Gambar~\ref{fig:ptz-control}.
+\emph{IO package} bertanggung jawab untuk mengelola komunikasi antara robot dan perangkat keras eksternal, dalam hal ini adalah kamera termal. Package ini terdiri dari dua node utama, yaitu \emph{RTSP client} dan \emph{PTZ controller}.  Pada node \emph{RTSP client}, implementasi dilakukan menggunakan pustaka \emph{OpenCV} untuk menangani aliran video dari kamera termal. Node ini terhubung ke kamera melalui protokol \emph{RTSP}, mengambil frame video secara kontinu, dan meneruskannya ke node pada \emph{perception package} untuk proses deteksi objek dan analisis suhu. Selain itu, node ini juga mengelola pengaturan kamera seperti mengubah resolusi menjadi 640$\times$480 piksel, yang merupakan ukuran standar untuk model deteksi objek yang digunakan. Node \emph{PTZ controller} bertugas mengendalikan pergerakan kamera termal, mencakup rotasi (\emph{pan}), kemiringan (\emph{tilt}), dan perbesaran (\emph{zoom}). Node ini menerima perintah dari \emph{Patrol Controller} melalui mekanisme \emph{action}  seperti ditunjukkan pada Gambar~\ref{fig:ptz-control}.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{gambar/bab3/ptz-control.png}
   \caption{Diagram alur kerja \emph{PTZ controller node} dengan kendali \emph{PID}}
   \label{fig:ptz-control}
-  \footnotesize{\emph{Sumber:} Dokumentasi Penulis}
 \end{figure}
 
-Dalam sistem ini \emph{Patrol Controller} bertindak sebagai \emph{action client} dan \emph{PTZ IO node} sebagai \emph{action server}. Komunikasi ini memungkinkan pengiriman \emph{goal}, umpan balik (\emph{feedback}), dan hasil akhir (\emph{result}). Di dalam \emph{PTZ IO node}, diterapkan kendali umpan balik berbasis \emph{PID controller} untuk memastikan pergerakan kamera menuju posisi target secara presisi dan stabil. Selisih antara posisi target (\emph{setpoint}) dan posisi aktual digunakan sebagai \emph{error}, yang kemudian diproses oleh tiga komponen \emph{PID}, yaitu \emph{proportional} (respon terhadap \emph{error} saat ini), \emph{integral} (koreksi terhadap akumulasi \emph{error}), dan \emph{derivative} (peredam perubahan mendadak). Keluaran dari \emph{PID controller} digunakan sebagai sinyal penggerak kamera. Dengan pendekatan ini, \emph{IO package} dapat mengintegrasikan sistem robot dengan kamera termal secara efisien,
+Gambar~\ref{fig:ptz-control} menunjukkan alur kerja \emph{PTZ controller node} yang berfungsi untuk menerima perintah dari \emph{Patrol Controller} dalam mengarahkan kamera ke posisi tertentu. Node ini mengimplementasikan kendali umpan balik berbasis \emph{PID controller} guna memastikan pergerakan kamera yang presisi dan stabil. Proses pengendalian ini melibatkan pengukuran posisi aktual kamera, perbandingan terhadap posisi target, serta penyesuaian gerakan berdasarkan selisih (\emph{error}) antara keduanya. Dengan mekanisme tersebut, sistem mampu mengarahkan kamera termal secara otomatis ke komponen gardu induk yang menjadi objek inspeksi. Dalam sistem ini, \emph{Patrol Controller} berperan sebagai \emph{action client}, sedangkan \emph{PTZ IO node} berperan sebagai \emph{action server}. Komunikasi antara keduanya dilakukan melalui mekanisme \emph{action interface} yang mendukung pengiriman \emph{goal}, umpan balik (\emph{feedback}), serta hasil akhir (\emph{result}). Di dalam \emph{PTZ IO node}, diterapkan kendali umpan balik menggunakan algoritma \emph{PID} untuk mengatur pergerakan kamera menuju posisi target secara akurat dan responsif.
+
+Selisih antara posisi target (\emph{setpoint}) dan posisi aktual digunakan sebagai \emph{error}, yang kemudian diproses oleh tiga komponen utama dalam kendali \emph{PID}, yaitu: komponen \emph{proportional} yang memberikan respon proporsional terhadap \emph{error} saat ini; komponen \emph{integral} yang mengakumulasi \emph{error} dari waktu ke waktu untuk mengoreksi kesalahan jangka panjang; serta komponen \emph{derivative} yang berfungsi sebagai peredam terhadap perubahan \emph{error} yang tiba-tiba. Untuk meningkatkan stabilitas dan respons sistem, algoritma \emph{PID} yang diterapkan menggunakan pendekatan \emph{region-based gain tuning}, yaitu pembagian ruang \emph{error} menjadi beberapa wilayah atau \emph{region}, masing-masing dengan nilai parameter $K_p$, $K_i$, dan $K_d$ yang berbeda. Misalnya, ketika nilai \emph{error} cukup besar (melebihi ambang batas tertentu), digunakan parameter penguatan yang lebih agresif untuk mempercepat konvergensi; sebaliknya, saat \emph{error} kecil, digunakan parameter yang lebih konservatif untuk menghindari osilasi dan menjaga kestabilan.Selain itu, sistem juga mempertimbangkan nilai keluaran minimum dan maksimum dari kontrol untuk menjaga agar perintah gerakan tidak melebihi batas fisik aktuator kamera. Mekanisme ini membantu sistem beradaptasi terhadap dinamika yang berbeda dalam proses penyesuaian posisi kamera.
+
+\vspace{1ex}
+\begin{algorithm}[H]
+\caption{Region-Based PID Controller}
+\label{alg:pid-controller}
+\KwIn{\emph{setpoint}, \emph{actual\_position}}
+\KwOut{\emph{control\_signal}}
+
+$error \gets setpoint - actual\_position$\;
+$integral \gets integral + error \cdot \Delta t$\;
+$derivative \gets \dfrac{error - prev\_error}{\Delta t}$\;
+
+\uIf{$|error| > error\_threshold$}{
+  $(K_p, K_i, K_d) \gets (K_p^{\text{high}}, K_i^{\text{high}}, K_d^{\text{high}})$\;
+}
+\Else{
+  $(K_p, K_i, K_d) \gets (K_p^{\text{low}}, K_i^{\text{low}}, K_d^{\text{low}})$\;
+}
+
+$output \gets K_p \cdot error + K_i \cdot integral + K_d \cdot derivative$\;
+$output \gets \texttt{clamp}(output, output\_min, output\_max)$\;
+$prev\_error \gets error$\;
+\Return $output$\;
+\end{algorithm}
+
+Logika pengendalian tersebut dirangkum secara rinci dalam Algoritma~\ref{alg:pid-controller}, yang menggambarkan proses komputasi sinyal kendali berdasarkan \emph{error} saat ini, serta pemilihan parameter kendali yang disesuaikan dengan besar kecilnya \emph{error} melalui pendekatan \emph{region-based gain tuning}.
+
+
 
 \subsubsection{3.2.3.2 Implementasi Sistem \emph{Localization and Mapping Package}}
 
-Implementasi sistem \emph{Localization and Mapping Package} dalam penelitian ini dirancang untuk mendukung fleksibilitas terhadap berbagai kondisi operasional di lapangan. Sistem dibangun secara modular dengan integrasi empat metode utama yang dapat diaktifkan melalui konfigurasi parameter pada berkas \texttt{launch} di ROS. Keempat metode tersebut terbagi ke dalam dua kelompok, yaitu metode berbasis \emph{odometry-only} dan metode berbasis \emph{SLAM}.
-
-Pada kelompok pertama, metode \emph{FastLIO2} dan \emph{DLIO} digunakan untuk melakukan estimasi posisi robot secara langsung tanpa membentuk peta lingkungan. Masing-masing metode dijalankan sebagai \emph{node} ROS terpisah, yang menerima masukan berupa data \emph{point cloud} dari empat sensor \emph{LiDAR Livox Mid-360} serta data orientasi dan akselerasi dari sensor \emph{Yesense-IMU}. Hasil estimasi posisi dipublikasikan dalam sistem transformasi ROS melalui \emph{tf broadcaster} dan dapat digunakan oleh subsistem lain seperti navigasi dan kontrol.
-
-Namun, pada saat implementasi, metode \emph{DLIO} tidak dapat dijalankan secara fungsional pada platform robot yang digunakan. Hal ini disebabkan oleh ketidaksesuaian \emph{timestamp} antara data \emph{LiDAR} dan \emph{IMU}, sedangkan \emph{DLIO} mensyaratkan sinkronisasi waktu yang presisi untuk melakukan \emph{sensor fusion}. Ketidaksesuaian tersebut mengakibatkan kegagalan pemrosesan internal pada \emph{node} \emph{DLIO}, sebagaimana ditunjukkan pada Gambar~\ref{fig:dlio-error}.
+Implementasi sistem \emph{Localization and Mapping Package} dalam penelitian ini dirancang untuk mendukung fleksibilitas terhadap berbagai kondisi operasional di lapangan. Sistem dibangun secara modular dengan integrasi empat metode utama yang dapat diaktifkan melalui konfigurasi parameter pada berkas \texttt{launch} di ROS. Keempat metode tersebut terbagi ke dalam dua kelompok, yaitu metode berbasis \emph{odometry-only} dan metode berbasis \emph{SLAM}. Pada kelompok pertama, metode \emph{FastLIO2} dan \emph{DLIO} digunakan untuk melakukan estimasi posisi robot secara langsung tanpa membentuk peta lingkungan. Masing-masing metode dijalankan sebagai \emph{node} ROS terpisah, yang menerima masukan berupa data \emph{point cloud} dari empat sensor \emph{LiDAR Livox Mid-360} serta data orientasi dan akselerasi dari sensor \emph{Yesense-IMU}. Hasil estimasi posisi dipublikasikan dalam sistem transformasi ROS melalui \emph{tf broadcaster} dan dapat digunakan oleh subsistem lain seperti navigasi dan kontrol. Namun, pada saat implementasi, metode \emph{DLIO} tidak dapat dijalankan secara fungsional pada platform robot yang digunakan. Hal ini disebabkan oleh ketidaksesuaian \emph{timestamp} antara data \emph{LiDAR} dan \emph{IMU}, sedangkan \emph{DLIO} mensyaratkan sinkronisasi waktu yang presisi untuk melakukan \emph{sensor fusion}. Ketidaksesuaian tersebut mengakibatkan kegagalan pemrosesan internal pada \emph{node} \emph{DLIO}, sebagaimana ditunjukkan pada Gambar~\ref{fig:dlio-error}.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.6\textwidth]{gambar/bab3/dlio-error.png}
   \caption{Kegagalan inisialisasi \emph{DLIO} akibat ketidaksesuaian \emph{timestamp}} 
   \label{fig:dlio-error}
-  \footnotesize{\emph{Sumber:} Dokumentasi Penulis}
 \end{figure}
 
-Metode \emph{FastLIO2} diimplementasikan dengan memanfaatkan pustaka ROS yang telah tersedia dan diintegrasikan dengan sensor \emph{LiDAR} dan \emph{IMU} pada robot. Metode ini telah dioptimalkan untuk berjalan pada platform dengan sumber daya terbatas, seperti yang digunakan dalam penelitian ini. \emph{FastLIO2} berhasil diimplementasikan dan mampu beroperasi secara \emph{real-time} untuk mengestimasi posisi berdasarkan data \emph{point cloud} dari sensor \emph{LiDAR}. Estimasi posisi dihitung menggunakan algoritma \emph{LiDAR-Inertial Odometry}, dengan dukungan data dari \emph{IMU} untuk meningkatkan akurasi. Hasil estimasi posisi yang diperoleh dari metode ini ditunjukkan pada Gambar~\ref{fig:fastlio2-result}.
+Gambar~\ref{fig:dlio-error} menunjukkan pesan kesalahan yang muncul saat mencoba menjalankan \emph{node} \emph{DLIO} dimana \emph{position} menjadi \emph{nan}. Pesan ini mengindikasikan bahwa data dari sensor \emph{LiDAR} dan \emph{IMU} tidak dapat disinkronkan dengan benar, sehingga proses estimasi posisi tidak dapat dilanjutkan. Akibatnya, implementasi metode \emph{DLIO} tidak dapat digunakan dalam sistem robot ini. Metode \emph{FastLIO2} diimplementasikan dengan memanfaatkan pustaka ROS yang telah tersedia dan diintegrasikan dengan sensor \emph{LiDAR} dan \emph{IMU} pada robot. Metode ini telah dioptimalkan untuk berjalan pada platform dengan sumber daya terbatas, seperti yang digunakan dalam penelitian ini. \emph{FastLIO2} berhasil diimplementasikan dan mampu beroperasi secara \emph{real-time} untuk mengestimasi posisi berdasarkan data \emph{point cloud} dari sensor \emph{LiDAR}. Estimasi posisi dihitung menggunakan algoritma \emph{LiDAR-Inertial Odometry}, dengan dukungan data dari \emph{IMU} untuk meningkatkan akurasi. Pada kelompok metode kedua yang berbasis \emph{SLAM}, implementasi dilakukan dengan pendekatan \emph{frontend-backend}. Pada metode ketiga, proses pemetaan dilakukan terlebih dahulu menggunakan \emph{FastLIO2} untuk membentuk peta dua dimensi dalam format \emph{grid map}. Peta ini kemudian dimuat oleh \emph{node} \emph{HDL Localization}, yang melakukan pelokalan secara \emph{real-time} dengan mencocokkan data \emph{point cloud} terhadap peta. Estimasi posisi robot dipublikasikan dalam bentuk transformasi dari kerangka \texttt{map} ke \texttt{base\_link} melalui sistem \emph{tf} ROS.
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\textwidth]{gambar/bab3/fastlio2-result.png}
-  \caption{Hasil estimasi posisi robot menggunakan metode \emph{FastLIO2}}
-  \label{fig:fastlio2-result}
-  \footnotesize{\emph{Sumber:} Dokumentasi Penulis}
-\end{figure}
-
-Pada kelompok metode kedua yang berbasis \emph{SLAM}, implementasi dilakukan dengan pendekatan \emph{frontend-backend}. Pada metode ketiga, proses pemetaan dilakukan terlebih dahulu menggunakan \emph{FastLIO2} untuk membentuk peta dua dimensi dalam format \emph{grid map}. Peta ini kemudian dimuat oleh \emph{node} \emph{HDL Localization}, yang melakukan pelokalan secara \emph{real-time} dengan mencocokkan data \emph{point cloud} terhadap peta. Estimasi posisi robot dipublikasikan dalam bentuk transformasi dari kerangka \texttt{map} ke \texttt{base\_link} melalui sistem \emph{tf} ROS. Hasil peta dua dimensi ditunjukkan pada Gambar~\ref{fig:pgm}.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.6\textwidth]{gambar/bab3/pgm.png}
-  \caption{Peta \emph{grid map} hasil pemetaan menggunakan metode \emph{FastLIO2} dan digunakan oleh \emph{node} \emph{HDL Localization}}
-  \label{fig:pgm}
-  \footnotesize{\emph{Sumber:} Dokumentasi Penulis}
-\end{figure}
-
-Metode keempat, yaitu \emph{Fast-LIO-SAM}, menggabungkan estimasi \emph{LiDAR-Inertial Odometry} pada bagian \emph{frontend} dengan proses optimisasi graf berbasis \emph{Smoothing and Mapping (SAM)} pada bagian \emph{backend}. Selama proses pemetaan, data dari sensor direkam dalam format file \texttt{.bag} dan digunakan secara \emph{offline} oleh \emph{node} \emph{Fast-LIO Localization QN} untuk melakukan estimasi posisi. Node ini mencocokkan data \emph{point cloud} terbaru dengan peta yang telah terbentuk untuk memperkirakan posisi robot, kemudian menerbitkannya melalui \emph{tf broadcaster}. Hasil visualisasi peta 3D menunjukkan representasi struktur bangunan dan objek di sekitar robot secara detail, sebagaimana ditunjukkan pada Gambar~\ref{fig:fastlio-sam-map}.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\textwidth]{gambar/bab3/poincloud-map.png}  
-  \caption{Visualisasi peta tiga dimensi hasil pemetaan menggunakan metode \emph{Fast-LIO-SAM}}
-  \label{fig:fastlio-sam-map}
-  \footnotesize{\emph{Sumber:} Dokumentasi Penulis}
-\end{figure}
+Metode keempat, yaitu \emph{Fast-LIO-SAM}, menggabungkan estimasi \emph{LiDAR-Inertial Odometry} pada bagian \emph{frontend} dengan proses optimisasi graf berbasis \emph{Smoothing and Mapping (SAM)} pada bagian \emph{backend}. Selama proses pemetaan, data dari sensor direkam dalam format file \texttt{.bag} dan digunakan secara \emph{offline} oleh \emph{node} \emph{Fast-LIO Localization QN} untuk melakukan estimasi posisi. Node ini mencocokkan data \emph{point cloud} terbaru dengan peta yang telah terbentuk untuk memperkirakan posisi robot, kemudian menerbitkannya melalui \emph{tf broadcaster}. 
 
 
 \subsubsection{3.4.3.3 Implementasi Sistem \emph{Perception Package}}
@@ -320,8 +351,9 @@ Metode keempat, yaitu \emph{Fast-LIO-SAM}, menggabungkan estimasi \emph{LiDAR-In
   \includegraphics[width=0.6\textwidth]{gambar/bab3/obstacle-bb.png}
   \caption{Visualisasi \emph{Braitenberg Vehicle} kondisi terdapat rintangan (kanan) dan tanpa rintangan (kiri)}
   \label{fig:obstacle-detector}
-  \footnotesize{\emph{Sumber:} Dokumentasi Penulis}
 \end{figure}
+
+Gambar \ref{fig:obstacle-detector} menunjukkan visualisasi dari algoritma \emph{Braitenberg Vehicle} yang digunakan untuk mendeteksi rintangan. Pada gambar kiri, tidak terdapat rintangan di depan robot sehingga semua bagian memiliki nilai \emph{maximal}, sedangkan pada gambar kanan, terdapat rintangan di bagian depan kiri robot yang menyebabkan nilai pada \emph{segment} tersebut menjadi lebih kecil dari ambang batas.
 
 
 \subsubsection{3.4.3.4 Implementasi Sistem \emph{Autonomy Package}}
@@ -329,6 +361,7 @@ Metode keempat, yaitu \emph{Fast-LIO-SAM}, menggabungkan estimasi \emph{LiDAR-In
 Proses navigasi robot dilakukan dengan mengikuti jalur waypoint menggunakan algoritma \emph{Pure Pursuit} dan kontrol kecepatan berbasis \emph{PID controller}. Sistem ini juga memiliki kemampuan untuk melakukan inspeksi komponen secara otomatis ketika mencapai waypoint bertipe inspeksi, serta menghindari rintangan secara dinamis berdasarkan arsitektur perilaku (\emph{behavior-based arbitration}).
 
 \begin{algorithm}[H]
+  \label{alg:patrol-controller}
 \caption{Navigasi Waypoint dengan Pure Pursuit dan Subsumption Architecture}
 \KwIn{Daftar \texttt{waypoints[]} dengan atribut \texttt{position, type}}
 \KwOut{Navigasi dan inspeksi otomatis robot}
@@ -380,68 +413,26 @@ $i \gets 0$\;
 \textbf{Navigasi selesai}\;
 \end{algorithm}
 
+Algoritma~\ref{alg:patrol-controller} menggambarkan alur navigasi robot dalam mengikuti daftar waypoint yang diberikan. Proses ini dilakukan dengan dua komponen utama: pergerakan menuju waypoint menggunakan algoritma \emph{Pure Pursuit}, serta penghindaran rintangan berdasarkan arsitektur perilaku \emph{subsumption}.  Pada setiap iterasi, robot memeriksa apakah terdapat rintangan di jalurnya. Jika terdeteksi, sistem segera mengaktifkan perilaku penghindaran rintangan secara prioritas. Jika tidak, robot menghitung sudut arah relatif terhadap target (\(\alpha\)), sudut kemudi (\(\delta\)), serta menghasilkan perintah kecepatan linier dan sudut (\(v_{\text{cmd}}\) dan \(\omega_{\text{cmd}}\)) melalui kendali \emph{PID} untuk menjaga kestabilan gerak dan presisi arah. Ketika mencapai waypoint bertipe \texttt{inspection}, sistem akan mengarahkan kamera PTZ dan menjalankan proses pengambilan gambar menggunakan \emph{Computer Vision}. Dengan struktur algoritma ini, sistem navigasi mampu melakukan perpindahan antar waypoint secara otonom sekaligus menjalankan inspeksi otomatis dan penghindaran rintangan secara reaktif.
+
 
 \subsection{Implementasi Sistem \emph{Control Station}}
 Sistem \emph{Control Station} diimplementasikan sebagai antarmuka pengguna berbasis web yang memungkinkan operator untuk mengendalikan robot, memantau statusnya, dan mengakses data yang dikumpulkan selama operasi. Implementasi sistem ini dapat dibagi menjadi dua komponen utama yaitu\emph{front-end} dan \emph{back-end}.
 
 \subsubsection{3.4.4.1 Implementasi \emph{Frontend}}
-Frontend dari sistem ini dibuat menggunakan library \textit{React} dan framework \textit{Next.js} untuk memberikan pengalaman pengguna yang cepat dan dinamis. Pemilihan \textit{React} didasarkan pada prinsip \textit{component-based architecture} yang memungkinkan pembuatan antarmuka pengguna dengan komponen-komponen modular yang dapat digunakan kembali. Hal ini mempercepat proses pengembangan dan mengurangi redundansi kode, karena pengembang dapat memanfaatkan kembali komponen yang sudah ada di berbagai bagian aplikasi. Sementara itu, \textit{Next.js} memperluas kemampuan \textit{React} dengan menambahkan fitur seperti \textit{server-side rendering} (SSR), \textit{static site generation}, dan routing berbasis file. Dengan menggunakan \textit{Next.js}, sistem ini dapat menghasilkan halaman yang lebih cepat dengan waktu pemuatan yang lebih singkat karena SSR memungkinkan konten halaman di-render di sisi server sebelum dikirimkan ke klien.
+\emph{Frontend} dari sistem ini dibuat menggunakan \emph{library} \emph{React} dan \emph{framework} \emph{Next.js} untuk memberikan pengalaman pengguna yang cepat dan dinamis. Pemilihan \emph{React} didasarkan pada prinsip \emph{component-based architecture} yang memungkinkan pembuatan antarmuka pengguna dengan komponen-komponen modular yang dapat digunakan kembali. Hal ini mempercepat proses pengembangan dan mengurangi redundansi kode, karena pengembang dapat memanfaatkan kembali komponen yang sudah ada di berbagai bagian aplikasi. Sementara itu, \emph{Next.js} memperluas kemampuan \emph{React} dengan menambahkan fitur seperti \emph{server-side rendering} (SSR), \emph{static site generation}, dan \emph{routing} berbasis berkas. Dengan menggunakan \emph{Next.js}, sistem ini dapat menghasilkan halaman yang lebih cepat dengan waktu pemuatan yang lebih singkat karena SSR memungkinkan konten halaman di-\emph{render} di sisi \emph{server} sebelum dikirimkan ke \emph{klien}.
 
-Untuk pengelolaan state, sistem ini menggunakan \textit{state management} dengan \texttt{Zustand}, sebuah library ringan dan efisien yang memungkinkan pengelolaan state secara sederhana dan terpusat tanpa memerlukan \textit{boilerplate code} seperti yang banyak seperti penggunaan reducer. Untuk pengambilan data dari server, aplikasi ini menggunakan \texttt{Tanstack Query}, yang mempermudah pengelolaan data, mendukung caching, dan menyediakan pembaruan data secara otomatis ketika ada perubahan. Sistem ini juga mengimplementasikan \textit{client-side filtering} dan \textit{server-side pagination}. \textit{Client-side filtering} memungkinkan data yang ditampilkan untuk difilter langsung di sisi klien, mempercepat proses pencarian, sementara \textit{server-side pagination} membagi data menjadi beberapa halaman, sehingga hanya sebagian data yang dimuat pada satu waktu, mengurangi beban pada server dan meningkatkan kinerja aplikasi. \textit{Server-side rendering} (SSR) yang didukung oleh \textit{Next.js} memungkinkan aplikasi untuk merender halaman di sisi server sebelum mengirimkannya ke klien, sehingga mempercepat waktu pemuatan halaman dan meningkatkan kemampuan mesin pencari untuk mengindeks halaman dengan lebih baik.
+Untuk pengelolaan \emph{state}, sistem ini menggunakan \emph{state management} dengan \emph{Zustand}, sebuah \emph{library} ringan dan efisien yang memungkinkan pengelolaan \emph{state} secara sederhana dan terpusat tanpa memerlukan \emph{boilerplate code} seperti yang banyak muncul pada penggunaan \emph{reducer}. Untuk pengambilan data dari \emph{server}, aplikasi ini menggunakan \emph{Tanstack Query}, yang mempermudah pengelolaan data, mendukung \emph{caching}, dan menyediakan pembaruan data secara otomatis ketika ada perubahan. Sistem ini juga mengimplementasikan \emph{client-side filtering} dan \emph{server-side pagination}. \emph{Client-side filtering} memungkinkan data yang ditampilkan untuk difilter langsung di sisi \emph{klien}, mempercepat proses pencarian, sementara \emph{server-side pagination} membagi data menjadi beberapa halaman, sehingga hanya sebagian data yang dimuat pada satu waktu, mengurangi beban pada \emph{server} dan meningkatkan kinerja aplikasi. \emph{Server-side rendering} (SSR) yang didukung oleh \emph{Next.js} memungkinkan aplikasi untuk me-\emph{render} halaman di sisi \emph{server} sebelum mengirimkannya ke \emph{klien}, sehingga mempercepat waktu pemuatan halaman dan meningkatkan kemampuan mesin pencari untuk mengindeks halaman dengan lebih baik.
 
-Untuk tampilan antarmuka pengguna (UI), aplikasi ini menggunakan \texttt{Shadcn UI} dan \texttt{Tailwind CSS}. \texttt{Shadcn UI} adalah pustaka komponen UI yang menyediakan elemen-elemen desain minimalis dan responsif, sementara \texttt{Tailwind CSS} memungkinkan pengembang untuk mendesain elemen-elemen UI dengan cepat menggunakan \textit{utility-first} CSS, sehingga memudahkan pembuatan tampilan yang responsif dan dinamis. Untuk manajemen autentikasi, aplikasi ini menggunakan cookies untuk menyimpan token autentikasi pengguna. Dengan menggunakan cookies, sesi pengguna dapat dipertahankan meskipun terjadi refresh halaman. Cookies ini bekerja dengan \textit{token JWT} untuk memverifikasi identitas pengguna dalam setiap permintaan ke server.  Berikut merupakan implementasi tampilan antarmuka pengguna pada \emph{control station} yang telah dirancang sebelumnya.
+Untuk tampilan antarmuka pengguna (UI), aplikasi ini menggunakan \emph{Shadcn UI} dan \emph{Tailwind CSS}. \emph{Shadcn UI} adalah pustaka komponen UI yang menyediakan elemen-elemen desain minimalis dan responsif, sementara \emph{Tailwind CSS} memungkinkan pengembang untuk mendesain elemen-elemen UI dengan cepat menggunakan \emph{utility-first CSS}, sehingga memudahkan pembuatan tampilan yang responsif dan dinamis. Untuk manajemen autentikasi, aplikasi ini menggunakan \emph{cookies} untuk menyimpan \emph{token} autentikasi pengguna. Dengan menggunakan \emph{cookies}, sesi pengguna dapat dipertahankan meskipun terjadi \emph{refresh} halaman. \emph{Cookies} ini bekerja dengan \emph{token JWT} untuk memverifikasi identitas pengguna dalam setiap permintaan ke \emph{server}. Berikut merupakan implementasi tampilan antarmuka pengguna pada \emph{control station} yang telah dirancang sebelumnya.
 
+\subsubsection{3.4.4.2 Implementasi Sistem \emph{Backend}}
 
+Sistem \emph{backend} dari aplikasi ini dibuat menggunakan bahasa pemrograman \emph{TypeScript} dengan \emph{framework} \emph{Express.js} untuk membangun \emph{RESTful API} yang efisien dan mudah diakses. \emph{TypeScript} dipilih karena memberikan keunggulan dalam hal tipe data, yang memungkinkan pengembang untuk menulis kode yang lebih aman dan mudah dipelihara. Dengan menggunakan \emph{Express.js}, pengembangan \emph{API} menjadi lebih cepat dan mudah, karena \emph{framework} ini menyediakan berbagai fitur yang dibutuhkan untuk membangun aplikasi web dan \emph{API} secara efisien. Untuk pengelolaan basis data, sistem ini menggunakan pustaka \emph{Sequelize} sebagai \emph{Object-Relational Mapping} (ORM). \emph{Sequelize} memungkinkan interaksi dengan basis data menggunakan model \emph{JavaScript} yang lebih mudah dipahami dan dikelola, tanpa perlu menulis kueri \emph{SQL} secara langsung. ORM ini menyediakan berbagai fitur seperti validasi data, relasi antar tabel, serta sistem migrasi untuk mempermudah pengelolaan skema dan konsistensi data aplikasi.
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.65\textwidth]{gambar/bab3/fe/home.png}
-  \caption{Implementasi desain halaman utama pada \emph{control station}}
-  \label{fig:home-page}
-  \footnotesize\emph{Sumber: Dokumentasi Penulis}
-\end{figure}
+Dalam hal autentikasi, sistem menerapkan pendekatan berbasis \emph{JWT} (\emph{JSON Web Tokens}) untuk \emph{login} dan pengelolaan sesi. Pengguna yang berhasil melakukan autentikasi akan menerima \emph{access token} dan \emph{refresh token}. \emph{Access token} digunakan untuk mengakses \emph{endpoint API} yang bersifat privat, sedangkan \emph{refresh token} memungkinkan pembaruan \emph{access token} yang telah kedaluwarsa tanpa perlu \emph{login} ulang. \emph{Middleware} \emph{auth} digunakan untuk memverifikasi setiap token yang masuk dalam permintaan \emph{API}, sehingga hanya pengguna yang telah terautentikasi yang dapat mengakses sumber daya tertentu. Sistem ini juga menerapkan \emph{Role-Based Access Control} (RBAC) untuk membatasi hak akses berdasarkan peran pengguna, seperti \emph{superadmin}, \emph{admin}, atau \emph{user}. Selain itu, fitur keamanan lintas domain dikendalikan melalui penerapan mekanisme \emph{CORS} (\emph{Cross-Origin Resource Sharing}), yang memastikan bahwa hanya domain yang sah dan terverifikasi yang dapat berinteraksi dengan sistem \emph{API backend}.
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.65\textwidth]{gambar/bab3/fe/robot.png}
-  \caption{Implementasi desain halaman manajemen robot pada \emph{control station}}
-  \label{fig:robot-management}
-  \footnotesize\emph{Sumber: Dokumentasi Penulis}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.65\textwidth]{gambar/bab3/fe/component.png}
-  \caption{Implementasi desain halaman manajemen komponen gardu pada \emph{control station}}
-  \label{fig:component-management}
-  \footnotesize\emph{Sumber: Dokumentasi Penulis}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.65\textwidth]{gambar/bab3/fe/overheat.png}
-  \caption{Implementasi desain halaman hasil deteksi overheat pada \emph{control station}}
-  \label{fig:overheat-detection}
-  \footnotesize\emph{Sumber: Dokumentasi Penulis}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.65\textwidth]{gambar/bab3/fe/user.png}
-  \caption{Implementasi desain halaman manajemen user pada \emph{control station}}
-  \label{fig:user-management}
-  \footnotesize\emph{Sumber: Dokumentasi Penulis}
-\end{figure}
-
-
-\subsubsection{3.4.4.2 Implementasun Sistem Backend}
-
-Sistem backend dari aplikasi ini dibuat menggunakan bahasa pemrograman \textit{TypeScript} dengan framework \textit{Express.js} untuk membangun RESTful API yang efisien dan mudah diakses. \textit{TypeScript} dipilih karena memberikan keunggulan dalam hal tipe data, yang memungkinkan pengembang untuk menulis kode yang lebih aman dan mudah dipelihara. Dengan menggunakan \textit{Express.js}, pengembangan API menjadi lebih cepat dan mudah, karena framework ini menyediakan berbagai fitur yang dibutuhkan untuk membangun aplikasi web dan API secara efisien. Untuk pengelolaan basis data, sistem ini menggunakan pustaka \texttt{Sequelize} sebagai \textit{Object-Relational Mapping} (ORM). \texttt{Sequelize} memungkinkan interaksi dengan basis data menggunakan model JavaScript yang lebih mudah dipahami dan dikelola, tanpa perlu menulis kueri SQL secara langsung. ORM ini menyediakan berbagai fitur seperti validasi data, relasi antar tabel, serta sistem migrasi untuk mempermudah pengelolaan skema dan konsistensi data aplikasi.
-
-Dalam hal autentikasi, sistem menerapkan pendekatan berbasis \textit{JWT} (JSON Web Tokens) untuk login dan pengelolaan sesi. Pengguna yang berhasil melakukan autentikasi akan menerima \textit{access token} dan \textit{refresh token}. \textit{Access token} digunakan untuk mengakses endpoint API yang bersifat privat, sedangkan \textit{refresh token} memungkinkan pembaruan \textit{access token} yang telah kedaluwarsa tanpa perlu login ulang. Middleware \texttt{auth} digunakan untuk memverifikasi setiap token yang masuk dalam permintaan API, sehingga hanya pengguna yang telah terautentikasi yang dapat mengakses sumber daya tertentu. Sistem ini juga menerapkan \textit{Role-Based Access Control} (RBAC) untuk membatasi hak akses berdasarkan peran pengguna, seperti \textit{superadmin}, \textit{admin}, atau \textit{user}. Selain itu, fitur keamanan lintas domain dikendalikan melalui penerapan mekanisme \textit{CORS} (Cross-Origin Resource Sharing), yang memastikan bahwa hanya domain yang sah dan terverifikasi yang dapat berinteraksi dengan sistem API backend.
-
-Untuk mendukung pengolahan data secara waktu nyata (\textit{real-time}), sistem ini menggunakan protokol \texttt{WebSocket}. Dengan WebSocket, koneksi dua arah (\textit{full-duplex}) antara klien dan server dapat terjaga secara terus-menerus, memungkinkan pengiriman data seperti posisi robot, status sensor, dan notifikasi sistem secara langsung tanpa perlu melakukan permintaan berulang (\textit{polling}). Pendekatan ini sangat penting untuk sistem pemantauan dan kontrol yang memerlukan latensi rendah dan pembaruan data secara instan. Sementara itu, untuk mendukung transmisi video langsung dari kamera robot ke antarmuka pengguna, sistem menggunakan protokol \texttt{WebRTC} (\textit{Web Real-Time Communication}). WebRTC memungkinkan komunikasi audio dan video secara peer-to-peer antara klien dan server, tanpa perlu plugin tambahan, serta mendukung kompresi dan pengiriman media dengan efisiensi tinggi. Penggunaan WebRTC memastikan bahwa tayangan video dari kamera robot dapat diakses secara langsung (\textit{live streaming}) dengan latensi rendah dan kualitas yang dapat disesuaikan secara adaptif sesuai kondisi jaringan.
-
+Untuk mendukung pengolahan data secara waktu nyata (\emph{real-time}), sistem ini menggunakan protokol \emph{WebSocket}. Dengan \emph{WebSocket}, koneksi dua arah (\emph{full-duplex}) antara \emph{klien} dan \emph{server} dapat terjaga secara terus-menerus, memungkinkan pengiriman data seperti posisi robot, status sensor, dan notifikasi sistem secara langsung tanpa perlu melakukan permintaan berulang (\emph{polling}). Pendekatan ini sangat penting untuk sistem pemantauan dan kontrol yang memerlukan latensi rendah dan pembaruan data secara instan. Sementara itu, untuk mendukung transmisi video langsung dari kamera robot ke antarmuka pengguna, sistem menggunakan protokol \emph{WebRTC} (\emph{Web Real-Time Communication}). \emph{WebRTC} memungkinkan komunikasi audio dan video secara \emph{peer-to-peer} antara \emph{klien} dan \emph{server}, tanpa perlu \emph{plugin} tambahan, serta mendukung kompresi dan pengiriman media dengan efisiensi tinggi. Penggunaan \emph{WebRTC} memastikan bahwa tayangan video dari kamera robot dapat diakses secara langsung (\emph{live streaming}) dengan latensi rendah dan kualitas yang dapat disesuaikan secara adaptif sesuai kondisi jaringan.
 
 \section{Integrasi Sistem}
 Integrasi sistem dilakukan dengan menggabungkan seluruh komponen perangkat keras dan perangkat lunak yang telah dirancang untuk menciptakan sistem yang berjalan secara efisien dan terkoordinasi. Tahap pertama adalah integrasi komponen elektrikal, yang melibatkan pemasangan perangkat tambahan seperti kamera termal, router nirkabel, dan perangkat \emph{switch} jaringan pada robot. Komponen-komponen ini dihubungkan dengan catu daya 24 VDC dari port daya \emph{navigation host} robot, memastikan semua perangkat dapat beroperasi tanpa memerlukan sumber daya eksternal tambahan. Selanjutnya, perangkat-perangkat ini dikonfigurasi dalam jaringan lokal dengan alamat IP statis, memungkinkan komunikasi antar perangkat di dalam robot untuk mendukung fungsionalitas sistem. Untuk komunikasi antara \emph{control station} dan robot, digunakan skema komunikasi nirkabel \emph{Point-to-Point} (PTP). Pada \emph{control station}, router berfungsi sebagai \emph{access point} (AP) yang terhubung ke jaringan lokal robot. Sementara itu, pada robot, perangkat \emph{router} berfungsi sebagai \emph{station}, yang terhubung langsung dengan \emph{access point} yang ada di \emph{control station}. Konfigurasi ini memungkinkan pertukaran data dua arah berkecepatan tinggi antara robot dan \emph{control station}, dengan latensi rendah yang sangat krusial untuk mendukung transmisi data secara \emph{real-time}.
@@ -460,26 +451,26 @@ Pada tahap awal, \emph{control station} menerima data komponen gardu induk yang 
 \subsection{Pembuatan Rute dan Waypoint di \emph{Control Station}}
 Setelah data komponen terintegrasi, operator dapat membuat rute patroli di \emph{control station}. Rute ini terdiri dari serangkaian waypoint yang masing-masing berisi informasi tentang lokasi (X, Y), orientasi (Z), serta jenis waypoint (seperti \emph{start}, \emph{scan area}, atau \emph{dock charge}). Data waypoint ini kemudian dikirimkan ke robot dan digunakan untuk navigasi. Pada setiap waypoint, terdapat parameter tambahan yang digunakan untuk mengontrol pergerakan robot dan pengaturan kamera, seperti kecepatan (\emph{speed}), tipe gait (\emph{gaitType}), serta kontrol kamera seperti pan, tilt, dan zoom. Parameter ini memungkinkan robot untuk bergerak sesuai dengan yang diinginkan serta melakukan pemindaian atau deteksi suhu pada komponen gardu induk. Berikut adalah contoh format salah satu array waypoint yang digunakan dalam sistem:
 
-\begin{lstlisting}
-{
-  "id": 6,
-  "sequenceOrder": 0,
-  "locationX": 10.5,
-  "locationY": 20.3,
-  "orientationZ": 45,
-  "waypointType": "start",
-  "gaitType": "walk",
-  "speed": 0.5,
-  "bodyHeight": 1.2,
-  "cameraPan": 90,
-  "cameraTilt": -10,
-  "rgbCameraZoom": 1.5,
-  "thermalCameraZoom": 2,
-  "direction": "forward",
-  "useObstacleAvoidance": true,
-  "map": "route_1"
-}
-\end{lstlisting}
+\begin{lstlisting}[language=XML, caption={Sample Waypoint JSON Data}, label={lst:waypoint-example}]
+  {
+    "id": 6,
+    "sequenceOrder": 0,
+    "locationX": 10.5,
+    "locationY": 20.3,
+    "orientationZ": 45,
+    "waypointType": "start",
+    "gaitType": "walk",
+    "speed": 0.5,
+    "bodyHeight": 1.2,
+    "cameraPan": 90,
+    "cameraTilt": -10,
+    "rgbCameraZoom": 1.5,
+    "thermalCameraZoom": 2,
+    "direction": "forward",
+    "useObstacleAvoidance": true,
+    "map": "route_1"
+  }
+  \end{lstlisting}
 
 \subsection{Navigasi Robot}
 Setelah waypoint dan rute ditentukan, robot dapat dijadwalkan untuk patroli pada waktu tertentu. Robot yang selalu terhubung dalam kondisi docking station akan melanjutkan patroli ke rute yang telah ditentukan pada waktu yang telah dijadwalkan. Selama patroli, robot bergerak menuju setiap waypoint secara berurutan, dengan mempertimbangkan kecepatan dan metode pergerakan yang telah diatur. Jika robot mendeteksi suhu berlebih pada komponen gardu induk, sistem akan melaporkan kondisi tersebut ke \emph{control station}.

@@ -41,8 +41,8 @@
       \strng{authornamehash}{1f950b5522b7ccb037c7b18022601504}
       \strng{authorfullhash}{1f950b5522b7ccb037c7b18022601504}
       \strng{authorfullhashraw}{1f950b5522b7ccb037c7b18022601504}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{month}{1}
@@ -95,8 +95,8 @@
       \strng{authornamehash}{22f8d04767be3a3e62a2a780e540b4fc}
       \strng{authorfullhash}{2815e95779384bca44fd1c717314bbc3}
       \strng{authorfullhashraw}{2815e95779384bca44fd1c717314bbc3}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Space Weather}
@@ -141,8 +141,8 @@
       \strng{authornamehash}{fee91f496c54d5821361d02866b592db}
       \strng{authorfullhash}{3886688923ecdd63579cbc0354c95bc3}
       \strng{authorfullhashraw}{3886688923ecdd63579cbc0354c95bc3}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Russian Journal of Earth Sciences}
@@ -175,8 +175,8 @@
       \strng{authornamehash}{e0e58de268595145c4ad92412662a71f}
       \strng{authorfullhash}{e0e58de268595145c4ad92412662a71f}
       \strng{authorfullhashraw}{e0e58de268595145c4ad92412662a71f}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issue}{9}
@@ -460,8 +460,8 @@
       \strng{authornamehash}{66bee84ee91107cea18f41f3a4e74007}
       \strng{authorfullhash}{ea95652de4b6c72037665c57f7f79a00}
       \strng{authorfullhashraw}{ea95652de4b6c72037665c57f7f79a00}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{E3S Web of Conferences}
@@ -760,8 +760,8 @@
       \strng{authornamehash}{ee129c16ea7bb397a736406a9ec55a1e}
       \strng{authorfullhash}{ee129c16ea7bb397a736406a9ec55a1e}
       \strng{authorfullhashraw}{ee129c16ea7bb397a736406a9ec55a1e}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{Accessed: 2024-10-16}
@@ -1014,8 +1014,8 @@
       \strng{authornamehash}{c5099efba9f8194711f936173ab8f171}
       \strng{authorfullhash}{c5099efba9f8194711f936173ab8f171}
       \strng{authorfullhashraw}{c5099efba9f8194711f936173ab8f171}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Vehicles: Experiments in Synthetic Psychology}
@@ -1175,8 +1175,8 @@
       \strng{authornamehash}{11689a5f24bab7ef84159a0aa06ae177}
       \strng{authorfullhash}{11689a5f24bab7ef84159a0aa06ae177}
       \strng{authorfullhashraw}{11689a5f24bab7ef84159a0aa06ae177}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{First Monday}
@@ -1366,8 +1366,8 @@
       \strng{authornamehash}{a384119ffa0f3414225b956a30c34bd9}
       \strng{authorfullhash}{a384119ffa0f3414225b956a30c34bd9}
       \strng{authorfullhashraw}{a384119ffa0f3414225b956a30c34bd9}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{The WebSocket Protocol}
