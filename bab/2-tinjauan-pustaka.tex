@@ -25,7 +25,7 @@ Penelitian ini mengusulkan penggunaan \emph{VANT} \emph{(Vehículo Aéreo No Tri
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.34]{gambar/bab2/drone.png}
-  \caption{\emph{GUI} Drone dengan kamera termal untuk pemantauan gardu induk.}
+  \caption{\emph{GUI} Drone dengan kamera termal untuk pemantauan gardu induk. \cite{Prieto2022}}
   \label{fig:Drone dengan kamera termal untuk pemantauan gardu induk}
 \end{figure}
 
@@ -255,19 +255,26 @@ di mana \( K_p \), \( K_i \), dan \( K_d \) masing-masing adalah konstanta pengu
 Penghindaran rintangan berdasarkan prinsip \emph{Braitenberg} merupakan pendekatan reaktif yang meniru perilaku biologis sederhana. Dalam pendekatan ini, sensor, seperti sensor ultrasonik atau \emph{LiDAR}, dihubungkan langsung ke aktuator secara fungsional, yang memungkinkan robot untuk bereaksi terhadap objek yang terdeteksi di sekitarnya. Dalam bentuk dasar, intensitas pembacaan sensor mempengaruhi kecepatan roda secara langsung, dengan tujuan menghindari objek yang terdeteksi tanpa memerlukan perhitungan kompleks atau pembuatan peta. Sebagai contoh, jika sensor mendeteksi objek di depan, robot akan memperlambat roda yang berada di sisi yang lebih dekat dengan objek, memutar arah untuk menghindari tabrakan. Meskipun pendekatan ini sangat sederhana, ia terbukti sangat efektif dalam situasi yang memerlukan penghindaran rintangan di lingkungan yang tidak terstruktur. Pendekatan \emph{Braitenberg} sering digunakan pada robot yang bergerak dalam area yang dinamis, di mana reaksi cepat terhadap perubahan lingkungan sangat penting. Namun, karena sifatnya yang reaktif, metode ini cenderung menghasilkan gerakan yang tidak halus dan terkadang tidak optimal, terutama dalam navigasi jalur yang kompleks. Robot yang menggunakan pendekatan ini mungkin akan kesulitan saat menghadapi jalur yang harus dilalui dengan presisi tinggi atau di lingkungan yang memiliki banyak hambatan. Oleh karena itu, \emph{Braitenberg} sering digunakan sebagai lapisan reaktif tambahan pada sistem pengendalian berbasis jalur, seperti \emph{PID} atau \emph{Pure Pursuit}, untuk meningkatkan respons terhadap rintangan secara real-time sambil mempertahankan kontrol navigasi yang lebih halus dan terencana. Kombinasi ini memungkinkan robot untuk memiliki respons cepat terhadap rintangan, sambil tetap mengikuti jalur. \cite{braitenberg1986vehicles}.
 
 
-\subsubsection{2.2.9.3 Pure Pursuit untuk Pelacakan Jalur}
 
-\emph{Pure Pursuit} adalah algoritma pelacakan jalur berbasis geometri yang dirancang untuk mengarahkan robot menuju sebuah titik target (\emph{look-ahead point}) yang berada di depan lintasan referensi. Algoritma ini populer karena kesederhanaannya serta kemampuannya menghasilkan lintasan yang halus, terutama pada sistem robotik non-ackermann seperti robot dengan \emph{differential drive}. Prinsip kerja \emph{Pure Pursuit} adalah membentuk lintasan lengkung dari posisi robot menuju titik target. Sudut belok atau kelengkungan lintasan dihitung berdasarkan sudut \( \alpha \), yaitu sudut antara arah heading robot saat ini dan garis lurus ke titik target, serta jarak \emph{look-ahead} \(L_d\). Kelengkungan lintasan ditentukan oleh persamaan:
+\subsubsection{2.2.9.3 Pure Pursuit untuk Pelacakan Jalur}
+\emph{Pure Pursuit} adalah algoritma pelacakan jalur berbasis geometri yang dirancang untuk mengarahkan robot menuju sebuah titik target (\emph{look-ahead point}) yang berada di depan lintasan referensi. Algoritma ini populer karena kesederhanaannya serta kemampuannya menghasilkan lintasan yang halus, terutama pada sistem robotik non-ackermann seperti robot dengan \emph{differential drive}.  Prinsip kerja \emph{Pure Pursuit} adalah membentuk lintasan lengkung dari posisi robot menuju titik target. Sudut belok atau kelengkungan lintasan dihitung berdasarkan sudut \( \alpha \), yaitu sudut antara arah heading robot saat ini dan garis lurus ke titik target, serta jarak \emph{look-ahead} \(L_d\).  Kelengkungan lintasan, yang dinotasikan sebagai \( \kappa \), merepresentasikan seberapa tajam lengkungan lintasan yang harus dilalui oleh robot. Semakin besar nilai \( \kappa \), semakin tajam lintasan yang harus dilalui. Dalam konteks geometri, kelengkungan \( \kappa \) juga dapat didefinisikan sebagai kebalikan dari jari-jari kurva lintasan \( R \), yaitu:
+\begin{equation}
+    \kappa = \frac{1}{R},
+\end{equation}
+di mana \( R \) merupakan jari-jari lingkaran imajiner yang dilalui oleh robot untuk mencapai titik target. Jika robot bergerak lurus (tidak membelok), maka \( \kappa = 0 \), menandakan lintasan lurus sempurna. Sebaliknya, nilai \( \kappa \) yang besar menunjukkan kebutuhan untuk berbelok tajam mengikuti kurva yang lebih kecil. 
+
+Dalam algoritma \emph{Pure Pursuit}, nilai \( \kappa \) dihitung menggunakan rumus berikut:
 \begin{equation}
     \kappa = \frac{2 \cdot \sin(\alpha)}{L_d},
 \end{equation}
-di mana \( \kappa \) kemudian dikonversi menjadi kecepatan sudut:
+yang kemudian dikonversi menjadi kecepatan sudut robot dengan persamaan:
 \begin{equation}
     \omega = v \cdot \kappa,
 \end{equation}
 dengan \( v \) adalah kecepatan linier robot.
 
-\emph{Look ahed distance} \(L_d\) sangat memengaruhi karakteristik gerakan yang dihasilkan oleh algoritma ini. Ketika nilai \(L_d\) terlalu kecil, robot menjadi sangat responsif terhadap perubahan arah, sehingga sering kali menghasilkan lintasan yang terlalu tajam atau osilatif, terutama pada kecepatan tinggi. Sebaliknya, jika \(L_d\) terlalu besar, robot cenderung mengambil jalur yang lebih lurus dan memotong tikungan, sehingga berpotensi menyimpang dari lintasan referensi. Oleh karena itu, pemilihan nilai \(L_d\) perlu mempertimbangkan kecepatan dan konteks lingkungan. Beberapa implementasi bahkan menggunakan skema adaptif yang menyesuaikan \(L_d\) secara dinamis seiring dengan kecepatan robot untuk menjaga keseimbangan antara stabilitas dan akurasi pelacakan. Metode \emph{Pure Pursuit} sangat cocok untuk navigasi jalur dengan geometri kompleks karena mampu menyesuaikan arah gerak secara kontinu berdasarkan posisi dan heading saat ini. Untuk meningkatkan stabilitas sistem dan mengurangi osilasi gerakan, algoritma ini sering dikombinasikan dengan pengendali PID yang mengatur kecepatan sudut berdasarkan nilai kelengkungan yang dihitung \cite{coulter1992implementation}.
+\emph{Look-ahead distance} \(L_d\) sangat memengaruhi karakteristik gerakan yang dihasilkan oleh algoritma ini. Ketika nilai \(L_d\) terlalu kecil, robot menjadi sangat responsif terhadap perubahan arah, sehingga sering kali menghasilkan lintasan yang terlalu tajam atau osilatif, terutama pada kecepatan tinggi. Sebaliknya, jika \(L_d\) terlalu besar, robot cenderung mengambil jalur yang lebih lurus dan memotong tikungan, sehingga berpotensi menyimpang dari lintasan referensi. Oleh karena itu, pemilihan nilai \(L_d\) perlu mempertimbangkan kecepatan dan konteks lingkungan.   Beberapa implementasi bahkan menggunakan skema adaptif yang menyesuaikan \(L_d\) secara dinamis seiring dengan kecepatan robot untuk menjaga keseimbangan antara stabilitas dan akurasi pelacakan. Metode \emph{Pure Pursuit} sangat cocok untuk navigasi jalur dengan geometri kompleks karena mampu menyesuaikan arah gerak secara kontinu berdasarkan posisi dan heading saat ini. Untuk meningkatkan stabilitas sistem dan mengurangi osilasi gerakan, algoritma ini sering dikombinasikan dengan pengendali PID yang mengatur kecepatan sudut berdasarkan nilai kelengkungan yang dihitung \cite{coulter1992implementation}.
+
 
 
 \subsection{\emph{Computer Vision}}

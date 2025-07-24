@@ -136,7 +136,7 @@ Implementasi sistem elektrikal dilakukan dengan mengintegrasikan komponen-kompon
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{gambar/bab3/int-control-port.png}
-  \caption{Port pada \emph{Navigation Host} Robot  Tampak depan (atas) dan belakang (bawah) \cite{deeprobotics_jueyingx30}}
+  \caption{Port pada \emph{Navigation Host} Robot  Tampak depan (A) dan belakang (B) \cite{deeprobotics_jueyingx30}}
   \label{fig:int-control-port}
 \end{figure}
 
@@ -300,29 +300,34 @@ Selisih antara posisi target (\emph{setpoint}) dan posisi aktual digunakan sebag
 
 \vspace{1ex}
 \begin{algorithm}[H]
-\caption{Region-Based PID Controller}
-\label{alg:pid-controller}
-\KwIn{\emph{setpoint}, \emph{actual\_position}}
-\KwOut{\emph{control\_signal}}
+\caption{Region-Based PID Controller with Membership Levels}
+\label{alg:region-pid}
+\KwIn{\emph{setpoint}, \emph{actual\_position}, \emph{prev\_error}, \emph{accum\_error}}
+\KwData{PID arrays: $K_P[i], K_I[i], K_D[i]$; bounds: $output\_bound$, $accum\_bound$; $membership\_amount$}
+\KwOut{\emph{control\_output}}
 
 $error \gets setpoint - actual\_position$\;
-$integral \gets integral + error \cdot \Delta t$\;
-$derivative \gets \dfrac{error - prev\_error}{\Delta t}$\;
 
-\uIf{$|error| > error\_threshold$}{
-  $(K_p, K_i, K_d) \gets (K_p^{\text{high}}, K_i^{\text{high}}, K_d^{\text{high}})$\;
-}
-\Else{
-  $(K_p, K_i, K_d) \gets (K_p^{\text{low}}, K_i^{\text{low}}, K_d^{\text{low}})$\;
-}
+$step \gets \dfrac{output\_bound}{membership\_amount}$\;
+$idx \gets \min(membership\_amount - 1,\ \left\lfloor \dfrac{|error|}{step} \right\rfloor)$\;
 
-$output \gets K_p \cdot error + K_i \cdot integral + K_d \cdot derivative$\;
-$output \gets \texttt{clamp}(output, output\_min, output\_max)$\;
+$K_p \gets K_P[idx]$\;
+$K_i \gets K_I[idx]$\;
+$K_d \gets K_D[idx]$\;
+
+$accum\_error \gets \texttt{clamp}(accum\_error + error,\ -accum\_bound,\ accum\_bound)$\;
+$derivative \gets error - prev\_error$\;
+
+$output \gets K_p \cdot error + K_i \cdot accum\_error + K_d \cdot derivative$\;
+$output \gets \texttt{clamp}(output,\ -output\_bound,\ output\_bound)$\;
+
 $prev\_error \gets error$\;
 \Return $output$\;
 \end{algorithm}
 
-Logika pengendalian tersebut dirangkum secara rinci dalam Algoritma~\ref{alg:pid-controller}, yang menggambarkan proses komputasi sinyal kendali berdasarkan \emph{error} saat ini, serta pemilihan parameter kendali yang disesuaikan dengan besar kecilnya \emph{error} melalui pendekatan \emph{region-based gain tuning}.
+
+
+Logika pengendalian tersebut dirangkum secara rinci dalam Algoritma~\ref{alg:region-pid}, yang menggambarkan proses komputasi sinyal kendali berdasarkan \emph{error} saat ini, serta pemilihan parameter kendali yang disesuaikan dengan besar kecilnya \emph{error} melalui pendekatan \emph{region-based gain tuning}.
 
 
 
@@ -332,7 +337,7 @@ Implementasi sistem \emph{Localization and Mapping Package} dalam penelitian ini
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.6\textwidth]{gambar/bab3/dlio-error.png}
+  \includegraphics[width=0.6\textwidth]{gambar/bab3/dlio-error-negate.png}
   \caption{Kegagalan inisialisasi \emph{DLIO} akibat ketidaksesuaian \emph{timestamp}} 
   \label{fig:dlio-error}
 \end{figure}
@@ -348,12 +353,12 @@ Metode keempat, yaitu \emph{Fast-LIO-SAM}, menggabungkan estimasi \emph{LiDAR-In
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.6\textwidth]{gambar/bab3/obstacle-bb.png}
-  \caption{Visualisasi \emph{Braitenberg Vehicle} kondisi terdapat rintangan (kanan) dan tanpa rintangan (kiri)}
+  \includegraphics[width=0.6\textwidth]{gambar/bab3/obstacle_avoidance.png}
+  \caption{Implementasi \emph{Obstacle Detector} dengan LiDAR}
   \label{fig:obstacle-detector}
 \end{figure}
 
-Gambar \ref{fig:obstacle-detector} menunjukkan visualisasi dari algoritma \emph{Braitenberg Vehicle} yang digunakan untuk mendeteksi rintangan. Pada gambar kiri, tidak terdapat rintangan di depan robot sehingga semua bagian memiliki nilai \emph{maximal}, sedangkan pada gambar kanan, terdapat rintangan di bagian depan kiri robot yang menyebabkan nilai pada \emph{segment} tersebut menjadi lebih kecil dari ambang batas.
+Gambar~\ref{fig:obstacle-detector} memperlihatkan visualisasi hasil pembacaan LiDAR yang dibagi ke dalam 32 arah atau segmen (garis merah) di depan robot. Setiap garis mewakili arah pemindaian, sedangkan titik-titik warna di kejauhan merupakan objek yang terdeteksi. Data ini digunakan untuk menentukan apakah ada rintangan yang perlu dihindari berdasarkan jaraknya terhadap robot. Data dari \emph{node} ini kemudian digabungkan dalam \emph{Patrol Controller} untuk menentukan tindakan yang harus diambil, baik itu melanjutkan pergerakan, menghindari rintangan, atau melakukan inspeksi komponen gardu induk. 
 
 
 \subsubsection{3.4.3.4 Implementasi Sistem \emph{Autonomy Package}}
@@ -361,57 +366,59 @@ Gambar \ref{fig:obstacle-detector} menunjukkan visualisasi dari algoritma \emph{
 Proses navigasi robot dilakukan dengan mengikuti jalur waypoint menggunakan algoritma \emph{Pure Pursuit} dan kontrol kecepatan berbasis \emph{PID controller}. Sistem ini juga memiliki kemampuan untuk melakukan inspeksi komponen secara otomatis ketika mencapai waypoint bertipe inspeksi, serta menghindari rintangan secara dinamis berdasarkan arsitektur perilaku (\emph{behavior-based arbitration}).
 
 \begin{algorithm}[H]
+  \caption{Navigasi Waypoint dengan Pure Pursuit dan Subsumption Architecture}
   \label{alg:patrol-controller}
-\caption{Navigasi Waypoint dengan Pure Pursuit dan Subsumption Architecture}
-\KwIn{Daftar \texttt{waypoints[]} dengan atribut \texttt{position, type}}
-\KwOut{Navigasi dan inspeksi otomatis robot}
-$i \gets 0$\;
-\While{$i < \texttt{waypoints.length}$}{
-    $\mathbf{w}_i \gets \texttt{waypoints}[i]$\;
-    
-    \While{\textbf{not} \texttt{isAtWaypoint}($\mathbf{w}_i$)}{
-        \uIf{\texttt{detectObstacle()}}{
-            \texttt{avoidObstacleBehavior()}\;
-        }
-        \Else{
-            Hitung sudut arah relatif:\;
-            \begin{equation}
-            \alpha = \arctan2(y_{\text{target}} - y, x_{\text{target}} - x) - \theta
-            \end{equation}
-            Hitung sudut kemudi:\;
-            \begin{equation}
-            \delta = \arctan\left(\frac{2L \sin \alpha}{L_d}\right)
-            \end{equation}
-            Hitung error kecepatan:\;
-            \begin{equation}
-            e_v(t) = v_{\text{target}} - v(t)
-            \end{equation}
-            \begin{equation}
-            v_{\text{cmd}} = K_p^v e_v(t) + K_i^v \int_0^t e_v(\tau)\, d\tau + K_d^v \frac{de_v(t)}{dt}
-            \end{equation}
-            Hitung error arah:\;
-            \begin{equation}
-            e_\delta(t) = \delta - \delta(t)
-            \end{equation}
-            \begin{equation}
-            \omega_{\text{cmd}} = K_p^\delta e_\delta(t) + K_i^\delta \int_0^t e_\delta(\tau)\, d\tau + K_d^\delta \frac{de_\delta(t)}{dt}
-            \end{equation}
-            \texttt{publish}$(v_{\text{cmd}}, \omega_{\text{cmd}})$\;
-        }
-    }
-    
-    \If{$\mathbf{w}_i.\texttt{type} == \text{"inspection"}$}{
-        $\texttt{ptz\_pose} \gets \texttt{getPTZPose}(\mathbf{w}_i)$\;
-        \texttt{sendToPTZNode(ptz\_pose)}\;
-        \texttt{sendCommandToCV("capture")}\;
-        \uIf{\texttt{waitForCVResponse()} == "success"}{
-            Lanjut ke waypoint berikutnya\;
-        }
-    }
-    $i \gets i + 1$\;
-}
-\textbf{Navigasi selesai}\;
-\end{algorithm}
+  \KwIn{Daftar \texttt{waypoints[]} dengan atribut \texttt{position, type}}
+  \KwOut{Navigasi dan inspeksi otomatis oleh robot}
+  $i \gets 0$\;
+  \While{$i < \texttt{waypoints.length}$}{
+      $\mathbf{w}_i \gets \texttt{waypoints}[i]$\;
+      
+      \While{\textbf{not} \texttt{isAtWaypoint}($\mathbf{w}_i$)}{
+          \uIf{\texttt{detectObstacle()}}{
+              \texttt{avoidObstacleBehavior()}\;
+          }
+          \Else{
+              Hitung sudut arah relatif:\;
+              
+              $\alpha \gets \arctan2(y_{\text{target}} - y, x_{\text{target}} - x) - \theta$\;
+  
+              Hitung sudut kemudi:\;
+              
+              $\delta \gets \arctan\left(\frac{2L \sin \alpha}{L_d}\right)$\;
+  
+              Hitung error kecepatan:\;
+  
+              $e_v(t) \gets v_{\text{target}} - v(t)$\;
+  
+              $v_{\text{cmd}} \gets K_p^v e_v(t) + K_i^v \int_0^t e_v(\tau)\, d\tau + K_d^v \frac{de_v(t)}{dt}$\;
+  
+              Hitung error arah:
+  
+              $e_\delta(t) \gets \delta - \delta(t)$\;
+  
+              $\omega_{\text{cmd}} \gets K_p^\delta e_\delta(t) + K_i^\delta \int_0^t e_\delta(\tau)\, d\tau + K_d^\delta \frac{de_\delta(t)}{dt}$\;
+  
+              \texttt{publish}($v_{\text{cmd}}, \omega_{\text{cmd}}$)\;
+          }
+      }
+  
+      \If{$\mathbf{w}_i.\text{\texttt{type}} == \texttt{"inspection"}$}{
+          $\texttt{ptz\_pose} \gets \texttt{getPTZPose}(\mathbf{w}_i)$\;
+          
+          \texttt{sendToPTZNode(ptz\_pose)}\;
+          
+          \texttt{sendCommandToCV("capture")}\;
+  
+          \uIf{\texttt{waitForCVResponse()} == \texttt{"success"}}{
+              Lanjut ke waypoint berikutnya\;
+          }
+      }
+      $i \gets i + 1$\;
+  }
+  \textbf{Navigasi selesai}\;
+  \end{algorithm}
+  
 
 Algoritma~\ref{alg:patrol-controller} menggambarkan alur navigasi robot dalam mengikuti daftar waypoint yang diberikan. Proses ini dilakukan dengan dua komponen utama: pergerakan menuju waypoint menggunakan algoritma \emph{Pure Pursuit}, serta penghindaran rintangan berdasarkan arsitektur perilaku \emph{subsumption}.  Pada setiap iterasi, robot memeriksa apakah terdapat rintangan di jalurnya. Jika terdeteksi, sistem segera mengaktifkan perilaku penghindaran rintangan secara prioritas. Jika tidak, robot menghitung sudut arah relatif terhadap target (\(\alpha\)), sudut kemudi (\(\delta\)), serta menghasilkan perintah kecepatan linier dan sudut (\(v_{\text{cmd}}\) dan \(\omega_{\text{cmd}}\)) melalui kendali \emph{PID} untuk menjaga kestabilan gerak dan presisi arah. Ketika mencapai waypoint bertipe \texttt{inspection}, sistem akan mengarahkan kamera PTZ dan menjalankan proses pengambilan gambar menggunakan \emph{Computer Vision}. Dengan struktur algoritma ini, sistem navigasi mampu melakukan perpindahan antar waypoint secara otonom sekaligus menjalankan inspeksi otomatis dan penghindaran rintangan secara reaktif.
 
@@ -491,4 +498,4 @@ Di sini, \( \mathbf{x}_t^{\text{pred}} \) adalah posisi robot yang diprediksi be
 Jika robot mendeteksi adanya rintangan selama patroli, sistem \emph{obstacle avoidance} akan mengaktifkan algoritma penghindaran untuk menghindari hambatan tersebut. Setelah rintangan terhindar, robot akan melanjutkan perjalanannya dan kembali ke jalur semula menggunakan \emph{Fast-LIO2} untuk memastikan robot tetap pada jalur yang telah ditentukan. Jika robot masih menyimpang setelah menghindari rintangan, sistem akan mengoreksi posisi dan arah robot untuk memastikan kembali ke jalur yang benar. Penghindaran rintangan diaktifkan secara otomatis melalui deteksi objek yang ada di sekitar robot. Data dari sensor LiDAR yang dipasang pada robot digunakan untuk mendeteksi objek di sekitarnya, dan algoritma \emph{Braitenberg} digunakan untuk menilai seberapa dekat objek dengan robot. Jika jarak objek terdeteksi lebih kecil dari ambang batas yang telah ditentukan, robot akan menyesuaikan jalurnya dan menghindari rintangan.
 
 \subsection{Pengecekan Konfigurasi dan Kembali ke Posisi Awal}
-Pada saat robot melakukan docking untuk pengisian daya, sistem akan memeriksa dan memperbarui konfigurasi yang diterima dari \emph{control station}. Perubahan konfigurasi, baik itu rute atau jadwal patroli, hanya dapat dilakukan ketika robot berada dalam kondisi \emph{idle} atau saat berada di \emph{dock station}. Hal ini memastikan bahwa perubahan tidak mengganggu patroli yang sedang berjalan. Setelah menyelesaikan patroli, robot akan kembali ke posisi awalnya. Rute yang telah dibuat harus mencakup titik awal dan titik akhir yang sama, sehingga robot dapat kembali ke tempat yang sama setelah menyelesaikan patroli. Dalam hal ini, sistem memastikan bahwa robot mengikuti jalur yang benar, melakukan koreksi posisi jika diperlukan, dan kembali ke titik awal setelah menyelesaikan tugasnya. Dengan alur kerja yang terstruktur ini, robot dapat melakukan patroli secara otomatis, memantau kondisi komponen gardu induk, dan mengatasi potensi overheat yang terjadi, sambil tetap mengikuti jalur yang telah ditentukan dengan akurasi tinggi.
+Pada saat robot melakukan docking untuk pengisian daya, sistem akan memeriksa dan memperbarui konfigurasi yang diterima dari \emph{control station}. Perubahan konfigurasi, baik itu rute atau jadwal patroli, hanya dapat dilakukan ketika robot berada dalam kondisi \emph{idle} atau saat berada di \emph{dock station}. Hal ini memastikan bahwa perubahan tidak mengganggu patroli yang sedang berjalan. Setelah menyelesaikan patroli, robot akan kembali ke posisi awalnya. Rute yang telah dibuat harus mencakup titik awal dan titik akhir yang sama, sehingga robot dapat kembali ke tempat yang sama setelah menyelesaikan patroli. Dalam hal ini, sistem memastikan bahwa robot mengikuti jalur yang benar, melakukan koreksi posisi jika diperlukan, dan kembali ke titik awal setelah menyelesaikan tugasnya. Dengan alur kerja yang terstruktur ini, robot dapat melakukan patroli secara otomatis, memantau kondisi komponen gardu induk, dan mengatasi potensi overheat yang terjadi.

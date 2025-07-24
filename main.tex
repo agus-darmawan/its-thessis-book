@@ -142,6 +142,8 @@
   tabsize=2,
 }
 \lstset{style=codestyle}
+\renewcommand{\lstlistingname}{Kode}
+
 
 % Isi keseluruhan dokumen
 \begin{document}
@@ -214,9 +216,32 @@
 \cleardoublepage
 
 % Daftar tabel
-\renewcommand*\listtablename{DAFTAR TABEL}
-\addcontentsline{toc}{chapter}{\listtablename}
-\listoftables
+\addcontentsline{toc}{chapter}{DAFTAR KODE DAN ALGORITMA}
+
+% Ganti nama caption agar konsisten
+\renewcommand{\lstlistingname}{Kode}
+\renewcommand{\lstlistlistingname}{DAFTAR KODE}
+\renewcommand{\algorithmcfname}{Algoritma}
+\renewcommand{\listalgorithmcfname}{DAFTAR ALGORITMA}
+
+\begingroup
+\let\clearpage\relax  % Hilangkan page break antar daftar otomatis
+\let\newpage\relax    % Tambahan: cegah \newpage otomatis
+
+% Perkecil font agar muat lebih banyak
+\small
+
+% Tambahkan daftar kode
+\lstlistoflistings
+
+\vspace{2em} % Jarak antar bagian
+
+% Tambahkan daftar algoritma
+\listofalgorithms
+
+\endgroup
+
+
 \cleardoublepage
 
 % Nomor halaman isi dimulai dari sini

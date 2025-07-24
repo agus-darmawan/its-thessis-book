@@ -16,25 +16,17 @@ submodul perangkat lunak. Adapun skenario pengujian yang dilakukan dijelaskan se
 berikut.
 
 \subsection{Pengujian Sistem Elektrikal}
-Pengujian sistem elektrikal bertujuan untuk memastikan bahwa seluruh komponen perangkat
-keras beroperasi dengan baik dan sesuai dengan spesifikasi teknis yang telah ditetapkan.
-Pengujian ini meliputi pengukuran tegangan, verifikasi koneksi, serta uji
-fungsionalitas tiap komponen. Pengukuran tegangan dilakukan menggunakan osiloskop
-guna memastikan bahwa tegangan yang diterima oleh setiap komponen berada dalam batas
-toleransi yang diizinkan. Dikarenakan semua komponen perangkat keras menggunakan
-catu daya yang sama maka pengujian hanya dilakukan pada satu titik tegangan, yaitu
-pada tegangan 24VDC. Adapun gambar pengujian sebagai berikut:
+Pengujian sistem elektrikal dilakukan untuk memastikan bahwa seluruh komponen perangkat keras berfungsi dengan baik dan sesuai dengan spesifikasi teknis yang telah ditentukan. Pengujian ini mencakup pengukuran tegangan, verifikasi koneksi, serta pengujian fungsionalitas masing-masing komponen. Pengukuran tegangan dilakukan menggunakan osiloskop untuk memastikan bahwa tegangan yang diterima oleh setiap komponen berada dalam batas toleransi yang diizinkan. Karena seluruh komponen perangkat keras menggunakan sumber catu daya yang sama, maka pengujian tegangan cukup dilakukan pada satu titik, yaitu pada jalur tegangan 24VDC. Adapun ilustrasi pengujian ditunjukkan pada Gambar \ref{ref:pengujian_tegangan}.
+
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.5]{gambar/bab4/osii.png}
 	\caption{Pengujian Tegangan 24V dengan osiloskop}
-	\label{fig:pengujian_tegangan} \footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
+	\label{fig:pengujian_tegangan} 
 \end{figure}
 
-Berdasarkan pengukuran tegangan yang dilakukan, dimana teggangan akan direkam
-dalam 5 yang dilakukan sebanyak 10 kali pengulangan, maka didapatkan hasil yang dapat
-dilihat pada tabel \ref{tab:pengujian_tegangan}
+Pengukuran dilakukan pada titik catu daya utama yang terhubung ke semua komponen dan diukur selama 3 detik dengan frekuensi sampling 1 kHz seperti pada gambar \ref{fig:pengujian_tegangan}. Didapatkan nilai tegangan \emph{maximum}, \emph{minimum }, dan \emph{average} yang akan digunakan untuk analisis lebih lanjut. Pengukuran ini dilakukan untuk memastikan bahwa sistem kelistrikan berfungsi dengan baik dan dapat mendukung operasi robot secara optimal.Berdasarkan pengukuran tegangan yang dilakukan, dimana teggangan akan direkam  sebanyak 10 kali pengulangan, maka didapatkan hasil yang dapat dilihat pada tabel \ref{tab:pengujian_tegangan}
 \begin{table}[H]
 	\centering
 	\caption{Hasil Pengujian Tegangan 24VDC pada Sistem Elektrikal}
@@ -60,8 +52,7 @@ dilihat pada tabel \ref{tab:pengujian_tegangan}
 Hasil pengujian menunjukkan bahwa tegangan 24VDC pada sistem elektrikal stabil
 dan sesuai dengan spesifikasi yang diharapkan. Tegangan tetap berada dalam rentang
 yang aman untuk semua komponen, meskipun terjadi sedikit penurunan saat motor
-PTZ bergerak. Penurunan ini masih dalam batas toleransi yang dapat diterima,
-sehingga tidak mempengaruhi kinerja sistem secara keseluruhan.
+PTZ bergerak. 
 
 \begin{table}[H]
 	\centering
@@ -79,16 +70,10 @@ sehingga tidak mempengaruhi kinerja sistem secara keseluruhan.
 \end{table}
 
 Rata-rata tegangan minimum yang tercatat selama pengujian adalah sebesar 23{,}73
-V, dengan deviasi maksimum terhadap nilai ideal 24,0 V sebesar 0{,}27 V. Nilai ini
-menunjukkan bahwa meskipun terjadi penurunan tegangan, sistem masih berada dalam
-batas toleransi yang aman. Sementara itu, rata-rata tegangan maksimum berada
+V, dengan deviasi maksimum terhadap nilai ideal 24,0 V sebesar 0{,}27 V. Sementara itu, rata-rata tegangan maksimum berada
 pada 23{,}87 V, yang mengindikasikan bahwa sistem beroperasi secara stabil tanpa
 melebihi batas suplai yang ditentukan. Secara keseluruhan, rata-rata tegangan selama
-pengujian adalah 23{,}82 V, dengan error sebesar 0{,}18 V terhadap nilai ideal. Nilai
-ini masih tergolong kecil dan tidak memberikan dampak signifikan terhadap performa
-sistem elektrikal 24 VDC. Hal ini menunjukkan bahwa sistem distribusi daya
-bekerja dengan stabil dan toleransi tegangan masih berada dalam rentang aman
-untuk pengoperasian seluruh perangkat keras.
+pengujian adalah 23{,}82 V, dengan error sebesar 0{,}18 V terhadap nilai ideal.
 
 Pengujian koneksi dilakukan dengan memanfaatkan perintah \emph{ping} dan \emph{traceroute}
 untuk memastikan bahwa tidak terdapat sambungan yang terputus maupun kesalahan
@@ -113,10 +98,7 @@ delay sebesar 2{,}5 ms, ke komputer robot sebesar 3{,}1 ms, dan ke router statio
 sebesar 1{,}8 ms. Sementara dari sisi robot, \textit{ping} ke kamera thermal
 menunjukkan rata-rata delay sebesar 3{,}3 ms, sedangkan ke \textit{control
 station} sebesar 3{,}0 ms. Secara keseluruhan, nilai rata-rata delay dari
-seluruh pengujian berada pada 2{,}77 ms, yang masih tergolong sangat kecil dan memenuhi
-syarat untuk sistem komunikasi waktu nyata. Hasil ini menegaskan bahwa jaringan
-yang digunakan cukup andal untuk menunjang proses pertukaran data dan kontrol
-antar komponen sistem secara simultan dan stabil.
+seluruh pengujian berada pada 2{,}77 ms. 
 
 \subsection{Pengujian \emph{IO Package}}
 Pengujian perangkat lunak IO Package bertujuan untuk memastikan bahwa semua
@@ -134,19 +116,17 @@ Gambar \ref{fig:rtsp_client}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.9\textwidth]{gambar/bab4/test_rtsp.jpeg}
+	\includegraphics[width=0.83\textwidth]{gambar/bab4/test_rtsp.jpeg}
 	\caption{Tampilan RQT GUI dalam Pengujian RTSP Client}
-	\label{fig:rtsp_client} \footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
+	\label{fig:rtsp_client} 
 \end{figure}
 
-Selanjutnya pada pengujian PTZ Control, dilakukan verifikasi apakah robot dapat
-mengontrol orientasi kamera dengan mengirimkan perintah \emph{pan} dan \emph{tilt}.
+Gambar \ref{fig:rtsp_client} menunjukkan tampilan bahwa data video dari kamera thermal dapat diakses sebagai \emph{rostopic} dan ditampilkan pada \emph{RQT GUI}. Selanjutnya pada pengujian PTZ Control, dilakukan verifikasi apakah robot dapat mengontrol orientasi kamera dengan mengirimkan perintah \emph{pan} dan \emph{tilt}.
 Sistem dianggap berhasil mencapai posisi target apabila masing-masing sumbu berada
 dalam toleransi sebesar ±2 derajat dari nilai target. Pendekatan ini digunakan
 untuk menghindari kondisi di mana salah satu sumbu telah stabil namun sistem
 masih terus melakukan koreksi kecil terhadap sumbu lainnya yang sudah mendekati
-target. Dengan demikian, waktu pencapaian dihitung sejak perintah dikirim hingga
-kedua sumbu masuk ke dalam batas toleransi tersebut.
+target. 
 
 \begin{table}[H]
 	\centering
@@ -190,27 +170,20 @@ akurasi maupun kestabilan orientasi kamera.
 
 \subsection{Pengujian Mapping}
 Pada pengujian ini, dilakukan pengujian \emph{mapping} menggunakan menggunakan dua
-algoritma pemetaan, yaitu \emph{Fast-LIO2} dan \emph{Fast-LIO-SAM}. Algoritma \emph{Fast-LIO2}
-dirancang untuk bekerja secara cepat dan efisien dalam kondisi real-time, sedangkan
-\emph{Fast-LIO-SAM} merupakan versi yang lebih kompleks dengan integrasi \emph{loop
-closure} dan backend optimization guna meningkatkan akurasi pemetaan. Posisi
-start dan finish pada setiap percobaan ditandai dengan menggunakan lakban, seperti
+algoritma pemetaan, yaitu \emph{Fast-LIO2} dan \emph{Fast-LIO-SAM}.  Skenario pengujian dilakukan seperti pada gambar \ref{fig:loop_closure}.
 pada gambar \ref{fig:loop_closure}.
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.9\textwidth]{gambar/bab4/map-start.png}
-	\caption{Pemasangan lakban untuk menandai posisi \emph{start} dan \emph{finish}
+	\includegraphics[width=0.55\textwidth]{gambar/tanda.png}
+	\caption{Pemasangan tanda untuk menandai posisi \emph{start} dan \emph{finish}
 	robot}
-	\label{fig:loop_closure} \footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
+	\label{fig:loop_closure}
 \end{figure}
 
-Penggunaan lakban ini bertujuan untuk memastikan bahwa posisi start dan finish robot
-sama, sehingga dapat dipastikan bahwa robot melakukan \emph{loop closure} dengan
-tepat. Pemilihan lokasi di area Robotika ITS didasarkan pada kedekatannya dengan
-lokasi robot serta lingkungan yang cukup beragam, yang mencakup area semi-outdoor,
-semi-indoor, tanjakan, dan tangga. Adapun hasilnya dari 10 kali percobaan di Robotika
-ITS mencakup gedung depan dan belakang Robotika ITS. Hasil yang diperoleh dapat
-dilihat pada tabel berikut:
+
+Penggunaan tanda seperti pada gambar \ref{fig:loop_closure} ini bertujuan untuk memastikan bahwa posisi start dan finish robot
+sama, sehingga dapat dipastikan bahwa robot melakukan \emph{loop closure} denga tepat. Pemilihan lokasi di area Robotika ITS didasarkan pada kedekatannya dengan lokasi robot serta lingkungan yang cukup beragam, yang mencakup area semi-outdoor, semi-indoor, tanjakan, dan tangga. Adapun hasilnya dari 10 kali percobaan di Robotika
+ITS mencakup gedung depan dan belakang Robotika ITS. Hasil yang diperoleh dapat dilihat pada tabel berikut:
 
 \begin{table}[H]
 	\centering
@@ -253,23 +226,13 @@ dilihat pada tabel berikut:
 	\end{minipage}
 \end{table}
 
-Hasil pengujian menunjukkan bahwa algoritma \emph{Fast-LIO2} mampu melakukan
-pemetaan secara konsisten dan berhasil pada seluruh percobaan. Sebaliknya,
-algoritma \emph{Fast-LIO-SAM} mengalami dua kali kegagalan (\emph{crash}) pada
-percobaan kedua dan keenam. Kegagalan tersebut disebabkan oleh beban komputasi yang
-tinggi pada proses backend optimization, yang tidak dapat ditangani oleh sistem.
-Kondisi ini menyebabkan pemrosesan data berhenti sebelum proses pemetaan selesai.
-Berdasarkan hasil tersebut, pengujian lanjutan terhadap algoritma \emph{Fast-LIO-SAM}
-tidak dapat dilakukan lebih lanjut karena keterbatasan sumber daya komputasi
-yang tersedia pada platform robot yang digunakan.
+Hasil pengujian menunjukkan bahwa algoritma \emph{Fast-LIO2} mampu melakukan pemetaan secara konsisten dan berhasil pada seluruh percobaan. Sebaliknya, algoritma \emph{Fast-LIO-SAM} mengalami dua kali kegagalan (\emph{crash}) pada percobaan kedua dan keenam. Kegagalan tersebut disebabkan oleh beban komputasi yang tinggi pada proses backend optimization, yang tidak dapat ditangani oleh sistem. Kondisi ini menyebabkan pemrosesan data berhenti sebelum proses pemetaan selesai. Berdasarkan hasil tersebut, pengujian lanjutan terhadap algoritma \emph{Fast-LIO-SAM} tidak dapat dilakukan lebih lanjut karena keterbatasan sumber daya komputasi yang tersedia pada platform robot yang digunakan.
+
+
+
 
 \subsection{Pengujian \emph{Localization}}
-Pengujian \emph{localization} dilakukan untuk menilai akurasi sistem dalam memperkirakan
-posisi absolut robot setelah bergerak dalam suatu area dan kembali ke titik awal.
-Metode yang digunakan adalah \emph{return-to-start}, yaitu robot digerakkan
-secara acak selama 2 menit, kemudian dikembalikan ke posisi awal pemetaan yang idealnya
-terbaca sebagai koordinat $(x, y) = (0.0, 0.0)$. Selisih antara posisi aktual
-dan posisi estimasi digunakan sebagai acuan untuk menghitung besar error.
+Pengujian \emph{localization} dilakukan untuk menilai akurasi sistem dalam memperkirakan posisi absolut robot setelah bergerak dalam suatu area dan kembali ke titik awal. Metode yang digunakan adalah \emph{return-to-start}, yaitu robot digerakkan secara acak selama 2 menit, kemudian dikembalikan ke posisi awal pemetaan yang idealnya terbaca sebagai koordinat $(x, y) = (0.0, 0.0)$. Selisih antara posisi aktual dan posisi estimasi digunakan sebagai acuan untuk menghitung besar error.
 
 \begin{table}[H]
 	\centering
@@ -288,25 +251,10 @@ dan posisi estimasi digunakan sebagai acuan untuk menghitung besar error.
 	\end{tabular}
 \end{table}
 
-Hasil pengujian pada Tabel \ref{tab:hasil_localization} menunjukkan bahwa sistem
-lokalisasi memberikan performa yang cukup stabil meskipun masih terdapat deviasi
-terhadap posisi awal. Error tertinggi tercatat sebesar 0{,}47 meter, sedangkan error
-terendah adalah 0{,}20 meter. Nilai-nilai ini masih berada dalam rentang
-toleransi untuk sistem berbasis LiDAR-IMU yang beroperasi di lingkungan semi-indoor
-tanpa koreksi eksternal seperti GNSS atau landmark eksternal. Performa ini menunjukkan
-bahwa meskipun terdapat akumulasi kesalahan selama pergerakan dinamis, sistem
-tetap mampu memperkirakan posisi robot dengan tingkat error yang dapat diterima
-untuk kebutuhan pemetaan dan navigasi dalam ruang terbatas.
+Hasil pengujian pada Tabel \ref{tab:hasil_localization} menunjukkan bahwa sistem lokalisasi memberikan performa yang cukup stabil meskipun masih terdapat deviasi terhadap posisi awal. Error tertinggi tercatat sebesar 0{,}47 meter, sedangkan error terendah adalah 0{,}20 meter. Nilai-nilai ini masih berada dalam rentang toleransi untuk sistem berbasis LiDAR-IMU yang beroperasi di lingkungan semi-indoor tanpa koreksi eksternal seperti GNSS atau landmark eksternal. Performa ini menunjukkan bahwa meskipun terdapat akumulasi kesalahan selama pergerakan dinamis, sistem tetap mampu memperkirakan posisi robot dengan tingkat error yang dapat diterima untuk kebutuhan pemetaan dan navigasi dalam ruang terbatas.
 
 \subsection{Pengujian \emph{Obstacle Avoidance}}
-Pengujian sistem \emph{obstacle avoidance} bertujuan untuk memastikan bahwa robot
-dapat menghindari rintangan dengan efektif dan efisien dalam berbagai kondisi.
-Pengujian ini dilaksanakan di area Robotika ITS, dengan menggunakan berbagai jenis
-rintangan yang ada, seperti dinding, kursi, dan objek lain yang ditempatkan
-secara acak di sekitar area. Algoritma yang digunakan dalam penghindaran rintangan
-ini adalah \emph{Braintenberg Vehicle}, yang memungkinkan robot merespons secara
-dinamis terhadap rintangan yang terdeteksi oleh sensor-sensor yang ada pada robot.
-Adapun hasil pengujian \emph{obstacle avoidance} dapat dilihat pada tabel \ref{tab:hasil_obstacle_avoidance}
+Pengujian sistem \emph{obstacle avoidance} bertujuan untuk memastikan bahwa robot dapat menghindari rintangan dengan efektif dan efisien dalam berbagai kondisi. Pengujian ini dilaksanakan di area Robotika ITS, dengan menggunakan berbagai jenis rintangan yang ada, seperti dinding, kursi, dan objek lain yang ditempatkan secara acak di sekitar area. Algoritma yang digunakan dalam penghindaran rintangan ini adalah \emph{Braintenberg Vehicle}, yang memungkinkan robot merespons secara dinamis terhadap rintangan yang terdeteksi oleh sensor-sensor yang ada pada robot. Adapun hasil pengujian \emph{obstacle avoidance} dapat dilihat pada tabel \ref{tab:hasil_obstacle_avoidance}
 
 \begin{table}[H]
 	\centering
@@ -509,12 +457,7 @@ dilakukan dengan menggunakan dataset yang telah disiapkan sebelumnya, yang menca
 berbagai kondisi pencahayaan dan sudut pandang.
 
 \subsubsection{4.1.2.1 Pengujian Model \emph{Public datashet}}
-Dataset citra termal gardu listrik yang diperoleh dari platform \emph{Roboflow}
-dilatih menggunakan \emph{YOLOv8} dengan berbagai konfigurasi parameter. Model
-yang digunakan adalah \emph{YOLOv8s}, dengan jumlah \emph{epoch} 50, 100, 200,
-dan 300, \emph{batch size} 2, 4, dan 8, serta \emph{optimizer} \emph{Adam} dan \emph{SGD}.
-Dari kombinasi tersebut, diperoleh 48 model, dan 10 model terbaik berdasarkan nilai
-\emph{mAP50} disajikan pada Tabel \ref{tab:model_teratas_map50}.
+Dataset citra termal gardu listrik yang diperoleh dari platform \emph{Roboflow} digunakan untuk melatih model deteksi objek berbasis \emph{YOLOv8}. Pelatihan dilakukan dengan berbagai konfigurasi parameter untuk mengeksplorasi performa model terhadap kombinasi \emph{hyperparameter} yang berbeda. Model yang digunakan adalah \emph{YOLOv8s}, yang merupakan versi ringan dari keluarga YOLOv8 dan dirancang untuk efisiensi pada perangkat dengan sumber daya terbatas. Eksperimen dilakukan dengan variasi jumlah \emph{epoch} yaitu 50, 100, 200, dan 300; \emph{batch size} sebesar 2, 4, dan 8; serta dua jenis \emph{optimizer}, yaitu \emph{Adam} dan \emph{SGD}. Kombinasi dari parameter-parameter tersebut menghasilkan sebanyak 48 model berbeda yang dievaluasi berdasarkan metrik \emph{mean Average Precision} pada ambang batas 50\% (\emph{mAP50}). Tujuan dari pengujian ini adalah untuk mengidentifikasi konfigurasi model yang paling optimal dalam mendeteksi komponen dengan suhu berlebih pada citra termal gardu listrik. Sepuluh model dengan nilai \emph{mAP50} tertinggi disajikan pada Tabel~\ref{tab:model_teratas_map50} sebagai kandidat terbaik yang dapat digunakan untuk tahap integrasi dengan sistem pemantauan robotik.
 
 \begin{table}[h!]
 	\centering
@@ -555,52 +498,30 @@ serta \emph{recall} yang cukup tinggi. Pengujian ini memberikan wawasan penting
 untuk memilih konfigurasi optimal dalam pelatihan model deteksi objek berbasis
 citra termal.Adapun hasil \emph{confusion matric}, \emph{lost function}, serta
 grafik akurasi dari model tersebut tersebut dapat dilihat pada Gambar
-\ref{fig:confusion_matrix} dan Gambar \ref{fig:loss_function}.
+\ref{fig:confusion_matrix} dan Gambar \ref{fig:confusion_matrix}.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.15]{gambar/bab4/cf_res.png}
+	\includegraphics[scale=0.17]{gambar/bab4/cf_res.png}
 	\caption{\emph{Confusion Matrix YOLOv8n 100 Epoch SGD 8 Batch Size}}
-	\footnotesize{\textbf{Sumber:} Dokumentasi Pribadi}
 	\label{fig:confusion_matrix}
 \end{figure}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.3]{gambar/bab4/lost_function.png}
-	\caption{\emph{Loss Function YOLOv8n 100 Epoch SGD 8 Batch Size}}
-	\label{fig:loss_function} \footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
-\end{figure}
 
-Dari hasil pengujian model \emph{computer vision} pada citra termal gardu
-listrik, dapat disimpulkan bahwa model \emph{YOLOv8s} dengan konfigurasi \emph{batch
-size} 8, \emph{epochs} 100, dan \emph{optimizer} \emph{SGD} memberikan performa
-terbaik dalam mendeteksi objek pada citra termal gardu listrik. Model ini memiliki
-nilai \emph{mAP50} yang tinggi serta nilai \emph{precision} dan \emph{recall}
-yang baik, sehingga dapat diandalkan untuk aplikasi deteksi objek pada citra termal
-gardu listrik.
+Berdasarkan Gambar~\ref{fig:confusion_matrix}, terlihat bahwa model memiliki akurasi tinggi dalam mendeteksi kelas \emph{insulator}, ditandai dengan nilai diagonal yang tinggi pada kelas tersebut. Model juga menunjukkan performa baik pada kelas \emph{clamp}, \emph{breaker}, dan \emph{current transformer}. Namun, masih terdapat kelemahan pada beberapa kelas seperti \emph{disconnector} dan \emph{disconnector3}, yang menunjukkan nilai \emph{false negative} relatif tinggi. Ketidakseimbangan jumlah data antar kelas, serta kemiripan visual antar komponen menjadi tantangan tersendiri bagi model dalam membedakan objek secara presisi. Oleh karena itu, peningkatan jumlah dan variasi dataset, khususnya pada kelas dengan performa rendah, menjadi langkah penting ke depan untuk meningkatkan generalisasi dan akurasi sistem deteksi objek termal ini secara keseluruhan.
 
 \subsection{Pengujian Model \emph{Local Dataset}}
-Pengujian dilakukan menggunakan dataset lokal dari Gardu Induk Tegangan Ekstra Tinggi (GITET) Gandul, Depok, yang berisi citra \emph{current transformer} (CT) dan \emph{disconnector}. Model \emph{YOLOv8s} dilatih selama 100 \emph{epoch} dengan \emph{batch size} 8 menggunakan optimizer \emph{SGD}. Hasil evaluasi menunjukkan performa yang baik, dengan nilai mAP@0.5 sebesar 0{,}9214 dan mAP@0.5:0.95 sebesar 0{,}8554. Presisi tinggi (0{,}9529) menunjukkan bahwa sebagian besar deteksi benar, namun nilai recall (0{,}5773) mengindikasikan masih ada objek yang terlewat, khususnya pada kelas \emph{disconnector}. Adapun \emph{confusion matrix} dari model ini dapat dilihat pada Gambar \ref{fig:conf_matrix_gitet}.
+Pengujian dilakukan menggunakan \emph{dataset} lokal yang dikumpulkan dari lingkungan Gardu Induk Tegangan Ekstra Tinggi (GITET) Gandul, Depok. Dataset ini terdiri dari citra termal dua jenis komponen utama, yaitu \emph{current transformer} (CT) dan \emph{disconnector}, yang diambil langsung dari lokasi untuk memastikan representasi data yang relevan dengan kondisi nyata di lapangan. Pengujian ini bertujuan untuk mengevaluasi kemampuan model dalam mengenali komponen-komponen penting yang berpotensi mengalami suhu berlebih, sebagai bagian dari sistem pemantauan termal otomatis berbasis robot. Model yang digunakan adalah \emph{YOLOv8s}, dan pelatihan dilakukan selama 100 \emph{epoch} dengan \emph{batch size} sebesar 8, menggunakan \emph{optimizer} \emph{SGD} yang dipilih karena kestabilannya dalam pelatihan model klasifikasi skala menengah. Hasil evaluasi menunjukkan performa deteksi yang sangat baik, dengan nilai \emph{mean Average Precision} pada ambang 0{,}5 (\emph{mAP@0.5}) sebesar 0{,}9214 dan \emph{mAP@0.5:0.95} sebesar 0{,}8554. Nilai presisi yang tinggi, yaitu 0{,}9529, menandakan bahwa sebagian besar hasil deteksi yang dilakukan model adalah benar (minim kesalahan positif). Namun demikian, nilai \emph{recall} yang relatif lebih rendah, yaitu 0{,}5773, mengindikasikan bahwa masih terdapat sejumlah objek yang belum berhasil terdeteksi, terutama pada kelas \emph{disconnector}. 
+
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.5\textwidth]{gambar/bab4/cf_new.png}
+  \includegraphics[width=0.7\textwidth]{gambar/bab4/cf_new.png}
   \caption{\emph{Confusion Matrix YOLOv8s 100 Epoch SGD 8 Batch Size Local Dataset}}
   \label{fig:conf_matrix_gitet}
-    \footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{gambar/bab4/lf.png}
-    \caption{\emph{Loss Function YOLOv8s 100 Epoch SGD 8 Batch Size Local Dataset}}
-    \label{fig:loss_function_gitet}
-      \footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
-  \end{figure}
-  
 
-
-Berdasarkan confusion matrix pada Gambar~\ref{fig:conf_matrix_gitet}, model menunjukkan performa deteksi yang sangat baik untuk kelas CT (nilai diagonal tinggi), namun masih terdapat kekeliruan dalam mendeteksi disconnector (\emph{recall} rendah). Hal ini dapat disebabkan oleh variasi bentuk, posisi, atau kualitas citra disconnector dalam dataset lokal. Oleh karena itu, perlu dilakukan peningkatan dataset dengan menambahkan lebih banyak contoh \emph{disconnector} serta komponen gardu listrik lainya untuk meningkatkan kualitas dataset.
+Berdasarkan \emph{confusion matrix} pada Gambar~\ref{fig:conf_matrix_gitet}, model menunjukkan performa deteksi yang sangat baik terhadap kelas \emph{current transformer} (CT), ditandai dengan nilai diagonal yang tinggi, yang mencerminkan jumlah prediksi benar (true positive) yang konsisten dan dominan. Namun, performa untuk kelas \emph{disconnector} masih menunjukkan kelemahan, yang tercermin dari nilai \emph{recall} yang relatif rendah serta masih adanya prediksi salah klasifikasi (false negative). Rendahnya \emph{recall} pada kelas \emph{disconnector} ini kemungkinan disebabkan oleh beberapa faktor, seperti variasi bentuk fisik, posisi pemasangan, sudut pengambilan gambar, serta kualitas citra termal yang tidak seragam dalam dataset lokal. Selain itu, distribusi jumlah data yang tidak seimbang antar kelas dapat menyebabkan model menjadi lebih bias terhadap kelas yang jumlah datanya dominan, seperti CT.
 
 \subsection{Pengujian Kecepatan Inferensi}
 Pengujian kecepatan inferensi dilakukan untuk mengukur waktu yang dibutuhkan oleh model \emph{YOLOv8} dalam mendeteksi objek pada citra termal. Pengujian ini dilakukan dengan menggunakan berbagai variasi model \emph{YOLOv8}, termasuk yang menggunakan optimizers \emph{OpenVINO} dan \emph{TensorRT}. Hasil pengujian diukur dalam satuan FPS (Frame Per Second) untuk menunjukkan seberapa cepat model dapat memproses citra. Berikut adalah hasil pengujian kecepatan inferensi pada berbagai perangkat dan konfigurasi optimizer yang digunakan:
@@ -632,10 +553,9 @@ Pengujian deteksi suhu bertujuan untuk mengevaluasi kemampuan sistem dalam mengi
 \includegraphics[width=0.5\textwidth]{gambar/bab4/swq.png}
 \caption{Hasil Deteksi Suhu Berdasarkan ROI pada Citra Termal}
 \label{fig:deteksi_suhu}
-\footnotesize{\textbf{Sumber:} Dokumentasi penulis}
 \end{figure}
 
-Dari hasil pengujian, sistem berhasil mendeteksi suhu pada setiap objek yang teridentifikasi dengan akurasi yang baik. 
+Gambar \ref{fig:deteksi_suhu} menunjukkan hasil deteksi suhu pada citra termal yang diambil dari lingkungan gardu listrik.  Dimana pada gambar terdeteksi \emph{current transformer (CT)} memiliki suhu maksimum, minimum, dan rata-rata yang ditampilkan pada bounding box. Dari hasil pengujian, sistem berhasil mendeteksi suhu pada setiap objek yang teridentifikasi dengan akurasi yang baik. 
 
 \section{API Testing pada Sistem Control Station}
 Pengujian API merupakan bagian penting dalam pengembangan sistem Control Station untuk memastikan bahwa seluruh endpoint yang tersedia berfungsi dengan baik. Pengujian ini dilakukan untuk memverifikasi bahwa API dapat menangani permintaan dan respons sesuai dengan spesifikasi yang telah ditetapkan. Pengujian mencakup berbagai aspek, termasuk autentikasi, manajemen robot, log perawatan, dan sistem patroli. Pengujian mencakup autentikasi, manajemen robot dan komponennya, log perawatan, serta sistem patroli. Pengujian dilakukan menggunakan tool Postman dan setiap endpoint diuji untuk status respons dan validitas datanya.
@@ -793,20 +713,18 @@ Pengujian ini bertujuan untuk mengevaluasi kemampuan sistem dalam melakukan pelo
 \includegraphics[width=0.8\textwidth]{gambar/bab4/mapping_gitet.png}
 \caption{Hasil Pemetaan Menggunakan FastLIO2}
 \label{fig:fastlio2_mapping}
-\footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
 \end{figure}
 
-Dari hasil pemetaan tersebut, terlihat bahwa algoritma \emph{FastLIO2} mampu menghasilkan peta lingkungan gardu dalam bentuk tiga dimensi. Peta tersebut kemudian digunakan untuk membentuk \emph{point grid map} seperti pada Gambar \ref{fig:point_grid_map}.
+Dari hasil pemetaan pada gambar \ref{fig:fastlio2_mapping} terlihat bahwa algoritma \emph{FastLIO2} mampu menghasilkan peta lingkungan gardu dalam bentuk tiga dimensi. Peta tersebut kemudian digunakan untuk membentuk \emph{point grid map} seperti pada Gambar \ref{fig:point_grid_map}.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{gambar/bab4/pgm_gitet.png}
 \caption{Peta Grid Titik (Point Grid Map) Hasil Pemetaan}
 \label{fig:point_grid_map}
-\footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
 \end{figure}
 
-Namun, berdasarkan analisis terhadap hasil peta yang diperoleh, ditemukan bahwa peta tersebut tidak memiliki keragaman bentuk yang memadai untuk mendukung proses lokalisasi berbasis peta. Hal ini disebabkan oleh karakteristik struktur di gardu induk, seperti \textit{bracket} dan peralatan listrik lainnya, yang umumnya berukuran kecil, bersifat simetris, dan sulit terdeteksi secara konsisten dalam representasi dua dimensi. Akibatnya, sistem tidak mampu membentuk peta dengan fitur yang cukup kaya untuk mendukung lokalisasi yang akurat. Karena keterbatasan tersebut, sistem lokalisasi dalam penelitian ini tidak menggunakan pendekatan berbasis peta, melainkan mengandalkan metode odometri yang didukung oleh algoritma \textit{FastLIO2}. Posisi awal robot ditentukan secara tetap, dan proses lokalisasi dilakukan relatif terhadap posisi tersebut selama robot bergerak di lingkungan operasional. Sistem ini dapat dioptimalkan lebih lanjut melalui integrasi dengan sistem \textit{dock charging}, seperti yang digunakan pada robot Deep Robotics X30, untuk memastikan posisi awal robot selalu konsisten sebelum memulai aktivitas patroli. Pendekatan ini penting untuk mempertahankan ketepatan lokalisasi tanpa mengandalkan pemetaan global dalam lingkungan yang minim fitur visual.
+Gambar \ref{fig:point_grid_map} jika dilakukan analisis terhadap hasil peta yang diperoleh, ditemukan bahwa peta tersebut tidak memiliki keragaman bentuk yang memadai untuk mendukung proses lokalisasi berbasis peta. Hal ini disebabkan oleh karakteristik struktur di gardu induk, seperti \textit{bracket} dan peralatan listrik lainnya, yang umumnya berukuran kecil, bersifat simetris, dan sulit terdeteksi secara konsisten dalam representasi dua dimensi. Akibatnya, sistem tidak mampu membentuk peta dengan fitur yang cukup kaya untuk mendukung lokalisasi yang akurat. Karena keterbatasan tersebut, sistem lokalisasi dalam penelitian ini tidak menggunakan pendekatan berbasis peta, melainkan mengandalkan metode odometri yang didukung oleh algoritma \textit{FastLIO2}. Posisi awal robot ditentukan secara tetap, dan proses lokalisasi dilakukan relatif terhadap posisi tersebut selama robot bergerak di lingkungan operasional. Sistem ini dapat dioptimalkan lebih lanjut melalui integrasi dengan sistem \textit{dock charging}, seperti yang digunakan pada robot Deep Robotics X30, untuk memastikan posisi awal robot selalu konsisten sebelum memulai aktivitas patroli. Pendekatan ini penting untuk mempertahankan ketepatan lokalisasi tanpa mengandalkan pemetaan global dalam lingkungan yang minim fitur visual.
 
 
 
@@ -840,28 +758,27 @@ Pengujian dilakukan sebanyak lima kali dengan konfigurasi \emph{waypoint}, jadwa
     \end{tabular}
     \end{table}
 
-    Adapun hasil pengujian dimana robot mampu menetukan posisi komponen \emph{overheat}  berdasarkan data suhu yang terdeteksi, dapat dilihat pada diman apada pengujian ini ambang batas \emph{overheat} pada \emph{current transformator} diatur pada 40 C Gambar \ref{fig:simulasi_overheat}
+    Adapun hasil pengujian dimana robot mampu menetukan posisi komponen \emph{overheat}  berdasarkan data suhu yang terdeteksi, dapat dilihat pada diman apada pengujian ini ambang batas \emph{overheat} pada \emph{current transformator} diatur pada 40\textdegree{}C Gambar \ref{fig:simulasi_overheat}
 
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{gambar/bab4/final.png}
     \caption{Hasil Simulasi Deteksi \emph{Overheat} pada Citra Termal}
     \label{fig:simulasi_overheat}
-    \footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
     \end{figure}
 
-    Dimana dija dilakukan view secara detail pada komponen yang terdeteksi \emph{overheat} pada citra termal, seperti pada Gambar \ref{fig:simulasi_overheat_detail}.
+	Gambar \ref{fig:simulasi_overheat} menunjukkan hasil  deteksi \emph{overheat} lokasi komponen \emph{overheat} oleh robot. Titik lokasi komponent terlihat pada map dengan warna merah, yang menunjukkan bahwa sistem berhasil mendeteksi suhu \emph{current transformer} yang melebihi ambang batas yang telah ditentukan. Saat dilakukan \emph{view} detail maka
+	akan didapatkan hasil seperti pada gambar \ref{fig:simulasi_overheat_detail}.
 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.8\textwidth]{gambar/bab4/webview.png}
         \caption{Hasil Simulasi Deteksi Detail \emph{Overheat} pada Citra Termal}
         \label{fig:simulasi_overheat_detail}
-        \footnotesize{\textbf{Sumber:} Dokumentasi Penulis}
         \end{figure}
     
 
-    Analisis hasil pengujian menunjukkan bahwa sistem mampu menjalankan deteksi dan prediksi komponen dengan baik ketika data termal dan basis data komponen tersedia secara konsisten. Kegagalan pada pengujian kelima menunjukkan bahwa keandalan model deteksi visual sangat mempengaruhi keberhasilan seluruh proses. Selain itu, ketiadaan data komponen (seperti pada pengujian ketiga) dapat diatasi dengan fallback lokasi, namun dengan risiko berkurangnya akurasi posisi. Oleh karena itu, kelengkapan basis data dan kualitas model deteksi menjadi dua aspek kritikal dalam keberhasilan sistem secara keseluruhan.
+	Gambar \ref{fig:simulasi_overheat_detail} menunjukkan bahwa sistem berhasil mendeteksi suhu \emph{current transformer} yang melebihi ambang batas yang telah ditentukan. Analisis hasil pengujian menunjukkan bahwa sistem mampu menjalankan deteksi dan prediksi komponen dengan baik ketika data termal dan basis data komponen tersedia secara konsisten. Kegagalan pada pengujian kelima menunjukkan bahwa keandalan model deteksi visual sangat mempengaruhi keberhasilan seluruh proses. Selain itu, ketiadaan data komponen (seperti pada pengujian ketiga) dapat diatasi dengan \emph{fallback} lokasi, namun dengan risiko berkurangnya akurasi posisi. Oleh karena itu, kelengkapan basis data dan kualitas model deteksi menjadi dua aspek kritikal dalam keberhasilan sistem secara keseluruhan.
 
 
     \subsection{Hasil Pengujian \textit{Stress Test} WebSocket pada \textit{Frontend} (Next.js) dan \textit{Backend} (Express.js)}
