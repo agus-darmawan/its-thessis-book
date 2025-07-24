@@ -16,7 +16,7 @@ submodul perangkat lunak. Adapun skenario pengujian yang dilakukan dijelaskan se
 berikut.
 
 \subsection{Pengujian Sistem Elektrikal}
-Pengujian sistem elektrikal dilakukan untuk memastikan bahwa seluruh komponen perangkat keras berfungsi dengan baik dan sesuai dengan spesifikasi teknis yang telah ditentukan. Pengujian ini mencakup pengukuran tegangan, verifikasi koneksi, serta pengujian fungsionalitas masing-masing komponen. Pengukuran tegangan dilakukan menggunakan osiloskop untuk memastikan bahwa tegangan yang diterima oleh setiap komponen berada dalam batas toleransi yang diizinkan. Karena seluruh komponen perangkat keras menggunakan sumber catu daya yang sama, maka pengujian tegangan cukup dilakukan pada satu titik, yaitu pada jalur tegangan 24VDC. Adapun ilustrasi pengujian ditunjukkan pada Gambar \ref{ref:pengujian_tegangan}.
+Pengujian sistem elektrikal dilakukan untuk memastikan bahwa seluruh komponen perangkat keras berfungsi dengan baik dan sesuai dengan spesifikasi teknis yang telah ditentukan. Pengujian ini mencakup pengukuran tegangan, verifikasi koneksi, serta pengujian fungsionalitas masing-masing komponen. Pengukuran tegangan dilakukan menggunakan osiloskop untuk memastikan bahwa tegangan yang diterima oleh setiap komponen berada dalam batas toleransi yang diizinkan. Karena seluruh komponen perangkat keras menggunakan sumber catu daya yang sama, maka pengujian tegangan cukup dilakukan pada satu titik, yaitu pada jalur tegangan 24VDC. Adapun salah satu gambar pengujian ditunjukkan pada Gambar \ref{fig:pengujian_tegangan}.
 
 
 \begin{figure}[H]
@@ -189,44 +189,39 @@ ITS mencakup gedung depan dan belakang Robotika ITS. Hasil yang diperoleh dapat 
 	\centering
 	\caption{Perbandingan Hasil Pengujian Mapping Fast-LIO2 dan Fast-LIO-SAM}
 	\label{tab:perbandingan_mapping}
-	\begin{minipage}{0.48\textwidth}
-		\centering
-		\textbf{Fast-LIO2} \\
-		\vspace{0.2cm}
-		\begin{tabular}{|c|c|c|c|}
-			\hline
-			\textbf{No} & \textbf{Lokasi}  & \textbf{\emph{Loop}} & \textbf{Hasil} \\
-			\hline
-			1           & Barunastra       & Ya                   & Sukses         \\
-			2           & Barunastra       & Ya                   & Sukses         \\
-			3           & Robotika         & Ya                   & Sukses         \\
-			4           & Robotika         & Ya                   & Sukses         \\
-			5           & Teaching Factory & Ya                   & Sukses         \\
-			6           & Teaching Factory & Ya                   & Sukses         \\
-			\hline
-		\end{tabular}
-	\end{minipage}
-	\hfill
-	\begin{minipage}{0.48\textwidth}
-		\centering
-		\textbf{Fast-LIO-SAM} \\
-		\vspace{0.2cm}
-		\begin{tabular}{|c|c|c|c|}
-			\hline
-			\textbf{No} & \textbf{Lokasi}  & \textbf{\emph{Loop}} & \textbf{Hasil} \\
-			\hline
-			1           & Barunastra       & Ya                   & Sukses         \\
-			2           & Barunastra       & Tidak                & \emph{Crash}   \\
-			3           & Robotika         & Ya                   & Sukses         \\
-			4           & Robotika         & Ya                   & Sukses         \\
-			5           & Teaching Factory & Ya                   & Sukses         \\
-			6           & Teaching Factory & Tidak                & \emph{Crash}   \\
-			\hline
-		\end{tabular}
-	\end{minipage}
-\end{table}
+	\begin{tabular}{|c|c|c|c|c|c|}
+	  \hline
+	  \multirow{2}{*}{\textbf{No}} & \multirow{2}{*}{\textbf{Lokasi}} & \multicolumn{2}{c|}{\textbf{Fast-LIO2}} & \multicolumn{2}{c|}{\textbf{Fast-LIO-SAM}} \\
+	  \cline{3-6}
+	  & & \textbf{\emph{Loop}} & \textbf{Hasil} & \textbf{\emph{Loop}} & \textbf{Hasil} \\
+	  \hline
+	  1 & Barunastra       & Ya    & Sukses & Ya     & Sukses       \\
+	  2 & Barunastra       & Ya    & Sukses & Tidak  & \emph{Crash} \\
+	  3 & Robotika         & Ya    & Sukses & Ya     & Sukses       \\
+	  4 & Robotika         & Ya    & Sukses & Ya     & Sukses       \\
+	  5 & Teaching Factory & Ya    & Sukses & Ya     & Sukses       \\
+	  6 & Teaching Factory & Ya    & Sukses & Tidak  & \emph{Crash} \\
+	  \hline
+	\end{tabular}
+  \end{table}
+  
+Hasil pengujian menunjukkan bahwa algoritma \emph{Fast-LIO2} mampu melakukan pemetaan secara konsisten dan berhasil pada seluruh percobaan. Adapun salah satu contoh hasil pemetaan dapat dilihat pada Gambar \ref{fig:hasil_mapping_fastlio2}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{gambar/bab3/loop-closure.png}
+	\caption{Hasil \emph{mapping} Fast-LIO2 pada Area Robotika ITS}
+	\label{fig:hasil_mapping_fastlio2}
+\end{figure}
 
-Hasil pengujian menunjukkan bahwa algoritma \emph{Fast-LIO2} mampu melakukan pemetaan secara konsisten dan berhasil pada seluruh percobaan. Sebaliknya, algoritma \emph{Fast-LIO-SAM} mengalami dua kali kegagalan (\emph{crash}) pada percobaan kedua dan keenam. Kegagalan tersebut disebabkan oleh beban komputasi yang tinggi pada proses backend optimization, yang tidak dapat ditangani oleh sistem. Kondisi ini menyebabkan pemrosesan data berhenti sebelum proses pemetaan selesai. Berdasarkan hasil tersebut, pengujian lanjutan terhadap algoritma \emph{Fast-LIO-SAM} tidak dapat dilakukan lebih lanjut karena keterbatasan sumber daya komputasi yang tersedia pada platform robot yang digunakan.
+Dari hasil pemetaan pada Gambar \ref{fig:hasil_mapping_fastlio2}, terlihat bahwa algoritma \emph{Fast-LIO2} berhasil mencapai \emph{loop closure} dengan baik, yang ditandai dengan garis merah yang menghubungkan titik awal dan akhir pemetaan. Hal ini menunjukkan bahwa robot dapat kembali ke posisi awal dengan akurasi yang tinggi. Dari pemetaan ini kemudian dihasilkan \emph{point grid} yang dapat digunakan untuk analisis lebih lanjut, seperti perencanaan rute atau deteksi objek yang dapat dilihat pada Gambar \ref{fig:point_grid_fastlio2}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{gambar/bab3/pgm.png}
+	\caption{Hasil Point Grid Fast-LIO2 pada Area Robotika ITS}
+	\label{fig:point_grid_fastlio2}
+\end{figure}
+
+Pada Gambar \ref{fig:point_grid_fastlio2}, terlihat bahwa hasil pemetaan menghasilkan grid yang cukup rapat, yang menunjukkan bahwa robot mampu mendeteksi dan memetakan lingkungan dengan detail yang baik. Hal ini penting untuk aplikasi seperti navigasi otonom dan deteksi objek. Sebaliknya, algoritma \emph{Fast-LIO-SAM} mengalami dua kali kegagalan (\emph{crash}) pada percobaan kedua dan keenam. Kegagalan tersebut disebabkan oleh beban komputasi yang tinggi pada proses backend optimization, yang tidak dapat ditangani oleh sistem. Kondisi ini menyebabkan pemrosesan data berhenti sebelum proses pemetaan selesai. Berdasarkan hasil tersebut, pengujian lanjutan terhadap algoritma \emph{Fast-LIO-SAM} tidak dapat dilakukan lebih lanjut karena keterbatasan sumber daya komputasi yang tersedia pada platform robot yang digunakan.
 
 
 
@@ -740,7 +735,7 @@ Penggunaan protokol \emph{WebRTC} terbukti efektif dalam menangani transmisi vid
 
 Pengujian simulasi dilakukan dengan menggunakan data \emph{rosbag} yang diperoleh dari pengujian lapangan. Dalam simulasi ini, data dari \emph{rosbag} digunakan untuk merekonstruksi kondisi nyata, termasuk data LiDAR dan IMU untuk proses lokalisasi serta data citra dari kamera termal sebagai masukan deteksi suhu. Sistem kemudian diintegrasikan dengan antarmuka web, di mana jadwal patroli ditentukan sebelumnya. Saat robot tiba di titik inspeksi yang telah ditentukan, sistem akan melakukan analisis suhu pada posisi tersebut. Apabila terdeteksi adanya \emph{overheat}—yang pada simulasi ini disederhanakan menjadi suhu di atas 30\textdegree C—maka sistem akan mengirimkan data ke \emph{Web GUI} dan mencoba memprediksi posisi komponen yang mengalami anomali berdasarkan komponen terdekat pada peta.
 
-Pengujian dilakukan sebanyak lima kali dengan konfigurasi \emph{waypoint}, jadwal patroli, dan ambang suhu yang berbeda. Adapun hasil pengujian adalah sebagai berikut \ref{tab:simulasi_overheat}
+Pengujian dilakukan sebanyak lima kali dengan konfigurasi \emph{waypoint}, jadwal patroli, dan ambang suhu yang berbeda. Adapun hasil pengujian dapat dilihat pada tabel \ref{tab:simulasi_overheat}
 
 
 \begin{table}[H]
